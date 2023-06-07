@@ -8,17 +8,47 @@
 
 /* Begin PBXBuildFile section */
 		D0575E762A2F9F0A003CE661 /* Trektronic_AppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0575E752A2F9F0A003CE661 /* Trektronic_AppApp.swift */; };
-		D0575E782A2F9F0A003CE661 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0575E772A2F9F0A003CE661 /* ContentView.swift */; };
 		D0575E7A2A2F9F0C003CE661 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0575E792A2F9F0C003CE661 /* Assets.xcassets */; };
 		D0575E7D2A2F9F0C003CE661 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0575E7C2A2F9F0C003CE661 /* Preview Assets.xcassets */; };
+		D0575E852A2FA89A003CE661 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = D0575E842A2FA89A003CE661 /* FirebaseAuth */; };
+		D0575E872A2FA89A003CE661 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = D0575E862A2FA89A003CE661 /* FirebaseDatabase */; };
+		D0575E892A2FA89A003CE661 /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D0575E882A2FA89A003CE661 /* FirebaseDatabaseSwift */; };
+		D0575E8B2A2FA89A003CE661 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = D0575E8A2A2FA89A003CE661 /* FirebaseFirestore */; };
+		D0575E8D2A2FA89A003CE661 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D0575E8C2A2FA89A003CE661 /* FirebaseFirestoreSwift */; };
+		D0575E8F2A2FA89A003CE661 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = D0575E8E2A2FA89A003CE661 /* FirebaseMessaging */; };
+		D0575E912A2FA89A003CE661 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = D0575E902A2FA89A003CE661 /* FirebaseStorage */; };
+		D0575E942A2FAA56003CE661 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = D0575E932A2FAA56003CE661 /* GoogleSignIn */; };
+		D0575E962A2FAA56003CE661 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D0575E952A2FAA56003CE661 /* GoogleSignInSwift */; };
+		D0575E992A2FABCD003CE661 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0575E982A2FABCD003CE661 /* LoginView.swift */; };
+		D0575E9B2A2FAE15003CE661 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0575E9A2A2FAE15003CE661 /* LoginViewModel.swift */; };
+		D0575E9E2A2FAEE7003CE661 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0575E9D2A2FAEE7003CE661 /* OnboardingView.swift */; };
+		D0575EA02A2FAEFE003CE661 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0575E9F2A2FAEFE003CE661 /* OnboardingViewModel.swift */; };
+		D0575EA32A2FAF7A003CE661 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0575EA22A2FAF7A003CE661 /* TabBarView.swift */; };
+		D0575EA52A2FAF99003CE661 /* TabBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0575EA42A2FAF99003CE661 /* TabBarViewModel.swift */; };
+		D0575EA82A2FB04A003CE661 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0575EA72A2FB04A003CE661 /* FirebaseManager.swift */; };
+		D0575EAB2A2FB7CB003CE661 /* Text + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0575EAA2A2FB7CB003CE661 /* Text + Extension.swift */; };
+		D0575EAD2A2FB8C4003CE661 /* Color + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0575EAC2A2FB8C4003CE661 /* Color + Extension.swift */; };
+		D0575EAF2A2FC589003CE661 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D0575EAE2A2FC589003CE661 /* GoogleService-Info.plist */; };
+		D0575EB32A30EFED003CE661 /* Button + Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0575EB22A30EFED003CE661 /* Button + Style.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		D0575E722A2F9F0A003CE661 /* Trektronic-App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Trektronic-App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0575E752A2F9F0A003CE661 /* Trektronic_AppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trektronic_AppApp.swift; sourceTree = "<group>"; };
-		D0575E772A2F9F0A003CE661 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D0575E792A2F9F0C003CE661 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D0575E7C2A2F9F0C003CE661 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		D0575E982A2FABCD003CE661 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		D0575E9A2A2FAE15003CE661 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		D0575E9D2A2FAEE7003CE661 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		D0575E9F2A2FAEFE003CE661 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
+		D0575EA22A2FAF7A003CE661 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
+		D0575EA42A2FAF99003CE661 /* TabBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewModel.swift; sourceTree = "<group>"; };
+		D0575EA72A2FB04A003CE661 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
+		D0575EAA2A2FB7CB003CE661 /* Text + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text + Extension.swift"; sourceTree = "<group>"; };
+		D0575EAC2A2FB8C4003CE661 /* Color + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color + Extension.swift"; sourceTree = "<group>"; };
+		D0575EAE2A2FC589003CE661 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D0575EB02A2FC5F5003CE661 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D0575EB22A30EFED003CE661 /* Button + Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Button + Style.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,6 +56,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0575E962A2FAA56003CE661 /* GoogleSignInSwift in Frameworks */,
+				D0575E8F2A2FA89A003CE661 /* FirebaseMessaging in Frameworks */,
+				D0575E942A2FAA56003CE661 /* GoogleSignIn in Frameworks */,
+				D0575E8D2A2FA89A003CE661 /* FirebaseFirestoreSwift in Frameworks */,
+				D0575E892A2FA89A003CE661 /* FirebaseDatabaseSwift in Frameworks */,
+				D0575E8B2A2FA89A003CE661 /* FirebaseFirestore in Frameworks */,
+				D0575E912A2FA89A003CE661 /* FirebaseStorage in Frameworks */,
+				D0575E872A2FA89A003CE661 /* FirebaseDatabase in Frameworks */,
+				D0575E852A2FA89A003CE661 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -51,8 +90,15 @@
 		D0575E742A2F9F0A003CE661 /* Trektronic-App */ = {
 			isa = PBXGroup;
 			children = (
+				D0575EB02A2FC5F5003CE661 /* Info.plist */,
+				D0575EAE2A2FC589003CE661 /* GoogleService-Info.plist */,
 				D0575E752A2F9F0A003CE661 /* Trektronic_AppApp.swift */,
-				D0575E772A2F9F0A003CE661 /* ContentView.swift */,
+				D0575EB12A30EFBA003CE661 /* CustomStyle */,
+				D0575EA92A2FB7A1003CE661 /* Extension */,
+				D0575EA62A2FB015003CE661 /* Managers */,
+				D0575E972A2FABA2003CE661 /* Login */,
+				D0575E9C2A2FAED3003CE661 /* Onboarding */,
+				D0575EA12A2FAF48003CE661 /* TabBar */,
 				D0575E792A2F9F0C003CE661 /* Assets.xcassets */,
 				D0575E7B2A2F9F0C003CE661 /* Preview Content */,
 			);
@@ -65,6 +111,58 @@
 				D0575E7C2A2F9F0C003CE661 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		D0575E972A2FABA2003CE661 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				D0575E982A2FABCD003CE661 /* LoginView.swift */,
+				D0575E9A2A2FAE15003CE661 /* LoginViewModel.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		D0575E9C2A2FAED3003CE661 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				D0575E9D2A2FAEE7003CE661 /* OnboardingView.swift */,
+				D0575E9F2A2FAEFE003CE661 /* OnboardingViewModel.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		D0575EA12A2FAF48003CE661 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				D0575EA22A2FAF7A003CE661 /* TabBarView.swift */,
+				D0575EA42A2FAF99003CE661 /* TabBarViewModel.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
+		D0575EA62A2FB015003CE661 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				D0575EA72A2FB04A003CE661 /* FirebaseManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		D0575EA92A2FB7A1003CE661 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				D0575EAA2A2FB7CB003CE661 /* Text + Extension.swift */,
+				D0575EAC2A2FB8C4003CE661 /* Color + Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		D0575EB12A30EFBA003CE661 /* CustomStyle */ = {
+			isa = PBXGroup;
+			children = (
+				D0575EB22A30EFED003CE661 /* Button + Style.swift */,
+			);
+			path = CustomStyle;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +181,17 @@
 			dependencies = (
 			);
 			name = "Trektronic-App";
+			packageProductDependencies = (
+				D0575E842A2FA89A003CE661 /* FirebaseAuth */,
+				D0575E862A2FA89A003CE661 /* FirebaseDatabase */,
+				D0575E882A2FA89A003CE661 /* FirebaseDatabaseSwift */,
+				D0575E8A2A2FA89A003CE661 /* FirebaseFirestore */,
+				D0575E8C2A2FA89A003CE661 /* FirebaseFirestoreSwift */,
+				D0575E8E2A2FA89A003CE661 /* FirebaseMessaging */,
+				D0575E902A2FA89A003CE661 /* FirebaseStorage */,
+				D0575E932A2FAA56003CE661 /* GoogleSignIn */,
+				D0575E952A2FAA56003CE661 /* GoogleSignInSwift */,
+			);
 			productName = "Trektronic-App";
 			productReference = D0575E722A2F9F0A003CE661 /* Trektronic-App.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +220,10 @@
 				Base,
 			);
 			mainGroup = D0575E692A2F9F0A003CE661;
+			packageReferences = (
+				D0575E832A2FA899003CE661 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				D0575E922A2FAA56003CE661 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+			);
 			productRefGroup = D0575E732A2F9F0A003CE661 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -127,6 +240,7 @@
 			files = (
 				D0575E7D2A2F9F0C003CE661 /* Preview Assets.xcassets in Resources */,
 				D0575E7A2A2F9F0C003CE661 /* Assets.xcassets in Resources */,
+				D0575EAF2A2FC589003CE661 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,7 +251,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0575E782A2F9F0A003CE661 /* ContentView.swift in Sources */,
+				D0575EA52A2FAF99003CE661 /* TabBarViewModel.swift in Sources */,
+				D0575EAD2A2FB8C4003CE661 /* Color + Extension.swift in Sources */,
+				D0575EB32A30EFED003CE661 /* Button + Style.swift in Sources */,
+				D0575E9B2A2FAE15003CE661 /* LoginViewModel.swift in Sources */,
+				D0575EAB2A2FB7CB003CE661 /* Text + Extension.swift in Sources */,
+				D0575EA02A2FAEFE003CE661 /* OnboardingViewModel.swift in Sources */,
+				D0575EA82A2FB04A003CE661 /* FirebaseManager.swift in Sources */,
+				D0575EA32A2FAF7A003CE661 /* TabBarView.swift in Sources */,
+				D0575E992A2FABCD003CE661 /* LoginView.swift in Sources */,
+				D0575E9E2A2FAEE7003CE661 /* OnboardingView.swift in Sources */,
 				D0575E762A2F9F0A003CE661 /* Trektronic_AppApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -269,6 +392,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Trektronic-App/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Trektronic-App/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -297,6 +421,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Trektronic-App/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Trektronic-App/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -337,6 +462,73 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D0575E832A2FA899003CE661 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.0.0;
+			};
+		};
+		D0575E922A2FAA56003CE661 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D0575E842A2FA89A003CE661 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D0575E832A2FA899003CE661 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		D0575E862A2FA89A003CE661 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D0575E832A2FA899003CE661 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		D0575E882A2FA89A003CE661 /* FirebaseDatabaseSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D0575E832A2FA899003CE661 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabaseSwift;
+		};
+		D0575E8A2A2FA89A003CE661 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D0575E832A2FA899003CE661 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		D0575E8C2A2FA89A003CE661 /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D0575E832A2FA899003CE661 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
+		};
+		D0575E8E2A2FA89A003CE661 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D0575E832A2FA899003CE661 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+		D0575E902A2FA89A003CE661 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D0575E832A2FA899003CE661 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+		D0575E932A2FAA56003CE661 /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D0575E922A2FAA56003CE661 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		D0575E952A2FAA56003CE661 /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D0575E922A2FAA56003CE661 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D0575E6A2A2F9F0A003CE661 /* Project object */;
 }
