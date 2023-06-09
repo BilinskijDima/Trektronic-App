@@ -8,33 +8,32 @@
 import SwiftUI
 
 struct OnboardingView: View {
-    
+        
     @StateObject var vm: OnboardingViewModel = OnboardingViewModel()
     
     var body: some View {
         VStack(spacing: 0) {
-            
+           
             TabView(selection: $vm.currentStep) {
-                ForEach(0..<vm.onBoardingSteps.count, id: \.self) { step in
+                ForEach(Array(vm.onBoardingSteps.enumerated()), id: \.element) { index, step in
                     VStack {
-                        Image(vm.onBoardingSteps[step].image)
+                        Image(step.image)
                             .resizable()
                             .frame(width: 250, height: 250)
-                        Text(vm.onBoardingSteps[step].title)
-                        Text(vm.onBoardingSteps[step].description)
+                        Text(step.title)
+                        Text(step.description)
                     }
-                    .tag(step)
+                    .tag(index)
                 }
             }
-            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
             
-            HStack {
-                ForEach(0..<vm.onBoardingSteps.count, id: \.self) { step in
+            HStack(spacing: 16) {
+                ForEach(Array(vm.onBoardingSteps.enumerated()), id: \.element) { index, step in
                     Capsule ()
-                        .foregroundColor(Color.MyColor.baseColorWB)
-                        .frame(width: step == vm.currentStep ? 20 : 10, height: 10)
-                }
-              
+                        .foregroundColor(Color.baseColorWB)
+                        .frame(width: index == vm.currentStep ? 20 : 10, height: 10)
+                        }
             }
             .padding(.bottom, 42)
             
@@ -42,12 +41,14 @@ struct OnboardingView: View {
             
             Button {
                 if vm.currentStep < vm.onBoardingSteps.count - 1 {
-                    vm.currentStep += 1
+                    withAnimation(.easeInOut(duration: 0.45)) {     // анимацию при нажатии кнопки получилось добавить а вот при свайпе нет (
+                        vm.currentStep += 1
+                    }
                 } else {
                     vm.showScreen = true
                 }
             } label: { }
-                .buttonStyle(DefaultButton(name: vm.currentStep < vm.onBoardingSteps.count - 1 ? "Далее" : "Давай начнем"))
+                .buttonStyle(StyleDefaultButton(name: vm.currentStep < vm.onBoardingSteps.count - 1 ? "Далее" : "Давай начнем"))
                 .padding(.bottom, 42)
                 .padding(.horizontal, 24)
             

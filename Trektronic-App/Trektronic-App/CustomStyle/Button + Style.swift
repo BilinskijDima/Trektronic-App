@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct DefaultButtonImage: ButtonStyle {
+struct StyleDefaultButtonImage: ButtonStyle {
     
     var name: String
     var logo: Image
@@ -21,14 +21,14 @@ struct DefaultButtonImage: ButtonStyle {
             logo
                 .resizable()
                 .frame(width: width, height: height)
-                .foregroundColor(Color.MyColor.baseColorBW)
+                .foregroundColor(Color.baseColorBW)
             Text(name)
                 .myTextStyle()
             
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, 12)
-        .background(Color.MyColor.baseColorWB)
+        .background(Color.baseColorWB)
         .cornerRadius(.greatestFiniteMagnitude)
         .overlay {
             if configuration.isPressed {
@@ -41,7 +41,7 @@ struct DefaultButtonImage: ButtonStyle {
     
 }
 
-struct DefaultButton: ButtonStyle {
+struct StyleDefaultButton: ButtonStyle {
     
     var name: String
     
@@ -51,7 +51,7 @@ struct DefaultButton: ButtonStyle {
             .myTextStyle()
             .frame(maxWidth: .infinity)
             .padding(.vertical, 12)
-            .background(Color.MyColor.baseColorWB)
+            .background(Color.baseColorWB)
             .cornerRadius(.greatestFiniteMagnitude)
             .overlay {
                 if configuration.isPressed {

@@ -9,7 +9,7 @@ import Foundation
 
 final class OnboardingViewModel: ObservableObject  {
     
-    struct OnboardingStep {
+    struct OnboardingStep: Hashable {
         let image: String
         let title: String
         let description: String

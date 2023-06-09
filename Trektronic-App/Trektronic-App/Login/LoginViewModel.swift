@@ -31,8 +31,9 @@ final class LoginViewModel: ObservableObject  {
           
                 if userData.isEmailVerified {
                     
-                    showScreen = true
-                    
+                    await MainActor.run {
+                        showScreen = true
+                    }
                 }
                 
             } catch {

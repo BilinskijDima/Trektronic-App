@@ -25,12 +25,12 @@ struct LoginView: View {
                     .padding(.bottom, 16)
                 
                 Text("TrekTronic")
-                    .foregroundColor(Color.MyColor.baseColorWB)
+                    .foregroundColor(Color.baseColorWB)
                     .fontWeight(.bold)
                     .font(.system(size: 36))
                 
                 Text("больше чем просто трекер")
-                    .foregroundColor(Color.MyColor.baseColorWB)
+                    .foregroundColor(Color.baseColorWB)
                     .fontWeight(.regular)
                     .font(.system(size: 13))
             }
@@ -41,12 +41,12 @@ struct LoginView: View {
                 Button {
                     vm.singInWithGoogle()
                 } label: { }
-                    .buttonStyle(DefaultButtonImage(name: "Войти через Google", logo: Image("GoogleLogo"), width: 25, height: 25))
+                    .buttonStyle(StyleDefaultButtonImage(name: "Войти через Google", logo: Image("GoogleLogo"), width: 25, height: 25))
                 
                 Button {
                    
                 } label: { }
-                    .buttonStyle(DefaultButtonImage(name: "Войти через Apple", logo: Image(systemName: "apple.logo"), width: 25, height: 28.5))
+                    .buttonStyle(StyleDefaultButtonImage(name: "Войти через Apple", logo: Image(systemName: "apple.logo"), width: 25, height: 28.5))
             }
             .padding(.bottom, 42)
         }

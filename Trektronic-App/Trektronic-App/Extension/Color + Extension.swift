@@ -9,11 +9,13 @@ import SwiftUI
 
 extension Color {
     
-    enum MyColor {
-        
-        static let baseColorWB = Color("BaseColorWB")
-        static let baseColorBW = Color("BaseColorBW")
-        
-    }
+    public static var baseColorWB: Color {
+            return Color("BaseColorWB")
+        }
+    public static var baseColorBW: Color {
+            return Color("BaseColorBW")
+        }
+    
+
     
 }

@@ -12,95 +12,47 @@ struct TabBarView: View {
     @StateObject var vm: TabBarViewModel = TabBarViewModel()
     
     var body: some View {
-        
-        // Сделать все через enum 
-        
-        VStack(spacing: 0) {
+        VStack {
+            
+           Spacer()
+            
+            switch vm.selectedTab {
+            case .house:
+                LoginView()
+            case .person:
+                OnboardingView()
+            case .gearshape:
+                Text("3")
+            case .message:
+                Text("4")
+            case .folder:
+                Text("5")
+            }
+            
             Spacer()
-            
-            Text("TabBar")
-            
-            Spacer()
-            
-            ZStack() {
-        
+            VStack {
                 HStack {
-                    
-                    Button {
-                        vm.tapButton = 0
-                    } label: {
-                        Image(systemName: "house.fill")
-                            .resizable()
-                            .frame(width: 30, height: 30)
-                          
+                    ForEach(Tab.allCases, id: \.self) { tab in
+                        Spacer()
+                        Image(systemName: tab.rawValue)
+                            .foregroundColor(tab == vm.selectedTab ? vm.selectedColor : tab.color) // не уверен что так
+                            .font(.system(size: 25))
+                            .onTapGesture {
+                                    vm.selectedTab = tab
+                            }
+                        Spacer()
                     }
-                    .foregroundColor(vm.tapButton == 0 ? Color.MyColor.baseColorWB : Color(.red))
-
-                    Spacer(minLength: 42)
-                    
-                    Button {
-                        vm.tapButton = 1
-                    } label: {
-                        Image(systemName: "house.fill")
-                            .resizable()
-                            .frame(width: 30, height: 30)
-                         
-                    }
-                    .foregroundColor(vm.tapButton == 1 ? Color.MyColor.baseColorWB : Color(.red))
-                    
-                    Spacer(minLength: 42)
-                    
-                    Button {
-                        vm.tapButton = 2
-                    } label: {
-                        Image(systemName: "house.fill")
-                            .resizable()
-                            .frame(width: 30, height: 30)
-                    }
-                    .foregroundColor(vm.tapButton == 2 ? Color.MyColor.baseColorWB : Color(.red))
-                    
-                    Spacer(minLength: 42)
-                    
-                    Button {
-                        vm.tapButton = 3
-                    } label: {
-                        Image(systemName: "house.fill")
-                            .resizable()
-                            .frame(width: 30, height: 30)
-                       
-                    }
-                    .foregroundColor(vm.tapButton == 3 ? Color.MyColor.baseColorWB : Color(.red))
-                    
-                    Spacer(minLength: 42)
-                    
-                    Button {
-                        vm.tapButton = 4
-                    } label: {
-                        Image(systemName: "house.fill")
-                            .resizable()
-                            .frame(width: 30, height: 30)
-                    }
-                    .foregroundColor(vm.tapButton == 4 ? Color.MyColor.baseColorWB : Color(.red))
-
                 }
-                .frame(maxWidth: .infinity)
-                .padding(.horizontal, 40)
-                .padding(.vertical, 8)
-                .background(Color.primary.opacity(0.09))
-
-              
+                .frame(height: 60)
+                .background(.thinMaterial)
+                .cornerRadius(.greatestFiniteMagnitude)
+                .padding()
             }
         }
-        
-        
-        
-        
-        
-
     }
 }
 
-struct TabBarView_Previews: PreviewProvider {
+struct CustomTabBar_Previews: PreviewProvider {
     static var previews: some View {
         TabBarView()
     }

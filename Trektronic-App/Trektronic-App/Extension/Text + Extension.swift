@@ -10,7 +10,7 @@ import SwiftUI
 extension Text {
 
     func myTextStyle() -> some View {
-        self.foregroundColor(Color.MyColor.baseColorBW)
+        self.foregroundColor(Color.baseColorBW)
             .fontWeight(.bold)
             .font(.system(size: 18))
     }
