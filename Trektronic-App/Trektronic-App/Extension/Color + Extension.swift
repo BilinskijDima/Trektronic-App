@@ -9,13 +9,7 @@ import SwiftUI
 
 extension Color {
     
-    public static var baseColorWB: Color {
-            return Color("BaseColorWB")
-        }
-    public static var baseColorBW: Color {
-            return Color("BaseColorBW")
-        }
-    
-
+    static let baseColorWB =  Color("BaseColorWB")
+    static let baseColorBW =  Color("BaseColorBW")
     
 }

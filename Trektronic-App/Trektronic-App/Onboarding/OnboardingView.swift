@@ -15,7 +15,7 @@ struct OnboardingView: View {
         VStack(spacing: 0) {
            
             TabView(selection: $vm.currentStep) {
-                ForEach(Array(vm.onBoardingSteps.enumerated()), id: \.element) { index, step in
+                ForEach(vm.onBoardingSteps, id: \.id) { step in
                     VStack {
                         Image(step.image)
                             .resizable()
@@ -23,16 +23,16 @@ struct OnboardingView: View {
                         Text(step.title)
                         Text(step.description)
                     }
-                    .tag(index)
+                    .tag(step.id)
                 }
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
             
             HStack(spacing: 16) {
-                ForEach(Array(vm.onBoardingSteps.enumerated()), id: \.element) { index, step in
+                ForEach(vm.onBoardingSteps, id: \.id) { step in
                     Capsule ()
                         .foregroundColor(Color.baseColorWB)
-                        .frame(width: index == vm.currentStep ? 20 : 10, height: 10)
+                        .frame(width: step.id == vm.currentStep ? 20 : 10, height: 10)
                         }
             }
             .padding(.bottom, 42)
