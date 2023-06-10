@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>191854267523-iq8t1fgj1c2lkmnhq1p1km9k9ng1h6d4.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.191854267523-iq8t1fgj1c2lkmnhq1p1km9k9ng1h6d4</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCt2AA7YcZ7n4yU3g1aMX3or8xEoO5kIQM</string>
+	<key>GCM_SENDER_ID</key>
+	<string>191854267523</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.BillyWonka.Trektronic-App</string>
+	<key>PROJECT_ID</key>
+	<string>trektronic-app-9e1cf</string>
+	<key>STORAGE_BUCKET</key>
+	<string>trektronic-app-9e1cf.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:191854267523:ios:3be71f0db05895e1135fb6</string>
+</dict>
+</plist>
