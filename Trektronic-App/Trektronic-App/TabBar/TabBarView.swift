@@ -12,15 +12,15 @@ struct TabBarView: View {
     @StateObject var vm: TabBarViewModel = TabBarViewModel()
     
     var body: some View {
-        VStack {
+        ZStack(alignment: .bottom) {
             
            Spacer()
             
             switch vm.selectedTab {
             case .house:
-                LoginView()
+                HomeView()
             case .person:
-                OnboardingView()
+                Text("2")
             case .gearshape:
                 Text("3")
             case .message:
@@ -30,6 +30,7 @@ struct TabBarView: View {
             }
             
             Spacer()
+            
             VStack {
                 HStack {
                     ForEach(Tab.allCases, id: \.self) { tab in
@@ -40,15 +41,18 @@ struct TabBarView: View {
                             .onTapGesture {
                                     vm.selectedTab = tab
                             }
+                            .padding(.vertical, 12)
                         Spacer()
                     }
                 }
-                .frame(height: 60)
                 .background(.thinMaterial)
                 .cornerRadius(.greatestFiniteMagnitude)
-                .padding()
+                .padding(.horizontal, 24)
+                .padding(.bottom, 24)
+         
             }
         }
+        .edgesIgnoringSafeArea(.bottom)
     }
 }
 
