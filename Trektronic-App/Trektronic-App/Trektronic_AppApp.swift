@@ -19,11 +19,14 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct Trektronic_AppApp: App {
     
+    let persistenceController = PersistenceController.shared
+    
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     var body: some Scene {
         WindowGroup {
             LoginView()
+                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }

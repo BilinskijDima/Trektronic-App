@@ -20,11 +20,11 @@ struct TabBarView: View {
             case .house:
                 HomeView()
             case .person:
-                Text("2")
-            case .gearshape:
                 Text("3")
-            case .message:
+            case .gearshape:
                 Text("4")
+            case .message:
+                TestCoreDataView()
             case .folder:
                 Text("5")
             }

@@ -30,7 +30,7 @@ final class HomeViewModel: ObservableObject  {
     
     func updateUIFromStatistics(_ statisticsCollection: HKStatisticsCollection) {
         
-        let startDate = Calendar.current.date(byAdding: .day, value: -7, to: Date())!
+        guard let startDate = Calendar.current.date(byAdding: .day, value: -7, to: Date()) else {return}
         
         let endDate = Date()
         

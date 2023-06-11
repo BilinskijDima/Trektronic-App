@@ -6,16 +6,14 @@
 //
 
 import SwiftUI
-import HealthKit
 
 struct HomeView: View {
     
     @StateObject var vm: HomeViewModel = HomeViewModel()
-    
+
     var body: some View {
 
         VStack {
-            
             List(vm.steps, id: \.id) { step in
                 VStack {
                     Text("\(step.count)")
@@ -27,11 +25,12 @@ struct HomeView: View {
             .onAppear {
                 vm.calculateData()
             }
-         
             .padding(.horizontal, 24)
-            
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)        
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        
+        
+        
     }
 }
 
@@ -40,3 +39,5 @@ struct ContentView_Previews: PreviewProvider {
         HomeView()
     }
 }
+
+
