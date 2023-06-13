@@ -41,7 +41,7 @@ class HealthKitManager: HealthKitManagerProtocol {
         
         query = HKStatisticsCollectionQuery(quantityType: stepType, quantitySamplePredicate: predicate, options: .cumulativeSum, anchorDate: anchorDate, intervalComponents: daily)
         
-        return try await withUnsafeThrowingContinuation { continuation in
+        return try await withCheckedThrowingContinuation { continuation in
             query?.initialResultsHandler = { query, statisticsCollection, error in
                 if let error = error {
                     continuation.resume(throwing: error)
@@ -58,11 +58,11 @@ class HealthKitManager: HealthKitManagerProtocol {
     
     func requestAuthorisation() async throws -> Bool {
         
-        guard let stepType = HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.stepCount) else {return false}
+        guard let stepType = HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.stepCount) else {fatalError("error quantityType HealthKit")}
         
-        guard let healthStore = self.healthStore else {return false}
+        guard let healthStore = self.healthStore else {fatalError("error requestAuthorisation HealthKit")}
         
-        return await withUnsafeContinuation { continuation in
+        return try await withCheckedThrowingContinuation { continuation in
             healthStore.requestAuthorization(toShare: [], read: [stepType]) { (success, error) in
                 continuation.resume(returning: success)
             }
