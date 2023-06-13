@@ -13,9 +13,9 @@ struct PersistenceController {
     static var preview: PersistenceController = {      // это фантомная Data для работы с превью
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
-        for _ in 0..<10 {
+        for _ in 0..<5 {
             let newItem = ItemTest(context: viewContext)
-            newItem.testData = ""
+            newItem.testData = "фантомные данные"
         }
         do {
             try viewContext.save()
@@ -32,7 +32,7 @@ struct PersistenceController {
         container = NSPersistentContainer(name: "Trektronic-App") // модель данных
         if inMemory {
             guard let containerFirst = container.persistentStoreDescriptions.first else {return}
-            containerFirst.url = URL(fileURLWithPath: "/dev/null") // /dev/null — специальный файл в системах класса UNIX, представляющий собой так называемое «пустое устройство» или “черную дыру”. Запись в него происходит успешно, независимо от объёма «записанной» информации.
+            containerFirst.url = URL(filePath: "/dev/null") // /dev/null — специальный файл в системах класса UNIX, представляющий собой так называемое «пустое устройство» или “черную дыру”. Запись в него происходит успешно, независимо от объёма «записанной» информации.
         }
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {

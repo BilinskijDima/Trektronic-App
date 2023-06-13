@@ -10,8 +10,8 @@ import HealthKit
 
 protocol HealthKitManagerProtocol {
     
-    func calculateSteps(completion: @escaping (HKStatisticsCollection?) -> Void)
-    func requestAuthorisation(completion: @escaping (Bool) -> Void)
+    func calculateSteps() async throws -> HKStatisticsCollection?
+    func requestAuthorisation() async throws -> Bool
     var healthStore: HKHealthStore? {get}
     
 }
@@ -22,47 +22,54 @@ class HealthKitManager: HealthKitManagerProtocol {
     var query: HKStatisticsCollectionQuery?
     
     init() {
-        if HKHealthStore.isHealthDataAvailable() { 
+        if HKHealthStore.isHealthDataAvailable() {
             healthStore = HKHealthStore()
         }
     }
     
-    func calculateSteps(completion: @escaping (HKStatisticsCollection?) -> Void) {
-    
-        let stepType = HKQuantityType.init(HKQuantityTypeIdentifier.stepCount) // это как я понял в будущем замена этому методу
-            //.quantityType(forIdentifier: HKQuantityTypeIdentifier.stepCount) // метод deprecated но в офф доке пока нет
+    func calculateSteps() async throws -> HKStatisticsCollection? {
         
-        let startDate = Calendar.current.date(byAdding: .day, value: -7, to: Date()) // с какой даты начинается сбор данных
+        let stepType = HKQuantityType.init(HKQuantityTypeIdentifier.stepCount)
         
-        let anchorDate = Date.mondayAt12AM() //Это значение устанавливает начало дня для каждого из ваших временных интервалов. Технически якорь устанавливает время начала для одного временного интервала. с 00:00 ночи в данном случае
+        let startDate = Calendar.current.date(byAdding: .day, value: -7, to: Date())
         
-        let daily = DateComponents(day: 1) //Интервал данных 1-каждый день 2-каждый второй день и т.д
+        let anchorDate = Date.mondayAt12AM()
         
-        let predicate = HKQuery.predicateForSamples(withStart: startDate, end: Date(), options: .strictStartDate) //ограничивает результаты, возвращаемые запросом. Вы можете передать nil, если хотите выполнить статистический расчет по всем выборкам указанного типа.
+        let daily = DateComponents(day: 1)
+        
+        let predicate = HKQuery.predicateForSamples(withStart: startDate, end: Date(), options: .strictStartDate)
         
         query = HKStatisticsCollectionQuery(quantityType: stepType, quantitySamplePredicate: predicate, options: .cumulativeSum, anchorDate: anchorDate, intervalComponents: daily)
         
-        query?.initialResultsHandler = { query, statisticsCollection, error in
-            completion(statisticsCollection)
+        return try await withUnsafeThrowingContinuation { continuation in
+            query?.initialResultsHandler = { query, statisticsCollection, error in
+                if let error = error {
+                    continuation.resume(throwing: error)
+                } else {
+                    continuation.resume(returning: statisticsCollection)
+                }
+            }
+            
+            if let healthStore = healthStore, let query = self.query {
+                healthStore.execute(query)
+            }
         }
-        
-        if let healthStore = healthStore, let query = self.query {
-            healthStore.execute(query)
-        }
-        
     }
     
-    func requestAuthorisation(completion: @escaping (Bool) -> Void) {
+    func requestAuthorisation() async throws -> Bool {
         
-        guard let stepType = HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.stepCount) else {return} //тип данных для получения
+        guard let stepType = HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.stepCount) else {return false}
         
-        guard let healthStore = self.healthStore else {return completion(false)} // наличеи разрешения пользователя
+        guard let healthStore = self.healthStore else {return false}
         
-        healthStore.requestAuthorization(toShare: [], read: [stepType]) { (success, error) in // вносим в массив данные для которых будет запрашиваться разрешение и чтение их
-            completion(success)
+        return await withUnsafeContinuation { continuation in
+            healthStore.requestAuthorization(toShare: [], read: [stepType]) { (success, error) in
+                continuation.resume(returning: success)
+            }
         }
-        
     }
+    
     
 }
+
 

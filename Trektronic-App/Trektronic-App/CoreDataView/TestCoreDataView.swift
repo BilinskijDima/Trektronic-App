@@ -57,6 +57,6 @@ struct TestCoreDataView: View {
 
 struct TestCoreDataTwoView_Previews: PreviewProvider {
     static var previews: some View {
-        TestCoreDataView()
+        TestCoreDataView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }

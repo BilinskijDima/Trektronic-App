@@ -15,18 +15,15 @@ final class HomeViewModel: ObservableObject  {
     @Published var steps: [Step] = [Step]()
     
     func calculateData() {
-        if (healthKitManager.healthStore) != nil {
-            healthKitManager.requestAuthorisation { success in
-                if success {
-                    self.healthKitManager.calculateSteps { statisticsCollection in
-                        if let statisticsCollection = statisticsCollection {
-                            self.updateUIFromStatistics(statisticsCollection)
-                        }
-                    }
-                }
+        guard healthKitManager.healthStore != nil else {return}
+        Task {
+            if try await healthKitManager.requestAuthorisation() {
+                guard let calculateSteps = try await healthKitManager.calculateSteps() else {return}
+                self.updateUIFromStatistics(calculateSteps)
             }
         }
     }
+    
     
     func updateUIFromStatistics(_ statisticsCollection: HKStatisticsCollection) {
         
