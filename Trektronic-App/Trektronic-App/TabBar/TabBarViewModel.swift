@@ -34,6 +34,6 @@ enum Tab: String, CaseIterable {
 final class TabBarViewModel: ObservableObject  {
     
     @Published var selectedTab: Tab = .house
-    let selectedColor: Color = .red
+    let selectedColor: Color = .green
     
 }

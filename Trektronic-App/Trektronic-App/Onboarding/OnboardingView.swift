@@ -41,7 +41,7 @@ struct OnboardingView: View {
             
             Button {
                 if vm.currentStep < vm.onBoardingSteps.count - 1 {
-                    withAnimation(.easeInOut(duration: 0.45)) {     // анимацию при нажатии кнопки получилось добавить а вот при свайпе нет (
+                    withAnimation(.easeInOut(duration: 0.3)) {     // анимацию при нажатии кнопки получилось добавить а вот при свайпе нет (
                         vm.currentStep += 1
                     }
                 } else {
