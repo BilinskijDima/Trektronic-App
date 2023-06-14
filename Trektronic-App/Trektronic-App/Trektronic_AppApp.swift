@@ -18,15 +18,33 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
 @main
 struct Trektronic_AppApp: App {
+ 
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \UserFB.autState, ascending: true)], animation: .default)
+        
+    var itemsUser: FetchedResults<UserFB>
     
     let persistenceController = PersistenceController.shared
-    
+
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     var body: some Scene {
+        
         WindowGroup {
-            LoginView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+
+
+            if let state = itemsUser.last?.autState {
+                if state {
+                    HomeView()
+                        .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                }   else {
+                    LoginView()
+                        .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                }
+
+
+            }
         }
     }
+    
+    
 }
