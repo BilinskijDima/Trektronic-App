@@ -12,21 +12,23 @@ struct TabBarView: View {
     @StateObject var vm: TabBarViewModel = TabBarViewModel()
     
     var body: some View {
-        ZStack(alignment: .bottom) {
+        let viewContext = CoreDataManager.shared.persistentStoreContainer.viewContext
+        
+        VStack(spacing: 0) {
             
-           Spacer()
+          // Spacer()
             
             switch vm.selectedTab {
             case .house:
                 HomeView()
+            case .chart:
+                StatisticsView()
             case .person:
-                Text("3")
+                TestCoreDataView(vm: TestCoreDataViewModel(context: viewContext))
+                    .environment(\.managedObjectContext, viewContext)
             case .gearshape:
-                Text("4")
-            case .message:
-                Text("4")
-            case .folder:
-                Text("5")
+                Text("setting")
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
             
             Spacer()

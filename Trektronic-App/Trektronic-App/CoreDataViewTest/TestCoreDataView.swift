@@ -19,22 +19,12 @@ struct TestCoreDataView: View {
         self.testCoreDataVM = vm
     }
     
-    // тестируем запись даных
-//    @State private var number = 0
-//
-//    @Environment(\.managedObjectContext) private var viewContext
-//
-//    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \ItemTest.testData, ascending: true)],
-//                  animation: .default)
-//
-//    private var items: FetchedResults<ItemTest>
-    
     private func deleteBudget(at offsets: IndexSet) {
-
-            offsets.forEach { index in
-                let budget = testCoreDataVM.budgets[index]
-                testCoreDataVM.deleteBudget(budgetId: budget.id)
-            }
+        
+        offsets.forEach { index in
+            let budget = testCoreDataVM.budgets[index]
+            testCoreDataVM.deleteBudget(budgetId: budget.id)
+        }
         
     }
     
@@ -61,42 +51,9 @@ struct TestCoreDataView: View {
                     }
                 }
             }
-
+            
         }
-        
-        
-//        VStack {
-//
-//            TestCoreDataTwoView()
-//            Text("Две разные view на одной добавляем данные на вторую автоматически подтягиваются с базы даных")
-//                .padding(.horizontal, 24)
-//            NavigationView {
-//                List {
-//                    ForEach(items) { item in
-//                        Text(item.testData ?? "No data")
-//                    }
-//                }
-//                .navigationBarItems(trailing: Button(action: addItem, label: {
-//                    Image(systemName: "plus")
-//                }))
-//            }
-//        }
     }
-    
-//    private func addItem() {
-//        self.number += 1 // для теста
-//        withAnimation {
-//            let newItem = ItemTest(context: viewContext)
-//            newItem.testData = "Hello \(number)"
-//
-//            do {
-//                try viewContext.save()
-//            } catch {
-//                let nsError = error as NSError
-//                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-//            }
-//        }
-//    }
 }
 
 struct TestCoreDataTwoView_Previews: PreviewProvider {

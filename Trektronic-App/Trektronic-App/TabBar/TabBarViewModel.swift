@@ -10,20 +10,17 @@ import SwiftUI
 
 enum Tab: String, CaseIterable {
     case house
-    case message
+    case chart = "chart.xyaxis.line"
     case person
-    case folder
     case gearshape
     
     var color: Color {
         switch self {
         case .house:
             return .gray
-        case .message:
+        case .chart:
             return .gray
         case .person:
-            return .gray
-        case .folder:
             return .gray
         case .gearshape:
             return .gray

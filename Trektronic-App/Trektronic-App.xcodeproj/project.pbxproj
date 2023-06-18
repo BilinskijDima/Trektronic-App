@@ -41,6 +41,9 @@
 		D0882FC72A35CD2300AD2B29 /* Data + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0882FC62A35CD2300AD2B29 /* Data + Extension.swift */; };
 		D0882FEA2A35EA8600AD2B29 /* Trektronic-App.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D0882FE82A35EA8600AD2B29 /* Trektronic-App.xcdatamodeld */; };
 		D0882FF92A361E8700AD2B29 /* TestCoreDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0882FF82A361E8700AD2B29 /* TestCoreDataView.swift */; };
+		D0CC3C862A3F0E8F00C78346 /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CC3C852A3F0E8F00C78346 /* StatisticsView.swift */; };
+		D0CC3C882A3F0EA000C78346 /* StatisticsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CC3C872A3F0EA000C78346 /* StatisticsViewModel.swift */; };
+		D0CC3C8A2A3F101B00C78346 /* FireBaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CC3C892A3F101B00C78346 /* FireBaseModel.swift */; };
 		D0E808732A33BA89005A17E4 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E808722A33BA89005A17E4 /* HomeView.swift */; };
 		D0E808752A33BA96005A17E4 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E808742A33BA96005A17E4 /* HomeViewModel.swift */; };
 /* End PBXBuildFile section */
@@ -73,6 +76,9 @@
 		D0882FC62A35CD2300AD2B29 /* Data + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data + Extension.swift"; sourceTree = "<group>"; };
 		D0882FE92A35EA8600AD2B29 /* Trektronic-App.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Trektronic-App.xcdatamodel"; sourceTree = "<group>"; };
 		D0882FF82A361E8700AD2B29 /* TestCoreDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCoreDataView.swift; sourceTree = "<group>"; };
+		D0CC3C852A3F0E8F00C78346 /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
+		D0CC3C872A3F0EA000C78346 /* StatisticsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewModel.swift; sourceTree = "<group>"; };
+		D0CC3C892A3F101B00C78346 /* FireBaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseModel.swift; sourceTree = "<group>"; };
 		D0E808722A33BA89005A17E4 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		D0E808742A33BA96005A17E4 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		D0E808762A33E3FA005A17E4 /* Trektronic-App.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "Trektronic-App.entitlements"; sourceTree = "<group>"; };
@@ -117,9 +123,11 @@
 		D0575E742A2F9F0A003CE661 /* Trektronic-App */ = {
 			isa = PBXGroup;
 			children = (
+				D0575E7B2A2F9F0C003CE661 /* Preview Content */,
 				D0E808762A33E3FA005A17E4 /* Trektronic-App.entitlements */,
 				D0575EB02A2FC5F5003CE661 /* Info.plist */,
 				D0575EAE2A2FC589003CE661 /* GoogleService-Info.plist */,
+				D0575E792A2F9F0C003CE661 /* Assets.xcassets */,
 				D0575E752A2F9F0A003CE661 /* Trektronic_AppApp.swift */,
 				D0882FE72A35E99200AD2B29 /* CoreData */,
 				D0575EB12A30EFBA003CE661 /* CustomStyle */,
@@ -131,7 +139,7 @@
 				D0575EA12A2FAF48003CE661 /* TabBar */,
 				D0882FFC2A3632BC00AD2B29 /* CoreDataViewTest */,
 				D0E808712A33BA71005A17E4 /* Home */,
-				D0575E7B2A2F9F0C003CE661 /* Preview Content */,
+				D0CC3C842A3F0E2100C78346 /* Statistics */,
 			);
 			path = "Trektronic-App";
 			sourceTree = "<group>";
@@ -205,6 +213,7 @@
 			children = (
 				D0882FC32A35C0BD00AD2B29 /* HealthKitModel.swift */,
 				D07E99A32A3E17A700261CC8 /* CoreDataModel.swift */,
+				D0CC3C892A3F101B00C78346 /* FireBaseModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -228,12 +237,20 @@
 			path = CoreDataViewTest;
 			sourceTree = "<group>";
 		};
+		D0CC3C842A3F0E2100C78346 /* Statistics */ = {
+			isa = PBXGroup;
+			children = (
+				D0CC3C852A3F0E8F00C78346 /* StatisticsView.swift */,
+				D0CC3C872A3F0EA000C78346 /* StatisticsViewModel.swift */,
+			);
+			path = Statistics;
+			sourceTree = "<group>";
+		};
 		D0E808712A33BA71005A17E4 /* Home */ = {
 			isa = PBXGroup;
 			children = (
 				D0E808722A33BA89005A17E4 /* HomeView.swift */,
 				D0E808742A33BA96005A17E4 /* HomeViewModel.swift */,
-				D0575E792A2F9F0C003CE661 /* Assets.xcassets */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -325,6 +342,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0575EA52A2FAF99003CE661 /* TabBarViewModel.swift in Sources */,
+				D0CC3C862A3F0E8F00C78346 /* StatisticsView.swift in Sources */,
+				D0CC3C8A2A3F101B00C78346 /* FireBaseModel.swift in Sources */,
 				D0575EAD2A2FB8C4003CE661 /* Color + Extension.swift in Sources */,
 				D0575EB32A30EFED003CE661 /* Button + Style.swift in Sources */,
 				D07E99A22A3E175D00261CC8 /* EntitiesCD+ Extension.swift in Sources */,
@@ -344,6 +363,7 @@
 				D0575E9E2A2FAEE7003CE661 /* OnboardingView.swift in Sources */,
 				D0882FF92A361E8700AD2B29 /* TestCoreDataView.swift in Sources */,
 				D0882FEA2A35EA8600AD2B29 /* Trektronic-App.xcdatamodeld in Sources */,
+				D0CC3C882A3F0EA000C78346 /* StatisticsViewModel.swift in Sources */,
 				D0882FC22A35BEF200AD2B29 /* HealthKitManager.swift in Sources */,
 				D0882FC42A35C0BD00AD2B29 /* HealthKitModel.swift in Sources */,
 				D0575E762A2F9F0A003CE661 /* Trektronic_AppApp.swift in Sources */,

@@ -10,6 +10,7 @@ import SwiftUI
 struct OnboardingView: View {
     
     @AppStorage("stateLoadView") var stateLoadView = DefaultSettings.stateLoadHomeView
+    @AppStorage("stateLoadHealthKit") var stateLoadHealthKit = DefaultSettings.stateLoadHealthKit
         
     @StateObject var vm: OnboardingViewModel = OnboardingViewModel()
     
@@ -24,11 +25,20 @@ struct OnboardingView: View {
                             .frame(width: 250, height: 250)
                         Text(step.title)
                         Text(step.description)
+                        
+                        Button {
+                            Task {
+                                stateLoadHealthKit = try await vm.healthKitManager.requestAuthorisation()
+                            }
+                        } label: {
+                            Text("Button")
+                        }
+                        
                     }
                     .tag(step.id)
                 }
             }
-            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
             
             HStack(spacing: 16) {
                 ForEach(vm.onBoardingSteps, id: \.id) { step in
@@ -43,11 +53,10 @@ struct OnboardingView: View {
             
             Button {
                 if vm.currentStep < vm.onBoardingSteps.count - 1 {
-                    withAnimation(.easeInOut(duration: 0.3)) {     // анимацию при нажатии кнопки получилось добавить а вот при свайпе нет (
+                    withAnimation(.easeInOut(duration: 0.3)) {
                         vm.currentStep += 1
                     }
                 } else {
-                    vm.showScreen = true
                     stateLoadView.toggle()
                 }
             } label: { }

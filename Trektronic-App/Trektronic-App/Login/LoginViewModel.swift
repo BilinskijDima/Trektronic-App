@@ -7,10 +7,15 @@
 
 import Foundation
 import CoreData
+import SwiftUI
 
 final class LoginViewModel: ObservableObject  {
         
+    @AppStorage("userID") var userID = DefaultSettings.userID
+
     var fireBaseManager: FirebaseManagerProtocol = FirebaseManager()
+    
+    @Published var showScreen = false
     
    // это доделаю еще
 //    enum SignInState {
@@ -19,8 +24,6 @@ final class LoginViewModel: ObservableObject  {
 //    }
 //
     //    @Published var state: SignInState = .signedOut
-    
-    @Published var showScreen = false
     
     func singInWithGoogle() {
         
@@ -34,7 +37,13 @@ final class LoginViewModel: ObservableObject  {
                     await MainActor.run {
                         showScreen = true
                     }
-                    
+                    await MainActor.run {
+                        userID = userData.uid
+                    }
+                    let data = try await fireBaseManager.getData(id: userData.uid)
+                    if data.registrationDate == nil {
+                        try await self.fireBaseManager.setData(nickname: "nickname" ,registrationDate: Date.now, id: userData.uid)
+                    }
                 }
                 
             } catch {

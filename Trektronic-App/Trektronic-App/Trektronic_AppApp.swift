@@ -10,6 +10,8 @@ import FirebaseCore
 
 enum DefaultSettings {
     static let stateLoadHomeView = false
+    static let stateLoadHealthKit = false
+    static let userID = ""
 }
 
 class AppDelegate: NSObject, UIApplicationDelegate {
@@ -29,6 +31,7 @@ struct Trektronic_AppApp: App {
     
     var body: some Scene {
         WindowGroup {
+            
             //            let viewContext = CoreDataManager.shared.persistentStoreContainer.viewContext
             //            TestCoreDataView(vm: TestCoreDataViewModel(context: viewContext))
             //                .environment(\.managedObjectContext, viewContext)
