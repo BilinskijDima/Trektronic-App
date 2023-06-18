@@ -25,7 +25,6 @@ struct TabBarView: View {
                 Text("4")
             case .message:
                 Text("4")
-         //       TestCoreDataView()
             case .folder:
                 Text("5")
             }

@@ -8,43 +8,37 @@
 import SwiftUI
 import FirebaseCore
 
+enum DefaultSettings {
+    static let stateLoadHomeView = false
+}
+
 class AppDelegate: NSObject, UIApplicationDelegate {
-  func application(_ application: UIApplication,
-                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-    FirebaseApp.configure()
-    return true
-  }
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        FirebaseApp.configure()
+        return true
+    }
 }
 
 @main
 struct Trektronic_AppApp: App {
- 
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \UserFB.autState, ascending: true)], animation: .default)
-        
-    var itemsUser: FetchedResults<UserFB>
     
-    let persistenceController = PersistenceController.shared
-
+    @AppStorage("stateLoadView") var stateLoadHomeView = DefaultSettings.stateLoadHomeView
+    
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     var body: some Scene {
-        
         WindowGroup {
-
-
-            if let state = itemsUser.last?.autState {
-                if state {
-                    HomeView()
-                        .environment(\.managedObjectContext, persistenceController.container.viewContext)
-                }   else {
-                    LoginView()
-                        .environment(\.managedObjectContext, persistenceController.container.viewContext)
-                }
-
-
+            //            let viewContext = CoreDataManager.shared.persistentStoreContainer.viewContext
+            //            TestCoreDataView(vm: TestCoreDataViewModel(context: viewContext))
+            //                .environment(\.managedObjectContext, viewContext)
+            if stateLoadHomeView {
+                TabBarView()
+            }   else {
+                LoginView()
             }
+            
         }
     }
-    
     
 }

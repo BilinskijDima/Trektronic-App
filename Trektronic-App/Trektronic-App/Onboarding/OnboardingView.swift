@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct OnboardingView: View {
+    
+    @AppStorage("stateLoadView") var stateLoadView = DefaultSettings.stateLoadHomeView
         
     @StateObject var vm: OnboardingViewModel = OnboardingViewModel()
     
@@ -46,6 +48,7 @@ struct OnboardingView: View {
                     }
                 } else {
                     vm.showScreen = true
+                    stateLoadView.toggle()
                 }
             } label: { }
                 .buttonStyle(StyleDefaultButton(name: vm.currentStep < vm.onBoardingSteps.count - 1 ? "Далее" : "Давай начнем"))
@@ -54,7 +57,6 @@ struct OnboardingView: View {
             
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .fullScreenCover(isPresented: $vm.showScreen) { TabBarView() }
     }
 }
 

@@ -31,11 +31,11 @@ class HealthKitManager: HealthKitManagerProtocol {
         
         let stepType = HKQuantityType.init(HKQuantityTypeIdentifier.stepCount)
         
-        let startDate = Calendar.current.date(byAdding: .day, value: -7, to: Date())
+        let startDate = Calendar.current.date(byAdding: .day, value: -1, to: Date())
         
         let anchorDate = Date.mondayAt12AM()
         
-        let daily = DateComponents(day: 1)
+        let daily = DateComponents(minute: 1) // получаем данные поминутно за сутки 1440 записей
         
         let predicate = HKQuery.predicateForSamples(withStart: startDate, end: Date(), options: .strictStartDate)
         
