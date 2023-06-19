@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct OnboardingView: View {
-        
+    
+    @AppStorage("stateLoadView") var stateLoadView = DefaultSettings.stateLoadHomeView
+    
     @StateObject var vm: OnboardingViewModel = OnboardingViewModel()
     
     var body: some View {
@@ -22,11 +24,20 @@ struct OnboardingView: View {
                             .frame(width: 250, height: 250)
                         Text(step.title)
                         Text(step.description)
+                        
+                        Button {
+                            
+                            vm.stateHealthKit()
+                            
+                        } label: {
+                            Text("Button")
+                        }
+                        
                     }
                     .tag(step.id)
                 }
             }
-            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
             
             HStack(spacing: 16) {
                 ForEach(vm.onBoardingSteps, id: \.id) { step in
@@ -41,11 +52,11 @@ struct OnboardingView: View {
             
             Button {
                 if vm.currentStep < vm.onBoardingSteps.count - 1 {
-                    withAnimation(.easeInOut(duration: 0.3)) {     // анимацию при нажатии кнопки получилось добавить а вот при свайпе нет (
+                    withAnimation(.easeInOut(duration: 0.3)) {
                         vm.currentStep += 1
                     }
                 } else {
-                    vm.showScreen = true
+                    stateLoadView.toggle()
                 }
             } label: { }
                 .buttonStyle(StyleDefaultButton(name: vm.currentStep < vm.onBoardingSteps.count - 1 ? "Далее" : "Давай начнем"))
@@ -54,7 +65,6 @@ struct OnboardingView: View {
             
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .fullScreenCover(isPresented: $vm.showScreen) { TabBarView() }
     }
 }
 
