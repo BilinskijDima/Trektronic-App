@@ -53,7 +53,9 @@ final class StatisticsViewModel: ObservableObject  {
             let endDate = Date()
             
             await MainActor.run {
-                statisticsCollectionStep.enumerateStatistics(from: data, to: endDate) { (statistics, stop) in
+                statisticsCollectionStep.enumerateStatistics(from: data, to: endDate) { [weak self] (statistics, stop) in
+                    
+                    guard let self = self else {return}
                     
                     let count = statistics.sumQuantity()?.doubleValue(for: .count())
                     
@@ -61,7 +63,9 @@ final class StatisticsViewModel: ObservableObject  {
                     
                 }
                 
-                statisticsCollectionStepWeek.enumerateStatistics(from: startDate, to: endDate) { (statistics, stop) in
+                statisticsCollectionStepWeek.enumerateStatistics(from: startDate, to: endDate) { [weak self] (statistics, stop) in
+                    
+                    guard let self = self else {return}
                     
                     let count = statistics.sumQuantity()?.doubleValue(for: .count())
                     
@@ -71,7 +75,9 @@ final class StatisticsViewModel: ObservableObject  {
                     
                 }
                 
-                statisticsCollectionDistance.enumerateStatistics(from: data, to: endDate) { (statistics, stop) in
+                statisticsCollectionDistance.enumerateStatistics(from: data, to: endDate) { [weak self] (statistics, stop) in
+                    
+                    guard let self = self else {return}
                     
                     let count = statistics.sumQuantity()?.doubleValue(for: HKUnit.meter())
                     
