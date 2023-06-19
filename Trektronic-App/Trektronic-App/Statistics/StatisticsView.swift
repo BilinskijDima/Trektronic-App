@@ -11,10 +11,7 @@ import Charts
 struct StatisticsView: View {
     
     @ObservedObject var vm: StatisticsViewModel = StatisticsViewModel()
-    
-    @State var selectedTab = "Шаги"
-    var tabs = ["Шаги", "Дистанция"]
-    
+        
     var body: some View {
        
         NavigationView {
@@ -67,8 +64,8 @@ struct StatisticsView: View {
                     Text("График")
                         .padding(.vertical, 24)
                     
-                    Picker("charts", selection: $selectedTab) {
-                        ForEach(tabs, id: \.self) {
+                    Picker("charts", selection: $vm.selectedTab) {
+                        ForEach(vm.tabs, id: \.self) {
                             Text($0)
                         }
                     }

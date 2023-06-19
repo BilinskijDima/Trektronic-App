@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AddTestCoreDataView: View {
     
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) var dismiss
 
     @ObservedObject var vm: AddTestCoreDataViewModel
     
@@ -26,7 +26,7 @@ struct AddTestCoreDataView: View {
             Button("Save") {
                 
                 vm.save()
-                presentationMode.wrappedValue.dismiss()
+                dismiss()
             }
             .navigationTitle("Add New TestCoreData")
         }

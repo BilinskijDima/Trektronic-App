@@ -6,10 +6,13 @@
 //
 
 import Foundation
+import SwiftUI
 
 final class OnboardingViewModel: ObservableObject  {
     
-    var healthKitManager: HealthKitManagerProtocol = HealthKitManager()
+    private var healthKitManager: HealthKitManagerProtocol = HealthKitManager()
+    
+    @AppStorage("stateLoadHealthKit") var stateLoadHealthKit = DefaultSettings.stateLoadHealthKit
     
     struct OnboardingStep: Hashable {
         let id: Int
@@ -23,8 +26,12 @@ final class OnboardingViewModel: ObservableObject  {
     @Published var onBoardingSteps = [OnboardingStep(id: 0, image: "AppLogo", title: "Text title 1", description: "Text description 1"),  OnboardingStep(id: 1,image: "AppLogo", title: "Text title 2", description: "Text description 2"), OnboardingStep(id: 2,image: "AppLogo", title: "Text title 3", description: "Text description 3"),    OnboardingStep(id: 3, image: "AppLogo", title: "Text title 4", description: "Text description 4"), OnboardingStep(id: 4, image: "AppLogo", title: "Text title 5", description: "Text description 5")
     ]
     
-    
-    
+    @MainActor
+    func stateHealthKit() {
+        Task {
+            stateLoadHealthKit = try await healthKitManager.requestAuthorisation()
+        }
+    }
     
 }
 

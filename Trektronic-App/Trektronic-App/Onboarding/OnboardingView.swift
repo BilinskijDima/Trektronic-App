@@ -10,8 +10,7 @@ import SwiftUI
 struct OnboardingView: View {
     
     @AppStorage("stateLoadView") var stateLoadView = DefaultSettings.stateLoadHomeView
-    @AppStorage("stateLoadHealthKit") var stateLoadHealthKit = DefaultSettings.stateLoadHealthKit
-        
+    
     @StateObject var vm: OnboardingViewModel = OnboardingViewModel()
     
     var body: some View {
@@ -27,9 +26,9 @@ struct OnboardingView: View {
                         Text(step.description)
                         
                         Button {
-                            Task {
-                                stateLoadHealthKit = try await vm.healthKitManager.requestAuthorisation()
-                            }
+                            
+                            vm.stateHealthKit()
+                            
                         } label: {
                             Text("Button")
                         }

@@ -21,42 +21,42 @@ final class StatisticsViewModel: ObservableObject  {
     @Published var steps: Float = 0
     @Published var distance = 0
     
+    @Published var selectedTab = "Шаги"
+    var tabs = ["Шаги", "Дистанция"]
+    
     func calculateData() {
         guard healthKitManager.healthStore != nil else {return}
         Task {
             
             guard let data = try await fireBaseManager.getData(id: userID).registrationDate, let dataWeek = Calendar.current.date(byAdding: .day, value: -6, to: Date()) else {return}
             
-       
             if stateLoadHealthKit {
-                guard let calculateSteps = try await healthKitManager.calculateData(startDate: data, dataType: HKQuantityType.init(HKQuantityTypeIdentifier.stepCount)),
-                      let calculateStepsWeek = try await healthKitManager.calculateData(startDate: dataWeek, dataType: HKQuantityType.init(HKQuantityTypeIdentifier.stepCount)),
-                      let calculateDistance = try await healthKitManager.calculateData(startDate: data, dataType: HKQuantityType.init(HKQuantityTypeIdentifier.distanceWalkingRunning)) else {return}
+                guard let steps = HKQuantityType.quantityType(forIdentifier: .stepCount),
+                      let distance = HKQuantityType.quantityType(forIdentifier: .distanceWalkingRunning),
+                      let calculateSteps = try await healthKitManager.calculateData(startDate: data, dataType: steps),
+                      let calculateStepsWeek = try await healthKitManager.calculateData(startDate: dataWeek, dataType: steps),
+                      let calculateDistance = try await healthKitManager.calculateData(startDate: data, dataType: distance) else {return}
                 
-                self.updateUIFromStatistics(calculateSteps, calculateDistance, calculateStepsWeek)
+                await self.updateUIFromStatistics(calculateSteps, calculateDistance, calculateStepsWeek)
             }
         }
     }
     
+    @MainActor
     func updateUIFromStatistics(_ statisticsCollectionStep: HKStatisticsCollection,_ statisticsCollectionDistance: HKStatisticsCollection,_ statisticsCollectionStepWeek: HKStatisticsCollection) {
         
         guard let startDate = Calendar.current.date(byAdding: .day, value: -6, to: Date()) else {return}
         
         Task {
             guard let data = try await fireBaseManager.getData(id: userID).registrationDate else {return}
-
+            
             let endDate = Date()
             
             statisticsCollectionStep.enumerateStatistics(from: data, to: endDate) { (statistics, stop) in
                 
                 let count = statistics.sumQuantity()?.doubleValue(for: .count())
                 
-            
-                
-                DispatchQueue.main.async {
-                    self.steps = Float(count ?? 0.0)
-           
-                }
+                self.steps = Float(count ?? 0.0)
                 
             }
             
@@ -65,22 +65,17 @@ final class StatisticsViewModel: ObservableObject  {
                 let count = statistics.sumQuantity()?.doubleValue(for: .count())
                 
                 let stepWeek = HealthKitModel(count: Int(count ?? 0), date: statistics.startDate)
-                
-                DispatchQueue.main.async {
-                    self.stepsWeek.append(stepWeek)
-                }
-                
+
+                self.stepsWeek.append(stepWeek)
+
             }
             
             statisticsCollectionDistance.enumerateStatistics(from: data, to: endDate) { (statistics, stop) in
                 
                 let count = statistics.sumQuantity()?.doubleValue(for: HKUnit.meter())
-                
-                
-                DispatchQueue.main.async {
-                    self.distance = Int(count ?? 0.0)
-                }
-                
+
+                self.distance = Int(count ?? 0.0)
+ 
             }
         }
     }

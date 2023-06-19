@@ -89,8 +89,8 @@ class HealthKitManager: HealthKitManagerProtocol {
     
     func requestAuthorisation() async throws -> Bool {
         
-        guard let stepType = HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.stepCount) else {fatalError("error quantityType HealthKit")}
-        guard let distanceType = HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.distanceWalkingRunning) else {fatalError("error quantityType HealthKit")}
+        guard let stepType = HKQuantityType.quantityType(forIdentifier: .stepCount) else {fatalError("error quantityType HealthKit")}
+        guard let distanceType = HKQuantityType.quantityType(forIdentifier: .distanceWalkingRunning) else {fatalError("error quantityType HealthKit")}
         
         guard let healthStore = self.healthStore else {fatalError("error requestAuthorisation HealthKit")}
         
