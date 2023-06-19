@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D007790D2A406C4B0078AE3D /* HealthKit + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D007790C2A406C4B0078AE3D /* HealthKit + Extension.swift */; };
 		D0575E762A2F9F0A003CE661 /* Trektronic_AppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0575E752A2F9F0A003CE661 /* Trektronic_AppApp.swift */; };
 		D0575E7A2A2F9F0C003CE661 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0575E792A2F9F0C003CE661 /* Assets.xcassets */; };
 		D0575E7D2A2F9F0C003CE661 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0575E7C2A2F9F0C003CE661 /* Preview Assets.xcassets */; };
@@ -49,6 +50,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D007790C2A406C4B0078AE3D /* HealthKit + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HealthKit + Extension.swift"; sourceTree = "<group>"; };
 		D0575E722A2F9F0A003CE661 /* Trektronic-App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Trektronic-App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0575E752A2F9F0A003CE661 /* Trektronic_AppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trektronic_AppApp.swift; sourceTree = "<group>"; };
 		D0575E792A2F9F0C003CE661 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 		D0575EA92A2FB7A1003CE661 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				D007790C2A406C4B0078AE3D /* HealthKit + Extension.swift */,
 				D07E99A12A3E175D00261CC8 /* EntitiesCD+ Extension.swift */,
 				D0575EAA2A2FB7CB003CE661 /* Text + Extension.swift */,
 				D0575EAC2A2FB8C4003CE661 /* Color + Extension.swift */,
@@ -365,6 +368,7 @@
 				D0882FEA2A35EA8600AD2B29 /* Trektronic-App.xcdatamodeld in Sources */,
 				D0CC3C882A3F0EA000C78346 /* StatisticsViewModel.swift in Sources */,
 				D0882FC22A35BEF200AD2B29 /* HealthKitManager.swift in Sources */,
+				D007790D2A406C4B0078AE3D /* HealthKit + Extension.swift in Sources */,
 				D0882FC42A35C0BD00AD2B29 /* HealthKitModel.swift in Sources */,
 				D0575E762A2F9F0A003CE661 /* Trektronic_AppApp.swift in Sources */,
 				D07E99A02A3E133900261CC8 /* AddTestCoreDataView.swift in Sources */,

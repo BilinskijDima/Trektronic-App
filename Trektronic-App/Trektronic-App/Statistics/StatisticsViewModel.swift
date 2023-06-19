@@ -37,12 +37,12 @@ final class StatisticsViewModel: ObservableObject  {
                       let calculateStepsWeek = try await healthKitManager.calculateData(startDate: dataWeek, dataType: steps),
                       let calculateDistance = try await healthKitManager.calculateData(startDate: data, dataType: distance) else {return}
                 
-                await self.updateUIFromStatistics(calculateSteps, calculateDistance, calculateStepsWeek)
+                self.updateUIFromStatistics(calculateSteps, calculateDistance, calculateStepsWeek)
             }
         }
     }
     
-    @MainActor
+  
     func updateUIFromStatistics(_ statisticsCollectionStep: HKStatisticsCollection,_ statisticsCollectionDistance: HKStatisticsCollection,_ statisticsCollectionStepWeek: HKStatisticsCollection) {
         
         guard let startDate = Calendar.current.date(byAdding: .day, value: -6, to: Date()) else {return}
@@ -52,30 +52,32 @@ final class StatisticsViewModel: ObservableObject  {
             
             let endDate = Date()
             
-            statisticsCollectionStep.enumerateStatistics(from: data, to: endDate) { (statistics, stop) in
+            await MainActor.run {
+                statisticsCollectionStep.enumerateStatistics(from: data, to: endDate) { (statistics, stop) in
+                    
+                    let count = statistics.sumQuantity()?.doubleValue(for: .count())
+                    
+                    self.steps = Float(count ?? 0.0)
+                    
+                }
                 
-                let count = statistics.sumQuantity()?.doubleValue(for: .count())
+                statisticsCollectionStepWeek.enumerateStatistics(from: startDate, to: endDate) { (statistics, stop) in
+                    
+                    let count = statistics.sumQuantity()?.doubleValue(for: .count())
+                    
+                    let stepWeek = HealthKitModel(count: Int(count ?? 0), date: statistics.startDate)
+                    
+                    self.stepsWeek.append(stepWeek)
+                    
+                }
                 
-                self.steps = Float(count ?? 0.0)
-                
-            }
-            
-            statisticsCollectionStepWeek.enumerateStatistics(from: startDate, to: endDate) { (statistics, stop) in
-                
-                let count = statistics.sumQuantity()?.doubleValue(for: .count())
-                
-                let stepWeek = HealthKitModel(count: Int(count ?? 0), date: statistics.startDate)
-
-                self.stepsWeek.append(stepWeek)
-
-            }
-            
-            statisticsCollectionDistance.enumerateStatistics(from: data, to: endDate) { (statistics, stop) in
-                
-                let count = statistics.sumQuantity()?.doubleValue(for: HKUnit.meter())
-
-                self.distance = Int(count ?? 0.0)
- 
+                statisticsCollectionDistance.enumerateStatistics(from: data, to: endDate) { (statistics, stop) in
+                    
+                    let count = statistics.sumQuantity()?.doubleValue(for: HKUnit.meter())
+                    
+                    self.distance = Int(count ?? 0.0)
+                    
+                }
             }
         }
     }
