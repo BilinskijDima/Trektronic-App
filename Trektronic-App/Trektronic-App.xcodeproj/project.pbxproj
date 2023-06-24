@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D007790D2A406C4B0078AE3D /* HealthKit + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D007790C2A406C4B0078AE3D /* HealthKit + Extension.swift */; };
+		D00779122A46CCE00078AE3D /* comfortaa-bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = D00779112A46CCDF0078AE3D /* comfortaa-bold.otf */; };
 		D0575E762A2F9F0A003CE661 /* Trektronic_AppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0575E752A2F9F0A003CE661 /* Trektronic_AppApp.swift */; };
 		D0575E7A2A2F9F0C003CE661 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0575E792A2F9F0C003CE661 /* Assets.xcassets */; };
 		D0575E7D2A2F9F0C003CE661 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0575E7C2A2F9F0C003CE661 /* Preview Assets.xcassets */; };
@@ -51,6 +52,7 @@
 
 /* Begin PBXFileReference section */
 		D007790C2A406C4B0078AE3D /* HealthKit + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HealthKit + Extension.swift"; sourceTree = "<group>"; };
+		D00779112A46CCDF0078AE3D /* comfortaa-bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "comfortaa-bold.otf"; sourceTree = "<group>"; };
 		D0575E722A2F9F0A003CE661 /* Trektronic-App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Trektronic-App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0575E752A2F9F0A003CE661 /* Trektronic_AppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trektronic_AppApp.swift; sourceTree = "<group>"; };
 		D0575E792A2F9F0C003CE661 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -106,6 +108,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D00779102A46CCA60078AE3D /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				D00779112A46CCDF0078AE3D /* comfortaa-bold.otf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
 		D0575E692A2F9F0A003CE661 = {
 			isa = PBXGroup;
 			children = (
@@ -125,6 +135,7 @@
 		D0575E742A2F9F0A003CE661 /* Trektronic-App */ = {
 			isa = PBXGroup;
 			children = (
+				D00779102A46CCA60078AE3D /* Font */,
 				D0575E7B2A2F9F0C003CE661 /* Preview Content */,
 				D0E808762A33E3FA005A17E4 /* Trektronic-App.entitlements */,
 				D0575EB02A2FC5F5003CE661 /* Info.plist */,
@@ -334,6 +345,7 @@
 				D0575E7D2A2F9F0C003CE661 /* Preview Assets.xcassets in Resources */,
 				D0575E7A2A2F9F0C003CE661 /* Assets.xcassets in Resources */,
 				D0575EAF2A2FC589003CE661 /* GoogleService-Info.plist in Resources */,
+				D00779122A46CCE00078AE3D /* comfortaa-bold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

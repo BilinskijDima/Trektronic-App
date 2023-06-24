@@ -23,7 +23,7 @@ final class OnboardingViewModel: ObservableObject  {
     
     @Published var currentStep = 0
     
-    @Published var onBoardingSteps = [OnboardingStep(id: 0, image: "AppLogo", title: "Text title 1", description: "Text description 1"),  OnboardingStep(id: 1,image: "AppLogo", title: "Text title 2", description: "Text description 2"), OnboardingStep(id: 2,image: "AppLogo", title: "Text title 3", description: "Text description 3"),    OnboardingStep(id: 3, image: "AppLogo", title: "Text title 4", description: "Text description 4"), OnboardingStep(id: 4, image: "AppLogo", title: "Text title 5", description: "Text description 5")
+    @Published var onBoardingSteps = [OnboardingStep(id: 0, image: "AppLogo", title: "Получайте монеты за свою активность и достижение целей", description: "Text description 1"),  OnboardingStep(id: 1,image: "AppLogo", title: "Text title 2", description: "Text description 2"), OnboardingStep(id: 2,image: "AppLogo", title: "Text title 3", description: "Text description 3"),    OnboardingStep(id: 3, image: "AppLogo", title: "Text title 4", description: "Text description 4"), OnboardingStep(id: 4, image: "AppLogo", title: "Text title 5", description: "Text description 5")
     ]
     
     @MainActor

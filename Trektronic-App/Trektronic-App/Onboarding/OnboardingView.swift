@@ -23,6 +23,7 @@ struct OnboardingView: View {
                             .resizable()
                             .frame(width: 250, height: 250)
                         Text(step.title)
+                            .font(.custom("comfortaa-bold", size: 20))
                         Text(step.description)
                         
                         Button {
@@ -32,8 +33,11 @@ struct OnboardingView: View {
                         } label: {
                             Text("Button")
                         }
+                        .padding(.bottom, 24)
                         
                     }
+                  //  .background(.red)
+                    .cornerRadius(24)
                     .tag(step.id)
                 }
             }
