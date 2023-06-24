@@ -9,6 +9,8 @@ import Foundation
 import Firebase
 import FirebaseStorage
 import FirebaseFirestoreSwift
+import FirebaseDatabase
+import FirebaseDatabaseSwift
 import GoogleSignIn
 
 protocol FirebaseManagerProtocol {
@@ -17,11 +19,14 @@ protocol FirebaseManagerProtocol {
     func setData(nickname: String, registrationDate: Date, id: String) async throws
     func getData(id: String) async throws -> UserData
     
+    func setDataRealTime(step: Double)
+    func getDataRealTime(completion: @escaping (DataSnapshot) -> Void)
 }
 
 class FirebaseManager: FirebaseManagerProtocol {
     
     let db = Firestore.firestore()
+    let ref = Database.database().reference()
     
     func singInWithGoogle() async throws -> User {
         
@@ -69,6 +74,27 @@ class FirebaseManager: FirebaseManagerProtocol {
         
         return result
     }
+    
+    
+    func setDataRealTime(step: Double) {
+        
+        
+        self.ref.child("users").setValue(step)
+        
+    }
+    
+    
+    func getDataRealTime(completion: @escaping (DataSnapshot) -> Void) {
+        ref.child("users").observe(.value) { snapshot in
+            completion(snapshot)
+        }
+        
+      
+    }
+    
+    
+    
+    
     
     
     

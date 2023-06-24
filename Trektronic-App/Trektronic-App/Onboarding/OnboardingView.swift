@@ -44,6 +44,7 @@ struct OnboardingView: View {
                     Capsule ()
                         .foregroundColor(Color.baseColorWB)
                         .frame(width: step.id == vm.currentStep ? 20 : 10, height: 10)
+                        .animation(.easeInOut, value: vm.currentStep)
                         }
             }
             .padding(.bottom, 42)

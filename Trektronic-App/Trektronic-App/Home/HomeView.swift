@@ -8,12 +8,22 @@
 import SwiftUI
 
 struct HomeView: View {
-    
-
+    var fireBaseManager: FirebaseManagerProtocol = FirebaseManager()
+    @ObservedObject var vm: HomeViewModel = HomeViewModel()
     var body: some View {
-        Text ("HomeView")
-        
+        VStack{
+            Button {
+                //   fireBaseManager.setDataRealTime()
+            }label: {
+                Text (vm.text)
+            }
+        }
+        .task {
+            vm.ff()
+        }
     }
+        
+        
 }
 
 struct ContentView_Previews: PreviewProvider {

@@ -10,8 +10,8 @@ import Charts
 
 struct StatisticsView: View {
     
-    @ObservedObject var vm: StatisticsViewModel = StatisticsViewModel()
-        
+    @StateObject var vm: StatisticsViewModel = StatisticsViewModel()
+    
     var body: some View {
        
         NavigationView {
@@ -31,9 +31,7 @@ struct StatisticsView: View {
                         
                     }
                     .padding(.vertical, 24)
-                    
-                    
-                    
+
                     ZStack {
                         Circle()
                             .stroke(lineWidth: 35.0)
@@ -54,6 +52,7 @@ struct StatisticsView: View {
                             .stroke(style: StrokeStyle(lineWidth: 20.0, lineCap: .round, lineJoin: .round))
                             .foregroundColor(Color.red)
                             .rotationEffect(Angle(degrees: 270))
+                            .animation(.easeInOut, value: vm.steps)
                           //  .animation(.easeInOut(duration: 1.0)) // withAnimation
                         
                     }
@@ -108,17 +107,30 @@ struct StatisticsView: View {
                         }
                     }
                     
-                    
+               
+                    VStack {
+                        Text("Среднее за неделю")
+                        Text (vm.stepAvege.description)
+                    }
                 }
                 .padding(.horizontal, 24)
             }
-            .onAppear {
+            .task {
                 vm.calculateData()
             }
             .navigationTitle("Статистика")
+            .toolbar {
+                Button {
+                    
+                } label: {
+                    Image(systemName: "info.circle")
+                        .foregroundColor(.white)
+                }
+            }
         }
-        
+       
     }
+  
 }
 
 struct StatisticsView_Previews: PreviewProvider {
