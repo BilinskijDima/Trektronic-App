@@ -8,14 +8,13 @@
 import Foundation
 import SwiftUI
 
-public struct UserData: Codable {
-
-    let nickname: String?
-    let registrationDate: Date?
-
-    enum CodingKeys: String, CodingKey {
-        case nickname
-        case registrationDate
-    }
-
+struct Users: Hashable {
+    
+    var date: String
+    var step: Int
+    var coin: Int
+    var nickname: String
+ 
 }
+
+

@@ -12,10 +12,13 @@ import SwiftUI
 final class LoginViewModel: ObservableObject  {
         
     @AppStorage("userID") var userID = DefaultSettings.userID
+    
+    @AppStorage("stateLoadingView") var stateLoadView: LoadView = .loginView
 
-    var fireBaseManager: FirebaseManagerProtocol = FirebaseManager()
+    private var fireBaseManager: FirebaseManagerProtocol = FirebaseManager()
     
     @Published var showScreen = false
+    @Published var showScreen2 = false
     
    // это доделаю еще
 //    enum SignInState {
@@ -35,15 +38,20 @@ final class LoginViewModel: ObservableObject  {
                 if userData.isEmailVerified {
                     
                     await MainActor.run {
-                        showScreen = true
-                    }
-                    await MainActor.run {
+                        
                         userID = userData.uid
                     }
-                    let data = try await fireBaseManager.getData(id: userData.uid)
-                    if data.registrationDate == nil {
-                        try await self.fireBaseManager.setData(nickname: "nickname" ,registrationDate: Date.now, id: userData.uid)
-                    }
+                    
+                    fireBaseManager.getDataRealTime(id: userData.uid, completion: {[weak self] DataSnapshot in
+                        guard let self = self else {return}
+                        if let _ = DataSnapshot.value as? [String: AnyObject] {
+                            self.stateLoadView = .presettingView
+                        } else {
+                            self.stateLoadView = .onboardingView
+                        }
+                        
+                    })
+                    
                 }
                 
             } catch {
@@ -54,3 +62,4 @@ final class LoginViewModel: ObservableObject  {
     }
     
 }
+

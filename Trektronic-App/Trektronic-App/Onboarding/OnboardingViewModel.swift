@@ -9,11 +9,7 @@ import Foundation
 import SwiftUI
 
 final class OnboardingViewModel: ObservableObject  {
-    
-    private var healthKitManager: HealthKitManagerProtocol = HealthKitManager()
-    
-    @AppStorage("stateLoadHealthKit") var stateLoadHealthKit = DefaultSettings.stateLoadHealthKit
-    
+
     struct OnboardingStep: Hashable {
         let id: Int
         let image: String
@@ -22,16 +18,10 @@ final class OnboardingViewModel: ObservableObject  {
     }
     
     @Published var currentStep = 0
+    @Published var showPresetting = false
     
-    @Published var onBoardingSteps = [OnboardingStep(id: 0, image: "AppLogo", title: "Получайте монеты за свою активность и достижение целей", description: "Text description 1"),  OnboardingStep(id: 1,image: "AppLogo", title: "Text title 2", description: "Text description 2"), OnboardingStep(id: 2,image: "AppLogo", title: "Text title 3", description: "Text description 3"),    OnboardingStep(id: 3, image: "AppLogo", title: "Text title 4", description: "Text description 4"), OnboardingStep(id: 4, image: "AppLogo", title: "Text title 5", description: "Text description 5")
+    @Published var onBoardingSteps = [OnboardingStep(id: 0, image: "AppLogo", title: "Ходи и побеждай", description: "Ходите каждый день и достигайте своих целей"),  OnboardingStep(id: 1,image: "AppLogo", title: "Получай монеты", description: "Получайте монеты за свою активность и достижение целей"), OnboardingStep(id: 2,image: "AppLogo", title: "Совершенствуйте свои способности", description: "Повышайте уровень своих способностей, чтобы быть первым в битвах"), OnboardingStep(id: 3, image: "AppLogo", title: "Статистика", description: "Наблюдайте и анализируйте свой прогресс"), OnboardingStep(id: 4, image: "AppLogo", title: "Один на один", description: "Бросайте вызов другим пользователям TreckTronic"), OnboardingStep(id: 5, image: "AppLogo", title: "Осталось еще немного", description: "Давай завершим настройку и приступим к делу")
     ]
-    
-    @MainActor
-    func stateHealthKit() {
-        Task {
-            stateLoadHealthKit = try await healthKitManager.requestAuthorisation()
-        }
-    }
-    
+
 }
 

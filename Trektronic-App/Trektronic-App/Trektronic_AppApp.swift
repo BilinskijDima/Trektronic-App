@@ -9,9 +9,14 @@ import SwiftUI
 import FirebaseCore
 
 enum DefaultSettings {
-    static let stateLoadHomeView = false
-    static let stateLoadHealthKit = false
     static let userID = ""
+}
+
+enum LoadView: String, CaseIterable {
+    case loginView
+    case tabBarView
+    case onboardingView
+    case presettingView
 }
 
 class AppDelegate: NSObject, UIApplicationDelegate {
@@ -25,22 +30,24 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct Trektronic_AppApp: App {
     
-    @AppStorage("stateLoadView") var stateLoadHomeView = DefaultSettings.stateLoadHomeView
+    @AppStorage("stateLoadingView") var stateLoadView: LoadView = .loginView
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     var body: some Scene {
         WindowGroup {
-            
-            //            let viewContext = CoreDataManager.shared.persistentStoreContainer.viewContext
-            //            TestCoreDataView(vm: TestCoreDataViewModel(context: viewContext))
-            //                .environment(\.managedObjectContext, viewContext)
-            if stateLoadHomeView {
-                TabBarView()
-            }   else {
+                    
+            switch stateLoadView {
+            case .loginView:
                 LoginView()
+            case .tabBarView:
+                TabBarView()
+            case .onboardingView:
+                OnboardingView()
+            case .presettingView:
+                PresettingView()
             }
-            
+
         }
     }
     

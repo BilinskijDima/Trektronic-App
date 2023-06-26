@@ -12,24 +12,26 @@ import FirebaseFirestoreSwift
 import FirebaseDatabase
 import FirebaseDatabaseSwift
 import GoogleSignIn
+import SwiftUI
 
 protocol FirebaseManagerProtocol {
     
     func singInWithGoogle() async throws -> User
-    func setData(nickname: String, registrationDate: Date, id: String) async throws
-    func getData(id: String) async throws -> UserData
-    
-    func setDataRealTime(step: Double)
-    func getDataRealTime(completion: @escaping (DataSnapshot) -> Void)
+    func setDataRealTime(nickname: String, step: Int, date: String, coin: Int, id: String) async throws
+    func getDataRealTime(id: String, completion: @escaping (DataSnapshot) -> Void)
+    func checkUserNameAlreadyExist(newUserName: String, completion: @escaping(Bool) -> Void)
+    func fetchUser(completion: @escaping(DataSnapshot) -> Void)
+    func singOutWithGoogle()
 }
 
 class FirebaseManager: FirebaseManagerProtocol {
+    
+    @AppStorage("stateLoadingView") var stateLoadView: LoadView = .loginView
     
     let db = Firestore.firestore()
     let ref = Database.database().reference()
     
     func singInWithGoogle() async throws -> User {
-        
         guard let clientID = FirebaseApp.app()?.options.clientID else { fatalError("error") }
         
         let config = GIDConfiguration(clientID: clientID)
@@ -55,47 +57,52 @@ class FirebaseManager: FirebaseManagerProtocol {
         
     }
     
-    func setData(nickname: String, registrationDate: Date, id: String) async throws {
-        
-        let user = UserData(nickname: nickname, registrationDate: registrationDate)
-        
+    func singOutWithGoogle() {
+        let firebaseAuth = Auth.auth()
         do {
-            try db.collection("userData").document(id).setData(from: user)
-        } catch let error {
-            print("Error writing city to Firestore: \(error)")
+            try firebaseAuth.signOut()
+            self.stateLoadView = .loginView
+        } catch  {
+            print("Error signing out: ", error)
+        }
+    }
+
+    func setDataRealTime(nickname: String, step: Int, date: String, coin: Int, id: String) async throws {
+        let userReference = ref.child("users").child(id)
+        let value = ["nickname":nickname, "step":step, "date":date, "coin": coin] as [String : Any]
+        do {
+            try await userReference.updateChildValues(value)
+            print ("Saved user successfully")
+        } catch {
+            print(error.localizedDescription)
         }
     }
     
-    func getData(id: String) async throws -> UserData {
-        
-        let docRef = db.collection("userData").document(id)
-        
-        let result = try await docRef.getDocument(as: UserData.self)
-        
-        return result
-    }
     
-    
-    func setDataRealTime(step: Double) {
-        
-        
-        self.ref.child("users").setValue(step)
-        
-    }
-    
-    
-    func getDataRealTime(completion: @escaping (DataSnapshot) -> Void) {
-        ref.child("users").observe(.value) { snapshot in
+    func getDataRealTime(id: String, completion: @escaping(DataSnapshot) -> Void) {
+        ref.child("users").child(id).observe(.value) { snapshot in
             completion(snapshot)
         }
-        
-      
     }
     
+    func fetchUser(completion: @escaping(DataSnapshot) -> Void) {
+        ref.child("users").observe(.childAdded) { snapshot in
+            completion(snapshot)
+        }
+    }
     
-    
-    
-    
+    func checkUserNameAlreadyExist(newUserName: String, completion: @escaping(Bool) -> Void) {
+        ref.child("users").queryOrdered(byChild: "nickname").queryEqual(toValue: newUserName)
+                  .observeSingleEvent(of: .value, with: { snapshot in
+
+            if snapshot.exists() {
+                completion(true)
+            }
+            else {
+                completion(false)
+            }
+        })
+    }
     
     
     

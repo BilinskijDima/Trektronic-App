@@ -8,9 +8,7 @@
 import SwiftUI
 
 struct OnboardingView: View {
-    
-    @AppStorage("stateLoadView") var stateLoadView = DefaultSettings.stateLoadHomeView
-    
+    @AppStorage("stateLoadingView") var stateLoadView: LoadView = .loginView
     @StateObject var vm: OnboardingViewModel = OnboardingViewModel()
     
     var body: some View {
@@ -21,24 +19,37 @@ struct OnboardingView: View {
                     VStack {
                         Image(step.image)
                             .resizable()
-                            .frame(width: 250, height: 250)
-                        Text(step.title)
-                            .font(.custom("comfortaa-bold", size: 20))
-                        Text(step.description)
+                            .frame(width: 150, height: 150)
                         
-                        Button {
+                        VStack {
                             
-                            vm.stateHealthKit()
-                            
-                        } label: {
-                            Text("Button")
+                            VStack(spacing: 8) {
+                                
+                                Text(step.title)
+                                    .foregroundColor(Color.baseColorBW)
+                                    .multilineTextAlignment(.center)
+                                    .lineLimit(nil)
+                                    .bold()
+                                
+                                Text(step.description)
+                                    .foregroundColor(Color.baseColorBW)
+                                    .lineLimit(nil)
+                                    .multilineTextAlignment(.center)
+                                
+                            }
+                            .padding()
                         }
-                        .padding(.bottom, 24)
+                        .frame(maxWidth: .infinity)
+                        .background(Color.baseColorWB)
+                        .cornerRadius(24)
+                        .padding(.horizontal, 24)
+                        .padding(.vertical, 24)
                         
                     }
-                  //  .background(.red)
+                    .frame(maxWidth: .infinity)
                     .cornerRadius(24)
                     .tag(step.id)
+                    .padding(.horizontal, 24)
                 }
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
@@ -61,16 +72,20 @@ struct OnboardingView: View {
                         vm.currentStep += 1
                     }
                 } else {
-                    stateLoadView.toggle()
+                   // vm.showPresetting = true
+                    self.stateLoadView = .presettingView
                 }
             } label: { }
-                .buttonStyle(StyleDefaultButton(name: vm.currentStep < vm.onBoardingSteps.count - 1 ? "Далее" : "Давай начнем"))
+                .buttonStyle(StyleDefaultButton(name: vm.currentStep < vm.onBoardingSteps.count - 1 ? "Далее" : "Завершить настройку"))
                 .padding(.bottom, 42)
                 .padding(.horizontal, 24)
             
         }
+      // .fullScreenCover(isPresented: $vm.showPresetting) { PresettingView() }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+
     }
+
 }
 
 struct OnboardingView_Previews: PreviewProvider {
