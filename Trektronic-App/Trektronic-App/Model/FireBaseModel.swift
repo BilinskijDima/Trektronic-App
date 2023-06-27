@@ -6,15 +6,20 @@
 //
 
 import Foundation
-import SwiftUI
 
-struct Users: Hashable {
-    
+struct Users: Hashable, Codable {
+        
     var date: String
     var step: Int
     var coin: Int
     var nickname: String
- 
+    
+    enum CodingKeys : String, CodingKey {
+        case date
+        case step
+        case coin
+        case nickname
+    }
+    
 }
-
 

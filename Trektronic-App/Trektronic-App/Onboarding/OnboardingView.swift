@@ -17,10 +17,11 @@ struct OnboardingView: View {
             TabView(selection: $vm.currentStep) {
                 ForEach(vm.onBoardingSteps, id: \.id) { step in
                     VStack {
-                        Image(step.image)
-                            .resizable()
-                            .frame(width: 150, height: 150)
                         
+                        Image(systemName: step.image)
+                            .foregroundColor(.baseColorWB)
+                            .font(.system(size: 150))
+                       
                         VStack {
                             
                             VStack(spacing: 8) {
@@ -43,7 +44,7 @@ struct OnboardingView: View {
                         .background(Color.baseColorWB)
                         .cornerRadius(24)
                         .padding(.horizontal, 24)
-                        .padding(.vertical, 24)
+                        .padding(.vertical, 12)
                         
                     }
                     .frame(maxWidth: .infinity)

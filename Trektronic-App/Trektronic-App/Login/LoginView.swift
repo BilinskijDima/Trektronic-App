@@ -52,8 +52,6 @@ struct LoginView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding(.horizontal, 24)
-       // .fullScreenCover(isPresented: $vm.showScreen) { OnboardingView() }
-       // .fullScreenCover(isPresented: $vm.showScreen2) { TabBarView() }
     }
 }
 

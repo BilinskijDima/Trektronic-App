@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 enum Tab: String, CaseIterable {
+    
     case house
     case chart = "chart.xyaxis.line"
     case person

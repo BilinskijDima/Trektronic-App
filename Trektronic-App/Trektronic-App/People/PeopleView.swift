@@ -17,17 +17,17 @@ struct PeopleView: View {
         NavigationView {
             ScrollView(.vertical, showsIndicators: false) {
                 
-                ForEach(vm.users, id: \.self) { nim in
+                ForEach(vm.users, id: \.hashValue) { user in
                     
                     HStack {
                         Text("Image")
                         VStack {
-                            Text("\(nim.nickname)")
-                            Text("\(nim.date)")
+                            Text(user.nickname)
+                            Text(user.date)
                         }
                         Spacer()
                         
-                        Text("\(nim.step)")
+                        Text("\(user.step)")
                         
                     }
                     Divider()

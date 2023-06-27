@@ -17,7 +17,7 @@ import SwiftUI
 protocol FirebaseManagerProtocol {
     
     func singInWithGoogle() async throws -> User
-    func setDataRealTime(nickname: String, step: Int, date: String, coin: Int, id: String) async throws
+    func setDataRealTime(user: Users, id: String) async throws
     func getDataRealTime(id: String, completion: @escaping (DataSnapshot) -> Void)
     func checkUserNameAlreadyExist(newUserName: String, completion: @escaping(Bool) -> Void)
     func fetchUser(completion: @escaping(DataSnapshot) -> Void)
@@ -67,17 +67,21 @@ class FirebaseManager: FirebaseManagerProtocol {
         }
     }
 
-    func setDataRealTime(nickname: String, step: Int, date: String, coin: Int, id: String) async throws {
+    func setDataRealTime(user: Users, id: String) async throws {
+        
         let userReference = ref.child("users").child(id)
-        let value = ["nickname":nickname, "step":step, "date":date, "coin": coin] as [String : Any]
+        
+        guard let userDictionary = user.toDictionary else {return}
+        
         do {
-            try await userReference.updateChildValues(value)
+            try await userReference.updateChildValues(userDictionary)
             print ("Saved user successfully")
         } catch {
             print(error.localizedDescription)
         }
     }
     
+    //  getDataRealTime(), fetchUser(), checkUserNameAlreadyExist() эти методы не удалось написать под async await, как я понял это из за того что эти методы использую .observe то есть постоянно слушаю изменения данных, и замыкание данные возвращает не одним запросом, поэтому async ломает в данном случи работу этих методов, аналогично происходит в HealthKitManager где данные обновляются в реальном времени или забираются из хранилища не за один раз 
     
     func getDataRealTime(id: String, completion: @escaping(DataSnapshot) -> Void) {
         ref.child("users").child(id).observe(.value) { snapshot in
@@ -104,6 +108,7 @@ class FirebaseManager: FirebaseManagerProtocol {
         })
     }
     
-    
+ 
+
     
 }

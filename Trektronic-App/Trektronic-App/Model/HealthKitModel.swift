@@ -10,6 +10,7 @@ import Foundation
 struct HealthKitModel: Identifiable {
 
     let id = UUID()
+    
     let count: Double
     let date: Date
 

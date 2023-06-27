@@ -23,6 +23,20 @@ final class StatisticsViewModel: ObservableObject  {
     
     @Published var stepsWeek: [HealthKitModel] = [HealthKitModel]()
     @Published var distanceWeek: [HealthKitModel] = [HealthKitModel]()
+    
+    var dataChart: [HealthKitModel] {
+        switch selectedTab {
+        case .steps:
+            return stepsWeek
+        case .distance:
+            return distanceWeek
+        }
+    }
+    
+    var mapDataChart: [Date] {
+        self.dataChart.map { $0.date }
+    }
+    
     @Published var steps: Float = 0
     @Published var distance = 0
     @Published var stepAvenge = 0
@@ -32,14 +46,19 @@ final class StatisticsViewModel: ObservableObject  {
     
     func calculateDataHealthKit() {
         
-        guard healthKitManager.healthStore != nil, let dateWeek = Calendar.current.date(byAdding: .day, value: -6, to: Date()), let steps = HKQuantityType.quantityType(forIdentifier: .stepCount),  let distance = HKQuantityType.quantityType(forIdentifier: .distanceWalkingRunning) else {return}
+        guard healthKitManager.healthStore != nil,
+              let dateWeek = Calendar.current.date(byAdding: .day, value: -6, to: Date()),
+              let steps = HKQuantityType.quantityType(forIdentifier: .stepCount),
+              let distance = HKQuantityType.quantityType(forIdentifier: .distanceWalkingRunning) else {return}
         
         let date = Calendar.current.startOfDay(for: Date())
         
         if  healthKitManager.authorizationStatus() {
             
             Task {
-                guard let calculateStepsWeek = try await healthKitManager.calculateData(startDate: dateWeek, dataType: steps), let calculateDistanceWeek = try await healthKitManager.calculateData(startDate: dateWeek, dataType: distance) else {return}
+                guard let calculateStepsWeek = try await healthKitManager.calculateData(startDate: dateWeek, dataType: steps),
+                      let calculateDistanceWeek = try await healthKitManager.calculateData(startDate: dateWeek, dataType: distance) else {return}
+                
                 self.weekStatisticsSteps(calculateStepsWeek, calculateDistanceWeek)
             }
             
@@ -57,7 +76,6 @@ final class StatisticsViewModel: ObservableObject  {
                 
                 DispatchQueue.main.async {
                     self.steps = Float(sum.doubleValue(for: HKUnit.count()))
-                    print (Float(sum.doubleValue(for: HKUnit.count())))
                 }
             }
             

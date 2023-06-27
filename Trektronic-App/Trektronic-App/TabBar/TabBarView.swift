@@ -12,9 +12,7 @@ struct TabBarView: View {
     @StateObject var vm: TabBarViewModel = TabBarViewModel()
     
     var body: some View {
-        
-     //   let viewContext = CoreDataManager.shared.persistentStoreContainer.viewContext
-        
+                
         VStack(spacing: 0) {
             
             switch vm.selectedTab {

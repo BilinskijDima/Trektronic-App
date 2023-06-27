@@ -15,18 +15,15 @@ final class PeopleViewModel: ObservableObject  {
     
     func fetchUser() {
         self.fireBaseManager.fetchUser { dataSnapshot in
-            print (dataSnapshot)
-            
-            guard let dictionary = dataSnapshot.value as? [String: AnyObject] else {return}
-                
-            print (dictionary)
-
-            guard let date = dictionary["date"] as? String,  let step = dictionary["step"] as? Int,  let coin = dictionary["coin"] as? Int, let nickname = dictionary["nickname"] as? String else {return}
-           
-            let user = Users(date: date, step: step, coin: coin, nickname: nickname)
-            self.users.append(user)
-            print (user)
-
+            do {
+                let user = try dataSnapshot.decodeJSON(type: Users.self)
+                self.users.append(user)
+            } catch {
+                print (error.localizedDescription)
+            }
         }
     }
+    
+    
 }
+

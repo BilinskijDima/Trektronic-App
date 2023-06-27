@@ -97,7 +97,7 @@ struct StatisticsView: View {
                         .pickerStyle(.segmented)
                         
                         Chart {
-                            ForEach( vm.selectedTab == .steps ? vm.stepsWeek : vm.distanceWeek ) { dataWeek in // чет пытался сделать через енам , но чет я пока не понял как в этом месте реализовать это что бы если больше двух будет, массив с массивами и по индексу их выбирать но так не получилось , сделать массивв с массивами которые во вьюмодели
+                            ForEach(vm.dataChart) { dataWeek in
                                 
                                 BarMark(
                                     x: .value("День недели", dataWeek.date, unit: .day),
@@ -113,7 +113,7 @@ struct StatisticsView: View {
                         .padding(.vertical, 24)
                         .frame(height: 350)
                         .chartXAxis {
-                            AxisMarks(values: vm.stepsWeek.map { $0.date }) { date in
+                            AxisMarks(values: vm.mapDataChart) { date in
                                 AxisValueLabel(format: .dateTime.weekday())
                             }
                         }

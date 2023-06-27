@@ -11,9 +11,9 @@ import SwiftUI
 
 final class HomeViewModel: ObservableObject  {
     
-    @Published var nameUser: String = ""
-    @Published var coinUser: Int = 0
-    @Published var steps: Double = 0.0
+    @Published var stepsCoin: Double = 0.0
+    
+    @Published var user: Users?
     
     @AppStorage("userID") var userID = DefaultSettings.userID
     
@@ -22,24 +22,34 @@ final class HomeViewModel: ObservableObject  {
     
     func userData() {
         
-        self.fireBaseManager.getDataRealTime(id: userID) {[weak self] DataSnapshot in
-            guard let self = self else {return}
-            if let dictionary = DataSnapshot.value as? [String: AnyObject] {
-                self.nameUser = dictionary["nickname"] as? String ?? "Nickname"  // думаю можно как то более красиво получать дикшинари 
-                self.coinUser = dictionary["coin"] as? Int ?? 0
-                let dateString = dictionary["date"] as? String ?? "Date"
+        self.fireBaseManager.getDataRealTime(id: userID) {[weak self] dataSnapshot in
+            
+            guard var json = dataSnapshot.value as? [String: Any], let self = self else {return}
+            
+            json["id"] = dataSnapshot.key
+            
+            do {
+                let data = try JSONSerialization.data(withJSONObject: json)
+                let user = try JSONDecoder().decode(Users.self, from: data)
+                print (user)
+                self.user = user
                 
                 let dateFormatter = DateFormatter()
-                dateFormatter.locale = Locale(identifier: "en_US_POSIX")
                 dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ssZ"
                 
-                guard let dateConvert = dateFormatter.date(from: dateString) else {return}
-                print (dateConvert)
-                self.calculateDataHealthKit(withStart: dateConvert)
+                guard let dateConvert = dateFormatter.date(from: user.date) else {return}
+                
+                calculateDataHealthKit(withStart: dateConvert)
+                
+            } catch {
+                print (error.localizedDescription)
             }
         }
     }
-  
+    
+    
+    
+    
     func calculateDataHealthKit(withStart: Date) {
         
         guard healthKitManager.healthStore != nil, let steps = HKQuantityType.quantityType(forIdentifier: .stepCount) else {return}
@@ -51,7 +61,7 @@ final class HomeViewModel: ObservableObject  {
                 
                 DispatchQueue.main.async {
                     let value = Double(sum.doubleValue(for: HKUnit.count())) / 1000
-                    self.steps = round(value * 1000) / 1000.0
+                    self.stepsCoin = round(value * 1000) / 1000.0
                 }
             }
         }

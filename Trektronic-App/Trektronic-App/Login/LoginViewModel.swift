@@ -17,17 +17,6 @@ final class LoginViewModel: ObservableObject  {
 
     private var fireBaseManager: FirebaseManagerProtocol = FirebaseManager()
     
-    @Published var showScreen = false
-    @Published var showScreen2 = false
-    
-   // это доделаю еще
-//    enum SignInState {
-//      case signedIn
-//      case signedOut
-//    }
-//
-    //    @Published var state: SignInState = .signedOut
-    
     func singInWithGoogle() {
         
         Task {
@@ -42,12 +31,13 @@ final class LoginViewModel: ObservableObject  {
                         userID = userData.uid
                     }
                     
-                    fireBaseManager.getDataRealTime(id: userData.uid, completion: {[weak self] DataSnapshot in
+                    fireBaseManager.getDataRealTime(id: userData.uid, completion: {[weak self] dataSnapshot in
                         guard let self = self else {return}
-                        if let _ = DataSnapshot.value as? [String: AnyObject] {
-                            self.stateLoadView = .presettingView
-                        } else {
+                  
+                        if dataSnapshot.value as? [String: AnyObject] == nil {
                             self.stateLoadView = .onboardingView
+                        } else {
+                            self.stateLoadView = .presettingView
                         }
                         
                     })

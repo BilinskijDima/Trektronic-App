@@ -37,19 +37,19 @@ class HealthKitManager: HealthKitManagerProtocol {
     
     func authorizationStatus() -> Bool {
         
-        guard let stepType = HKQuantityType.quantityType(forIdentifier: .stepCount), let distanceType = HKQuantityType.quantityType(forIdentifier: .distanceWalkingRunning), let healthStore = healthStore else {fatalError("error quantityType HealthKit")}
+        guard let stepType = HKQuantityType.quantityType(forIdentifier: .stepCount),
+              let distanceType = HKQuantityType.quantityType(forIdentifier: .distanceWalkingRunning),
+              let healthStore = healthStore else {fatalError("error quantityType HealthKit")}
     
-        if healthStore.authorizationStatus(for: stepType) == .sharingAuthorized && healthStore.authorizationStatus(for: distanceType) == .sharingAuthorized {
-            return true
-        } else {
-            return false
-        }
-        
+        return healthStore.authorizationStatus(for: stepType) == .sharingAuthorized && healthStore.authorizationStatus(for: distanceType) == .sharingAuthorized
+     
     }
     
     func requestAuthorisation() async throws -> Bool {
         
-        guard let stepType = HKQuantityType.quantityType(forIdentifier: .stepCount), let distanceType = HKQuantityType.quantityType(forIdentifier: .distanceWalkingRunning), let healthStore = healthStore else {fatalError("error quantityType HealthKit")}
+        guard let stepType = HKQuantityType.quantityType(forIdentifier: .stepCount),
+              let distanceType = HKQuantityType.quantityType(forIdentifier: .distanceWalkingRunning),
+              let healthStore = healthStore else {fatalError("error quantityType HealthKit")}
         
         return try await withCheckedThrowingContinuation { continuation in
             healthStore.requestAuthorization(toShare: [stepType, distanceType], read: [stepType, distanceType]) { (success, error) in
@@ -98,15 +98,7 @@ class HealthKitManager: HealthKitManagerProtocol {
         })
         if let healthStore = healthStore {
             observerQuery.map(healthStore.execute)
-            
-//            healthStore.enableBackgroundDelivery(for: dataType, frequency: .immediate) { success, error in // насколько я выяснил фоновые обноаения работаю токль при платной подписке разраба
-//                if success {
-//                    print ("work BG")
-//                } else {
-//                    print ("error BG")
-//                }
-//            }
-            
+                        
         }
        
     }

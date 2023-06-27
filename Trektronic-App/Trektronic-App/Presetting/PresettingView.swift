@@ -70,12 +70,7 @@ struct PresettingView: View {
             Spacer()
             
             Button {
-                //vm.stateAutUser()
-                if vm.setData {
-                    vm.setDataRealTime()
-                } else {
-                    self.stateLoadView = .tabBarView
-                }
+                vm.stateSaveData()
             } label: { }
                 .buttonStyle(StyleDefaultButton(name: "Давай начнем"))
                 .opacity(vm.stateHealthKit && vm.stateNickname ? 1 : 0.5)

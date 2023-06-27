@@ -63,7 +63,7 @@ struct CardsView: View {
 
 struct HomeView: View {
     
-    @ObservedObject var vm: HomeViewModel = HomeViewModel()
+    @StateObject var vm: HomeViewModel = HomeViewModel()
     
     var body: some View {
         
@@ -71,9 +71,9 @@ struct HomeView: View {
             ScrollView(.vertical, showsIndicators: false) {
                 
                 VStack(spacing: 0) {
-                    CardsView(name: "STEP монета", nameValue: "STEP", nameSettings: "Множитель STEP: x1.0", color: .red, data: vm.steps.description)
+                    CardsView(name: "STEP монета", nameValue: "STEP", nameSettings: "Множитель STEP: x1.0", color: .red, data: vm.stepsCoin.description)
                     
-                    CardsView(name: "TRON монета", nameValue: "TROIN", nameSettings: "", color: .green, data: vm.coinUser.description)
+                    CardsView(name: "TRON монета", nameValue: "TROIN", nameSettings: "", color: .green, data: vm.user?.coin.description ?? "0")
                 }
                 .padding([.horizontal, .top], 24)
                 
@@ -82,7 +82,7 @@ struct HomeView: View {
             .toolbar {
                 Button {
                     
-                } label: {
+                } label: { 
                     Image(systemName: "info.circle.fill")
                         .foregroundColor(.baseColorWB)
                 }
