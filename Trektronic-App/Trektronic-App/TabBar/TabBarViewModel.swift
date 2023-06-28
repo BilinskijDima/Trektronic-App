@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 enum Tab: String, CaseIterable {
+    
     case house
     case chart = "chart.xyaxis.line"
     case person
@@ -31,6 +32,19 @@ enum Tab: String, CaseIterable {
 final class TabBarViewModel: ObservableObject  {
     
     @Published var selectedTab: Tab = .house
-    let selectedColor: Color = .green
+    
+    var selectedColor: Color {
+        switch selectedTab {
+        case .house:
+            return Color.red
+        case .chart:
+            return Color.green
+        case .person:
+            return Color.purple
+        case .gearshape:
+            return Color.blue
+            
+        }
+    }
     
 }

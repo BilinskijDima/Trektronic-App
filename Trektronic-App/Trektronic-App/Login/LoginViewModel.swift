@@ -12,18 +12,10 @@ import SwiftUI
 final class LoginViewModel: ObservableObject  {
         
     @AppStorage("userID") var userID = DefaultSettings.userID
+    
+    @AppStorage("stateLoadingView") var stateLoadView: LoadView = .loginView
 
-    var fireBaseManager: FirebaseManagerProtocol = FirebaseManager()
-    
-    @Published var showScreen = false
-    
-   // это доделаю еще
-//    enum SignInState {
-//      case signedIn
-//      case signedOut
-//    }
-//
-    //    @Published var state: SignInState = .signedOut
+    private var fireBaseManager: FirebaseManagerProtocol = FirebaseManager()
     
     func singInWithGoogle() {
         
@@ -35,15 +27,21 @@ final class LoginViewModel: ObservableObject  {
                 if userData.isEmailVerified {
                     
                     await MainActor.run {
-                        showScreen = true
-                    }
-                    await MainActor.run {
+                        
                         userID = userData.uid
                     }
-                    let data = try await fireBaseManager.getData(id: userData.uid)
-                    if data.registrationDate == nil {
-                        try await self.fireBaseManager.setData(nickname: "nickname" ,registrationDate: Date.now, id: userData.uid)
-                    }
+                    
+                    fireBaseManager.getDataRealTime(id: userData.uid, completion: {[weak self] dataSnapshot in
+                        guard let self = self else {return}
+                  
+                        if dataSnapshot.value as? [String: AnyObject] == nil {
+                            self.stateLoadView = .onboardingView
+                        } else {
+                            self.stateLoadView = .presettingView
+                        }
+                        
+                    })
+                    
                 }
                 
             } catch {
@@ -54,3 +52,4 @@ final class LoginViewModel: ObservableObject  {
     }
     
 }
+

@@ -8,9 +8,7 @@
 import SwiftUI
 
 struct OnboardingView: View {
-    
-    @AppStorage("stateLoadView") var stateLoadView = DefaultSettings.stateLoadHomeView
-    
+    @AppStorage("stateLoadingView") var stateLoadView: LoadView = .loginView
     @StateObject var vm: OnboardingViewModel = OnboardingViewModel()
     
     var body: some View {
@@ -19,22 +17,40 @@ struct OnboardingView: View {
             TabView(selection: $vm.currentStep) {
                 ForEach(vm.onBoardingSteps, id: \.id) { step in
                     VStack {
-                        Image(step.image)
-                            .resizable()
-                            .frame(width: 250, height: 250)
-                        Text(step.title)
-                        Text(step.description)
                         
-                        Button {
+                        Image(systemName: step.image)
+                            .foregroundColor(.baseColorWB)
+                            .font(.system(size: 150))
+                       
+                        VStack {
                             
-                            vm.stateHealthKit()
-                            
-                        } label: {
-                            Text("Button")
+                            VStack(spacing: 8) {
+                                
+                                Text(step.title)
+                                    .foregroundColor(Color.baseColorBW)
+                                    .multilineTextAlignment(.center)
+                                    .lineLimit(nil)
+                                    .bold()
+                                
+                                Text(step.description)
+                                    .foregroundColor(Color.baseColorBW)
+                                    .lineLimit(nil)
+                                    .multilineTextAlignment(.center)
+                                
+                            }
+                            .padding()
                         }
+                        .frame(maxWidth: .infinity)
+                        .background(Color.baseColorWB)
+                        .cornerRadius(24)
+                        .padding(.horizontal, 24)
+                        .padding(.vertical, 12)
                         
                     }
+                    .frame(maxWidth: .infinity)
+                    .cornerRadius(24)
                     .tag(step.id)
+                    .padding(.horizontal, 24)
                 }
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
@@ -44,6 +60,7 @@ struct OnboardingView: View {
                     Capsule ()
                         .foregroundColor(Color.baseColorWB)
                         .frame(width: step.id == vm.currentStep ? 20 : 10, height: 10)
+                        .animation(.easeInOut, value: vm.currentStep)
                         }
             }
             .padding(.bottom, 42)
@@ -56,16 +73,20 @@ struct OnboardingView: View {
                         vm.currentStep += 1
                     }
                 } else {
-                    stateLoadView.toggle()
+                   // vm.showPresetting = true
+                    self.stateLoadView = .presettingView
                 }
             } label: { }
-                .buttonStyle(StyleDefaultButton(name: vm.currentStep < vm.onBoardingSteps.count - 1 ? "Далее" : "Давай начнем"))
+                .buttonStyle(StyleDefaultButton(name: vm.currentStep < vm.onBoardingSteps.count - 1 ? "Далее" : "Завершить настройку"))
                 .padding(.bottom, 42)
                 .padding(.horizontal, 24)
             
         }
+      // .fullScreenCover(isPresented: $vm.showPresetting) { PresettingView() }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+
     }
+
 }
 
 struct OnboardingView_Previews: PreviewProvider {
