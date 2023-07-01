@@ -6,19 +6,49 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct PresettingView: View {
     
     @AppStorage("stateLoadingView") var stateLoadView: LoadView = .loginView
-
+    
     @StateObject var vm: PresettingViewModel = PresettingViewModel()
-  
+    
     var body: some View {
         
         VStack {
-            Spacer()
             
             VStack {
+                
+                Button {
+                    if !vm.disableTextFieldName {
+                        vm.showImagePicker.toggle()
+                    }
+                } label: {
+                    
+                    if vm.disableTextFieldName {
+                        WebImage(url: URL(string: vm.imageURL ?? ""))
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 160, height: 160)
+                            .cornerRadius(80)
+                    } else {
+                        if let image = vm.image {
+                            Image(uiImage: image)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 160, height: 160)
+                                .cornerRadius(80)
+                        } else {
+                            Image(systemName: "person.circle.fill")
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 160, height: 160)
+                                .foregroundColor(.baseColorWB)
+                        }
+                    }
+                }
+                .padding(.bottom, 24)
                 
                 Text(vm.disableTextFieldName ? "Рады вас снова видеть" : "Введите уникальное имя")
                     .multilineTextAlignment(.center)
@@ -39,14 +69,19 @@ struct PresettingView: View {
                             vm.checkNickname()
                         }
                     
-                    Image(systemName: "checkmark.circle.fill")
+                    Image(systemName: vm.stateNickname ? "checkmark.circle.fill" : "xmark.circle.fill")
                         .resizable()
                         .frame(width: 44, height: 44)
-                        .foregroundColor(vm.stateNickname ? Color.green : Color.baseColorWB)
+                        .foregroundColor(vm.stateNickname ? Color.green : Color.red)
                     
                 }
+                
+                Text(vm.errorText)
+                    .foregroundColor(.red)
+                
             }
-            .padding(.bottom, 24)
+            .padding(.top, 24)
+            .padding(.bottom, 8)
             
             VStack {
                 
@@ -60,10 +95,10 @@ struct PresettingView: View {
                     } label:{}
                         .buttonStyle(StyleDefaultButton(name: "Разрешить"))
                     
-                    Image(systemName: "checkmark.circle.fill")
+                    Image(systemName: vm.stateHealthKit ? "checkmark.circle.fill" : "xmark.circle.fill")
                         .resizable()
                         .frame(width: 44, height: 44)
-                        .foregroundColor(vm.stateHealthKit ? Color.green : Color.baseColorWB)
+                        .foregroundColor(vm.stateHealthKit ? Color.green : Color.red)
                 }
             }
             
@@ -79,14 +114,11 @@ struct PresettingView: View {
             
         }
         .task {
-                vm.stateAutUser()
+            vm.stateAutUser()
         }
         .padding(.horizontal, 24)
-        .alert("Извините такое имя уже занято", isPresented: $vm.showAlertName) {
-            Button("OK", role: .cancel) { }
-        }
-        .alert("Вы не ввели имя", isPresented: $vm.showAlertNameIsEmpty) {
-            Button("OK", role: .cancel) { }
+        .fullScreenCover(isPresented: $vm.showImagePicker) {
+            ImagePicker(image: $vm.image)
         }
         
     }

@@ -16,6 +16,8 @@ enum ChartsState: String, CaseIterable {
 
 final class StatisticsViewModel: ObservableObject  {
     
+    @Published var steps: Float = 0
+    
     @AppStorage("userID") var userID = DefaultSettings.userID
     
     private var fireBaseManager: FirebaseManagerProtocol = FirebaseManager()
@@ -23,6 +25,7 @@ final class StatisticsViewModel: ObservableObject  {
     
     @Published var stepsWeek: [HealthKitModel] = [HealthKitModel]()
     @Published var distanceWeek: [HealthKitModel] = [HealthKitModel]()
+    @Published var currentActiveItem: HealthKitModel?
     
     var dataChart: [HealthKitModel] {
         switch selectedTab {
@@ -37,15 +40,15 @@ final class StatisticsViewModel: ObservableObject  {
         self.dataChart.map { $0.date }
     }
     
-    @Published var steps: Float = 0
     @Published var distance = 0
     @Published var stepAvenge = 0
     @Published var distanceAvenge = 0
+    
+    @Published var setCoin = 0
    
     @Published var selectedTab: ChartsState = .steps
     
     func calculateDataHealthKit() {
-        
         guard healthKitManager.healthStore != nil,
               let dateWeek = Calendar.current.date(byAdding: .day, value: -6, to: Date()),
               let steps = HKQuantityType.quantityType(forIdentifier: .stepCount),
@@ -70,14 +73,7 @@ final class StatisticsViewModel: ObservableObject  {
                 }
                 
             }
-            
-            healthKitManager.getTodayStepsObserver(withStart: date, dataType: steps) {[weak self] result in
-                guard let sum = result?.sumQuantity(), let self = self else {return}
-                
-                DispatchQueue.main.async {
-                    self.steps = Float(sum.doubleValue(for: HKUnit.count()))
-                }
-            }
+       
             
             healthKitManager.getTodayStepsObserver(withStart: dateWeek, dataType: distance) {[weak self] result in
                 guard let sum = result?.sumQuantity(), let self = self else {return}
@@ -94,15 +90,16 @@ final class StatisticsViewModel: ObservableObject  {
                 DispatchQueue.main.async {
                     self.distance = Int(sum.doubleValue(for: HKUnit.meter()))
                 }
-                
             }
-            
         }
     }
     
     
+    func updateSteps(value: Int) {
+        fireBaseManager.updateData(nameValueUpdate: "step", id: userID, value: value)
+    }
+    
     func weekStatisticsSteps(_ statisticsCollectionStepWeek: HKStatisticsCollection, _ statisticsCollectionDistanceWeek: HKStatisticsCollection) {
-        
         guard let startDate = Calendar.current.date(byAdding: .day, value: -6, to: Date()) else {return}
         
         Task {
@@ -133,11 +130,8 @@ final class StatisticsViewModel: ObservableObject  {
                     self.distanceWeek.append(stepWeek)
                     
                 }
-            
             }
         }
-        
-        
     }
     
     

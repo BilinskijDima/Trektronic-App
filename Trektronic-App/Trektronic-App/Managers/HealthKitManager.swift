@@ -16,7 +16,7 @@ protocol HealthKitManagerProtocol {
     
     func getTodayStepsObserver(withStart: Date, dataType: HKQuantityType, completion: @escaping (HKStatistics?) -> Void)
     
-    func getMyStepsObserver(withStart: Date, dataType: HKQuantityType) async throws -> HKStatistics?
+    func getMyStepsObserver(withStart: Date, dataType: HKQuantityType, completion: @escaping (HKStatistics?) -> Void)
     
     func authorizationStatus() -> Bool 
 }
@@ -91,10 +91,11 @@ class HealthKitManager: HealthKitManagerProtocol {
             if let error = error {
                 print("Error: \(error.localizedDescription)")
             }
-            Task {
-                let step = try await self.getMyStepsObserver(withStart: withStart, dataType: dataType)
-                completion(step)
+        
+            self.getMyStepsObserver(withStart: withStart, dataType: dataType) { result in
+                completion(result)
             }
+            
         })
         if let healthStore = healthStore {
             observerQuery.map(healthStore.execute)
@@ -104,24 +105,23 @@ class HealthKitManager: HealthKitManagerProtocol {
     }
     
     
-    func getMyStepsObserver(withStart: Date, dataType: HKQuantityType) async throws -> HKStatistics? {
+    func getMyStepsObserver(withStart: Date, dataType: HKQuantityType, completion: @escaping (HKStatistics?) -> Void)  {
     
         let predicate = HKQuery.predicateForSamples(withStart: withStart, end:  Date(), options: .strictEndDate)
-        return try await withCheckedThrowingContinuation {[weak self] continuation in
-            guard let self = self else {return}
+   
             self.queryStatistics = HKStatisticsQuery(quantityType: dataType,
                                                      quantitySamplePredicate: predicate,
                                                      options: .cumulativeSum,
                                                      completionHandler: { _ , result, _ in
                 guard let result = result else { return }
                 
-                continuation.resume(returning: result)
+                completion(result)
                 
             })
             if let healthStore = healthStore {
                 queryStatistics.map(healthStore.execute)
             }
-        }
+        
         
     }
     
