@@ -86,12 +86,13 @@ final class HomeViewModel: ObservableObject  {
             do {
                 let userFavorite = try dataSnapshot.decodeJSON(type: Users.self)
                 guard let favouritesUser = self.user?.favouritesUser else {return}
-                for id in favouritesUser {
-                    if userFavorite.id == id {
-                        self.users.append(userFavorite)
-                    }
+                
+                
+                if self.favouritesUser.map({$0}).contains(userFavorite.id) {
+                    self.users.append(userFavorite)
                 }
 
+                
             } catch {
                 print (error.localizedDescription)
             }

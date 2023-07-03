@@ -10,33 +10,22 @@ import SDWebImageSwiftUI
 
 struct UserView: View {
     
-    @StateObject var vm: UserViewModel = UserViewModel()
-    
-    let user: Users?
-    let userSelf: Users?
-    var updateUser: () -> ()
-    var isFavorite: () -> Bool
-    
-    var width: CGFloat = 300
-    var height: CGFloat = 35
+    @StateObject var vm: UserViewModel
     
     var body: some View {
-        
-        let progressUserSelf = width * (CGFloat(userSelf?.step ?? 0)) / (CGFloat(userSelf?.step ?? 0) + CGFloat(vm.userFavorit?.step ?? 0))
-        let progressUserFavorit = width * (CGFloat(vm.userFavorit?.step ?? 0)) / (CGFloat(userSelf?.step ?? 0) + CGFloat(vm.userFavorit?.step ?? 0))
         
         ScrollView {
             
             VStack {
                 HStack {
-                    WebImage(url: URL(string: userSelf?.image ?? ""))
+                    WebImage(url: URL(string: vm.userSelf?.image ?? ""))
                         .resizable()
                         .scaledToFill()
                         .frame(width: 50, height: 50)
                         .cornerRadius(25)
                     VStack {
-                        Text (userSelf?.nickname ?? "")
-                        Text ("\(userSelf?.step ?? 0)")
+                        Text (vm.userSelf?.nickname ?? "")
+                        Text ("\(vm.userSelf?.step ?? 0)")
                     }
                     
                     Spacer()
@@ -57,20 +46,20 @@ struct UserView: View {
                         
                         ZStack(alignment: .leading) {
                             RoundedRectangle(cornerRadius: 20, style: .continuous)
-                                .frame(width: width, height: height)
+                                .frame(width: vm.width, height: vm.height)
                                 .foregroundColor(Color.black.opacity(0.1))
                           
                             RoundedRectangle(cornerRadius: 20, style: .continuous)
-                                .frame(width: progressUserSelf, height: height)
+                                .frame(width: vm.progressUserSelf, height: vm.height)
                                 .foregroundColor(Color.purple)
                         }
               
                         ZStack(alignment: .trailing) {
                             RoundedRectangle(cornerRadius: 20, style: .continuous)
-                                .frame(width: width, height: height)
+                                .frame(width: vm.width, height: vm.height)
                                 .foregroundColor(Color.clear)
                             RoundedRectangle(cornerRadius: 20, style: .continuous)
-                                .frame(width: progressUserFavorit, height: height)
+                                .frame(width: vm.progressUserFavorit, height: vm.height)
                                 .foregroundColor(Color.red)
                         }
                         HStack {
@@ -85,17 +74,19 @@ struct UserView: View {
             .padding([.horizontal, .top], 24)
         }
         .task {
-            vm.fetchUser(id: user?.id ?? "")
+            vm.fetchUser()
+           
         }
-        .navigationTitle (user?.nickname ?? "Name")
+        .navigationTitle (vm.user.nickname)
         .toolbar {
-            Button(action: updateUser, label: {
-                Image(systemName: isFavorite() ? "star.fill" : "star")
-                    .foregroundColor( isFavorite() ? Color.yellow : .baseColorWB)
+            Button(action: vm.updateUser, label: {
+                Image(systemName: vm.isFavorite() ? "star.fill" : "star")
+                    .foregroundColor( vm.isFavorite() ? Color.yellow : .baseColorWB)
             })
-            
+
         }
         .navigationBarTitleDisplayMode(.inline)
+        
     }
     
 }

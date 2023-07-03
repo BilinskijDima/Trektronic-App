@@ -7,9 +7,10 @@
 
 import Foundation
 import SwiftUI
+import Combine
 
 final class PeopleViewModel: ObservableObject  {
-    
+
     @Published var users = [Users]()
     
     @Published var userSelf: Users?

@@ -114,7 +114,7 @@ struct HomeView: View {
                         
                         ForEach(vm.users, id: \.hashValue) { user in
                             NavigationLink {
-                                UserView(user: user, userSelf: vm.user, updateUser: { vm.updateFavorite(id: user.id) }, isFavorite: { vm.isFavorite(id: user.id) })
+                                UserView(vm: UserViewModel(user: user, updateUser: { vm.updateFavorite(id: user.id) }, isFavorite: { vm.isFavorite(id: user.id) }))
                             } label: {
                                 HStack(alignment: .center, spacing: 16) {
                                     
