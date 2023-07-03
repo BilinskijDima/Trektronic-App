@@ -75,7 +75,7 @@ struct HomeView: View {
                     VStack(alignment: .trailing) {
                         
                         HStack(alignment: .center) {
-
+                            
                             Spacer()
                             HStack(spacing: 0) {
                                 Text(vm.user?.nickname ?? "")
@@ -105,12 +105,21 @@ struct HomeView: View {
                         
                         CardsView(name: "TRON монета", nameValue: "TROIN", nameSettings: "", color: .green, data: vm.user?.coin.description ?? "0")
                     }
-                   
+                    
                     VStack {
                         Text("Избранные")
                             .bold()
                             .font(.system(size: 35))
-                        .padding(.top, 24)
+                            .padding(.top, 24)
+                        
+                        if vm.favouritesUserCheck {
+                            Text ("Нет избранных людей")
+                                .foregroundColor(.baseColorWB)
+                                .padding(16)
+                                .background(Color.baseColorWB)
+                                .cornerRadius(12)
+                                .opacity(0.3)
+                        }
                         
                         ForEach(vm.users, id: \.hashValue) { user in
                             NavigationLink {
@@ -121,13 +130,13 @@ struct HomeView: View {
                             } label: {
                                 HStack(alignment: .center, spacing: 16) {
                                     
-                            
-                                        WebImage(url: URL(string: user.image))
-                                            .resizable()
-                                            .scaledToFill()
-                                            .frame(width: 50, height: 50)
-                                            .cornerRadius(25)
-                                 
+                                    
+                                    WebImage(url: URL(string: user.image))
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: 50, height: 50)
+                                        .cornerRadius(25)
+                                    
                                     
                                     VStack {
                                         Text(user.nickname)
@@ -143,7 +152,7 @@ struct HomeView: View {
                                             .foregroundColor(.purple)
                                             .frame(width: 50, height: 50)
                                             .cornerRadius(25)
-                                     
+                                        
                                         Text("\(user.step)")
                                             .foregroundColor(.baseColorWB)
                                     }
@@ -153,12 +162,12 @@ struct HomeView: View {
                             Divider()
                             
                         }
-                
+                        
                         
                         
                         
                     }
-               
+                    
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .padding(.horizontal, 24)
@@ -166,7 +175,7 @@ struct HomeView: View {
             .navigationTitle("Домой")
             .toolbar {
                 Button {
-                    
+                    vm.isShowingInfo = true
                 } label: {
                     Image(systemName: "info.circle.fill")
                         .foregroundColor(.baseColorWB)
@@ -177,6 +186,9 @@ struct HomeView: View {
         .task {
             vm.userData()
             vm.fetchFavoriteUser()
+        }
+        .sheet(isPresented: $vm.isShowingInfo) {
+            InfoView(nameView: "Экран Домой", infoText: "Информация об экране")
         }
         
     }

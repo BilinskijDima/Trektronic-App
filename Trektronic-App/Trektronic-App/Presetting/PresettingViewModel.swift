@@ -29,11 +29,17 @@ final class PresettingViewModel: ObservableObject  {
     @Published var errorText = ""
     @Published var setData = false
     
+    @Published var activateIndicator = false
+    
     @MainActor
     func requestAuthorisation() {
         Task {
             stateHealthKit = try await healthKitManager.requestAuthorisation()
         }
+    }
+    
+    func authorizationStatusHK() {
+        stateHealthKit = healthKitManager.authorizationStatus()
     }
     
     func stateSaveData() {
@@ -65,7 +71,7 @@ final class PresettingViewModel: ObservableObject  {
     func setDataRealTime() {
         Task {
           
-            guard let defaultImage = UIImage(systemName: "person.circle.fill") else {return}
+            guard let defaultImage = UIImage(named: "DefaultAvatar") else {return}
             
             let imageURL = try await fireBaseManager.persistImageToStorage(userID: userID, image: image ?? defaultImage)
 

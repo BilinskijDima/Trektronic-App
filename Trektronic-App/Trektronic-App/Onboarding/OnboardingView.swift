@@ -76,7 +76,7 @@ struct OnboardingView: View {
                     self.stateLoadView = .presettingView
                 }
             } label: { }
-                .buttonStyle(StyleDefaultButton(name: vm.currentStep < vm.onBoardingSteps.count - 1 ? "Далее" : "Завершить настройку"))
+                .buttonStyle(StyleDefaultButton(name: vm.currentStep < vm.onBoardingSteps.count - 1 ? "Далее" : "Завершить настройку", colorBG: Color.baseColorWB))
                 .padding(.bottom, 42)
                 .padding(.horizontal, 24)
             

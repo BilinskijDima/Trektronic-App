@@ -14,6 +14,7 @@ struct StyleDefaultButtonImage: ButtonStyle {
     var logo: Image
     var width: CGFloat
     var height: CGFloat
+    var colorBG: Color
 
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
@@ -24,11 +25,11 @@ struct StyleDefaultButtonImage: ButtonStyle {
                 .foregroundColor(Color.baseColorBW)
             Text(name)
                 .myTextStyle()
-            
+          
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, 12)
-        .background(Color.baseColorWB)
+        .background(colorBG)
         .cornerRadius(.greatestFiniteMagnitude)
         .overlay {
             if configuration.isPressed {
@@ -44,6 +45,7 @@ struct StyleDefaultButtonImage: ButtonStyle {
 struct StyleDefaultButton: ButtonStyle {
     
     var name: String
+    var colorBG: Color
     
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
@@ -51,7 +53,7 @@ struct StyleDefaultButton: ButtonStyle {
             .myTextStyle()
             .frame(maxWidth: .infinity)
             .padding(.vertical, 12)
-            .background(Color.baseColorWB)
+            .background(colorBG)
             .cornerRadius(.greatestFiniteMagnitude)
             .overlay {
                 if configuration.isPressed {

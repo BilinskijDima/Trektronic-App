@@ -48,6 +48,11 @@ final class StatisticsViewModel: ObservableObject  {
    
     @Published var selectedTab: ChartsState = .steps
     
+    @Published var sumStepWeek = [Double]()
+    @Published var sumStepWeekResult = false
+    
+    @Published var isShowingInfo = false
+    
     func calculateDataHealthKit() {
         guard healthKitManager.healthStore != nil,
               let dateWeek = Calendar.current.date(byAdding: .day, value: -6, to: Date()),
@@ -91,6 +96,8 @@ final class StatisticsViewModel: ObservableObject  {
                     self.distance = Int(sum.doubleValue(for: HKUnit.meter()))
                 }
             }
+        } else {
+            print ("Нет доступа к healthKit")
         }
     }
     
@@ -102,7 +109,14 @@ final class StatisticsViewModel: ObservableObject  {
     func weekStatisticsSteps(_ statisticsCollectionStepWeek: HKStatisticsCollection, _ statisticsCollectionDistanceWeek: HKStatisticsCollection) {
         guard let startDate = Calendar.current.date(byAdding: .day, value: -6, to: Date()) else {return}
         
+        DispatchQueue.main.async {
+            self.stepsWeek.removeAll()
+            self.sumStepWeek.removeAll()
+            self.distanceWeek.removeAll()
+        }
+       
         Task {
+           
             
             let endDate = Date()
             
@@ -113,7 +127,9 @@ final class StatisticsViewModel: ObservableObject  {
                     guard let self = self else {return}
                     
                     let count = statistics.sumQuantity()?.doubleValue(for: HKUnit.count())
-                    
+                  
+                    self.sumStepWeek.append(count ?? 0.0)
+                  
                     let stepWeek = HealthKitModel(count: count ?? 0.0, date: statistics.startDate)
                     
                     self.stepsWeek.append(stepWeek)
@@ -123,17 +139,34 @@ final class StatisticsViewModel: ObservableObject  {
                     
                     guard let self = self else {return}
                     
-                    guard let count = statistics.sumQuantity()?.doubleValue(for: HKUnit.meter()) else {return}
-                    let kil = count 
-                    let stepWeek = HealthKitModel(count: kil, date: statistics.startDate)
+                    let count = statistics.sumQuantity()?.doubleValue(for: HKUnit.meter())
+                  
+                    let stepWeek = HealthKitModel(count: count ?? 0, date: statistics.startDate)
                     
                     self.distanceWeek.append(stepWeek)
                     
                 }
             }
+            
+            self.statusSumStepWeek()
         }
+        
+        
     }
     
+    func statusSumStepWeek() {
+        
+        let sumStepWeek = sumStepWeek.reduce(0.0, { $0 + $1 })
+        
+        DispatchQueue.main.async {
+            if sumStepWeek == 0.0 {
+                self.sumStepWeekResult = true
+            } else {
+                self.sumStepWeekResult = false
+            }
+            
+        }
+    }
     
 }
     

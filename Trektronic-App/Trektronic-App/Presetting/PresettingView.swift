@@ -15,16 +15,20 @@ struct PresettingView: View {
     @StateObject var vm: PresettingViewModel = PresettingViewModel()
     
     var body: some View {
-        
+        ZStack(alignment: .bottom) {
+            
+            if vm.activateIndicator {
+                ProgressView()
+                    .scaleEffect(3, anchor: .center)
+                    .progressViewStyle(CircularProgressViewStyle(tint: .purple))
+                    .padding(.bottom, 135)
+            }
+            
         VStack {
             
             VStack {
                 
-                Button {
-                    if !vm.disableTextFieldName {
-                        vm.showImagePicker.toggle()
-                    }
-                } label: {
+                ZStack(alignment: .bottomTrailing) {
                     
                     if vm.disableTextFieldName {
                         WebImage(url: URL(string: vm.imageURL ?? ""))
@@ -40,14 +44,32 @@ struct PresettingView: View {
                                 .frame(width: 160, height: 160)
                                 .cornerRadius(80)
                         } else {
-                            Image(systemName: "person.circle.fill")
+                            Image("DefaultAvatar")
                                 .resizable()
                                 .scaledToFill()
                                 .frame(width: 160, height: 160)
                                 .foregroundColor(.baseColorWB)
                         }
                     }
+                    
+                    Button {
+                        if !vm.disableTextFieldName {
+                            vm.showImagePicker.toggle()
+                        }
+                    } label: {
+                        ZStack {
+                            Circle()
+                                .frame(width: 45, height: 45)
+                                .foregroundColor(.purple)
+                            Image(systemName: "plus")
+                                .foregroundColor(.baseColorBW)
+                        }
+                    }
+                    
+                    
                 }
+                
+                
                 .padding(.bottom, 24)
                 
                 Text(vm.disableTextFieldName ? "Рады вас снова видеть" : "Введите уникальное имя")
@@ -93,7 +115,7 @@ struct PresettingView: View {
                     Button {
                         vm.requestAuthorisation()
                     } label:{}
-                        .buttonStyle(StyleDefaultButton(name: "Разрешить"))
+                        .buttonStyle(StyleDefaultButton(name: "Разрешить", colorBG: Color.baseColorWB))
                     
                     Image(systemName: vm.stateHealthKit ? "checkmark.circle.fill" : "xmark.circle.fill")
                         .resizable()
@@ -106,8 +128,9 @@ struct PresettingView: View {
             
             Button {
                 vm.stateSaveData()
+                vm.activateIndicator = true
             } label: { }
-                .buttonStyle(StyleDefaultButton(name: "Давай начнем"))
+                .buttonStyle(StyleDefaultButton(name: "Давай начнем", colorBG: Color.baseColorWB))
                 .opacity(vm.stateHealthKit && vm.stateNickname ? 1 : 0.5)
                 .disabled(vm.stateHealthKit && vm.stateNickname ? false : true)
                 .padding(.bottom, 42)
@@ -115,12 +138,13 @@ struct PresettingView: View {
         }
         .task {
             vm.stateAutUser()
+            vm.authorizationStatusHK()
         }
         .padding(.horizontal, 24)
         .fullScreenCover(isPresented: $vm.showImagePicker) {
             ImagePicker(image: $vm.image)
         }
-        
+    }
     }
 }
 

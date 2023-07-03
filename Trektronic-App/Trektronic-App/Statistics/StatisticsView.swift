@@ -21,7 +21,7 @@ struct valueView: View {
             Spacer()
             Text(data)
         }
-        .padding(.horizontal, 45)
+        .padding(.horizontal, 25)
         .padding(.vertical, 12)
         .background(color)
         .cornerRadius(.greatestFiniteMagnitude)
@@ -32,7 +32,7 @@ struct valueView: View {
 struct StatisticsView: View {
     
     @ObservedObject var vm: StatisticsViewModel
-
+    
     var body: some View {
         
         NavigationView {
@@ -42,10 +42,10 @@ struct StatisticsView: View {
                     VStack {
                         HStack {
                             valueView(name: "Всего", color: .red, data: "\(Int(vm.steps))")
-    
+                            
                             Spacer()
                             
-                            valueView(name: "Дистанция", color: .green, data: "\(Int(vm.distance))")
+                            valueView(name: "Дистанция, м", color: .green, data: "\(Int(vm.distance))")
                         }
                         .padding(.vertical, 24)
                     }
@@ -79,7 +79,7 @@ struct StatisticsView: View {
                         .frame(width: 200, height: 200)
                         .padding(.vertical, 24)
                     }
-      
+                    
                     
                     VStack {
                         Text("График")
@@ -94,56 +94,69 @@ struct StatisticsView: View {
                             }
                         }
                         .pickerStyle(.segmented)
-                        
-                        Chart {
-                            ForEach(vm.dataChart) { dataWeek in
+                        ZStack(alignment: .center) {
+                            if vm.sumStepWeekResult {
                                 
-                                BarMark(
-                                    x: .value("День недели", dataWeek.date, unit: .day),
-                                    y: .value("Шаги", dataWeek.count)
+                                Text ("Нет данных")
+                                    .foregroundColor(.baseColorWB)
+                                    .padding(16)
+                                    .background(Color.baseColorWB)
+                                    .cornerRadius(12)
+                                    .opacity(0.3)
+                                
+                                
+                            }
+                            Chart {
+                                ForEach(vm.dataChart) { dataWeek in
                                     
-                                )
-                                .foregroundStyle(Color.purple)
-                                .cornerRadius(.greatestFiniteMagnitude)
-                            }
-                            
-                        }
-                        .chartOverlay(content: { proxy in
-                            GeometryReader { innerProxy in
-                                Rectangle()
-                                    .fill(.clear).contentShape(Rectangle())
-                                    .gesture(
-                                       DragGesture()
-                                        .onChanged{ value in
-                                            
-                                            let location = value.location
-                                            
-                                            if let step: Int = proxy.value(atY: location.x) {
-                                                print (step)
-                                            }
-                                            
-                                            
-                                        }.onEnded{ value in
-                                            
-                                        }
+                                    BarMark(
+                                        x: .value("День недели", dataWeek.date, unit: .day),
+                                        y: .value("Шаги", dataWeek.count)
+                                        
                                     )
+                                    .foregroundStyle(Color.purple)
+                                    .cornerRadius(.greatestFiniteMagnitude)
+                                }
                                 
                             }
+                            //.chartOverlay(content: { proxy in
+                            //                            GeometryReader { innerProxy in
+                            //                                Rectangle()
+                            //                                    .fill(.clear).contentShape(Rectangle())
+                            //                                    .gesture(
+                            //                                       DragGesture()
+                            //                                        .onChanged{ value in
+                            //
+                            //                                            let location = value.location
+                            //
+                            //                                            if let step: Int = proxy.value(atY: location.x) {
+                            //                                                print (step)
+                            //                                            }
+                            //
+                            //
+                            //                                        }.onEnded{ value in
+                            //
+                            //                                        }
+                            //                                    )
+                            //
+                            //                            }
+                            //
+                            //
+                            //                        })
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 24)
+                            .frame(height: 350)
+                            .chartXAxis {
+                                AxisMarks(values: vm.mapDataChart) { date in
+                                    AxisValueLabel(format: .dateTime.weekday())
+                                }
+                            }
+                            .chartYAxis {
+                                AxisMarks(position: .leading) {
+                                    AxisValueLabel()
+                                }
+                            }
                             
-                           
-                        })
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 24)
-                        .frame(height: 350)
-                        .chartXAxis {
-                            AxisMarks(values: vm.mapDataChart) { date in
-                                AxisValueLabel(format: .dateTime.weekday())
-                            }
-                        }
-                        .chartYAxis {
-                            AxisMarks(position: .leading) {
-                                AxisValueLabel()
-                            }
                         }
                     }
                     
@@ -157,7 +170,7 @@ struct StatisticsView: View {
                         HStack {
                             valueView(name: "Шаги", color: .red, data: vm.stepAvenge.description)
                             Spacer()
-                            valueView(name: "Дистанция", color: .green, data: vm.distanceAvenge.description)
+                            valueView(name: "Дистанция, м", color: .green, data: vm.distanceAvenge.description)
                         }
                         .padding(.bottom, 24)
                     }
@@ -168,18 +181,21 @@ struct StatisticsView: View {
             .navigationTitle("Статистика")
             .toolbar {
                 Button {
-                    
+                    vm.isShowingInfo = true
                 } label: {
                     Image(systemName: "info.circle.fill")
                         .foregroundColor(.baseColorWB)
                 }
             }
             .task {
-
+                
                 vm.calculateDataHealthKit()
                 
             }
-      
+            .sheet(isPresented: $vm.isShowingInfo) {
+                InfoView(nameView: "Экран Статистики", infoText: "Информация об экране")
+            }
+            
         }
     }
 }

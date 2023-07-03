@@ -19,6 +19,11 @@ final class HomeViewModel: ObservableObject  {
     
     @Published var user: Users?
     
+    @Published var favouritesUserCheck = false
+    
+    @Published var isShowingInfo = false
+   
+    
     @AppStorage("userID") var userID = DefaultSettings.userID
     
     private var fireBaseManager: FirebaseManagerProtocol = FirebaseManager()
@@ -92,6 +97,11 @@ final class HomeViewModel: ObservableObject  {
                     self.users.append(userFavorite)
                 }
 
+                if favouritesUser == [""] {
+                    self.favouritesUserCheck = true
+                } else {
+                    self.favouritesUserCheck = false
+                }
                 
             } catch {
                 print (error.localizedDescription)

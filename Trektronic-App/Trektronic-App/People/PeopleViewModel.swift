@@ -17,6 +17,8 @@ final class PeopleViewModel: ObservableObject  {
     
     @Published var favouritesUser = Set<String>()
     
+    @Published var  isShowingInfo = false
+    
     @AppStorage("userID") var userID = DefaultSettings.userID
     
     private var fireBaseManager: FirebaseManagerProtocol = FirebaseManager()
