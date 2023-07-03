@@ -21,11 +21,12 @@ struct PeopleView: View {
                 
                 ForEach(vm.users, id: \.hashValue) { user in
                     NavigationLink {
-
                         
-                        UserView(vm: UserViewModel(user: user, updateUser: { vm.updateFavorite(id: user.id) }, isFavorite: { vm.isFavorite(id: user.id) }))
-                        
-                        // По поводу UserView, получается так, что на PeopleView я делаю обсервер запрос на список пользователей , то есть список автоматически будет изменяться в зависимости от новых пользователей , НО не их данные, поэтому на UserView я делаю еще один запрос на данные конкретного пользователя и поэтому они обновляются в реальном времени
+                        UserView(userFavorit: user, userSelf: vm.userSelf,
+                                 updateUser: { vm.updateFavorite(id: user.id) },
+                                 isFavorite: { vm.isFavorite(id: user.id) })
+                    
+                        // По поводу UserView , получается так, что на PeopleView я делаю обсервер запрос на список пользователей , то есть список автоматически будет изменяться в зависимости от новых пользователей , НО не их данные, поэтому на UserView я делаю еще один запрос на данные конкретного пользователя и поэтому они обновляются в реальном времени
                         
                     } label: {
                         HStack(alignment: .center, spacing: 16) {

@@ -17,61 +17,35 @@ final class UserViewModel: ObservableObject  {
     let width: CGFloat = 300
     let height: CGFloat = 35
     
-    @Published var user: Users
-    @Published var userSelf: Users?
-    @Published var updateUser: (() -> ())
-    @Published var isFavorite: (() -> Bool)
     
     @Published var progressUserSelf: CGFloat = 0
     @Published var progressUserFavorit: CGFloat = 0
+    @Published var userFavoritData: Users?
     
-    @Published var userFavorit: Users?
     
-    init(user: Users, updateUser: @escaping () -> Void, isFavorite: @escaping () -> Bool) {
-        self.user = user
-    
-        self.updateUser = updateUser
-        self.isFavorite = isFavorite
-    }
-    
-    func progressUser() {
-        self.progressUserSelf = self.width * (CGFloat(self.userSelf?.step ?? 0)) / (CGFloat(self.userSelf?.step ?? 0) + CGFloat(self.userFavorit?.step ?? 0))
+    func progressUser(userSelf: CGFloat, userFavorit: CGFloat) {
+        self.progressUserSelf = self.width * (userSelf) / (userSelf + userFavorit)
         
-        self.progressUserFavorit = self.width * (CGFloat(self.userFavorit?.step ?? 0)) / (CGFloat(self.userSelf?.step ?? 0) + CGFloat(self.userFavorit?.step ?? 0))
+        self.progressUserFavorit = self.width * (userFavorit) / (userSelf + userFavorit)
     }
       
-    func fetchUser() {
-        self.fireBaseManager.getDataRealTime(id: user.id) {[weak self] dataSnapshot in
+    func fetchUser(id: String, userSelfStep: Int) {
+        self.fireBaseManager.getDataRealTime(id: id) {[weak self] dataSnapshot in
             guard let self = self else {return}
             
             do {
                 let user = try dataSnapshot.decodeJSON(type: Users.self)
              
-                    self.userFavorit = user
-                self.fetchUserSelf()
-               
+                    self.userFavoritData = user
+
+           
+                self.progressUser(userSelf: CGFloat(userSelfStep), userFavorit: CGFloat(user.step))
+                
             } catch {
                 print (error.localizedDescription)
             }
             
         }
-        
-    }
-    
-    func fetchUserSelf() {
-        self.fireBaseManager.getDataRealTime(id: userID) {[weak self] dataSnapshot in
-            guard let self = self else {return}
-            
-            do {
-                let user = try dataSnapshot.decodeJSON(type: Users.self)
-                self.userSelf = user
-                self.progressUser()
-            } catch {
-                print (error.localizedDescription)
-            }
-            
-        }
-        
         
     }
     

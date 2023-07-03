@@ -10,7 +10,12 @@ import SDWebImageSwiftUI
 
 struct UserView: View {
     
-    @StateObject var vm: UserViewModel
+    @StateObject var vm: UserViewModel = UserViewModel()
+    
+    var userFavorit: Users?
+    var userSelf: Users?
+    var updateUser: () -> ()
+    var isFavorite: () -> Bool
     
     var body: some View {
         
@@ -18,23 +23,23 @@ struct UserView: View {
             
             VStack {
                 HStack {
-                    WebImage(url: URL(string: vm.userSelf?.image ?? ""))
+                    WebImage(url: URL(string: userSelf?.image ?? ""))
                         .resizable()
                         .scaledToFill()
                         .frame(width: 50, height: 50)
                         .cornerRadius(25)
                     VStack {
-                        Text (vm.userSelf?.nickname ?? "")
-                        Text ("\(vm.userSelf?.step ?? 0)")
+                        Text (userSelf?.nickname ?? "")
+                        Text ("\(userSelf?.step ?? 0)")
                     }
                     
                     Spacer()
                     
                     VStack {
-                        Text (vm.userFavorit?.nickname ?? "")
-                        Text ("\(vm.userFavorit?.step ?? 0)")
+                        Text (vm.userFavoritData?.nickname ?? "")
+                        Text ("\(vm.userFavoritData?.step ?? 0)")
                     }
-                    WebImage(url: URL(string: vm.userFavorit?.image ?? ""))
+                    WebImage(url: URL(string: vm.userFavoritData?.image ?? ""))
                         .resizable()
                         .scaledToFill()
                         .frame(width: 50, height: 50)
@@ -74,14 +79,14 @@ struct UserView: View {
             .padding([.horizontal, .top], 24)
         }
         .task {
-            vm.fetchUser()
+            vm.fetchUser(id: userFavorit?.id ?? "", userSelfStep: userSelf?.step ?? 0)
            
         }
-        .navigationTitle (vm.user.nickname)
+        .navigationTitle (userFavorit?.nickname ?? "")
         .toolbar {
-            Button(action: vm.updateUser, label: {
-                Image(systemName: vm.isFavorite() ? "star.fill" : "star")
-                    .foregroundColor( vm.isFavorite() ? Color.yellow : .baseColorWB)
+            Button(action: updateUser, label: {
+                Image(systemName: isFavorite() ? "star.fill" : "star")
+                    .foregroundColor( isFavorite() ? Color.yellow : .baseColorWB)
             })
 
         }
