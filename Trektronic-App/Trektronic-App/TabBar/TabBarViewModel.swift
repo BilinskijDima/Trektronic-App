@@ -33,11 +33,16 @@ enum Tab: String, CaseIterable {
 
 final class TabBarViewModel: ObservableObject  {
     
+
+    
     private var cancellable = Set <AnyCancellable>()
     
     @Published var steps: Float = 0
     
+    @Published var userSelf: Users?
+    
     @Published var statisticsViewModel = StatisticsViewModel()
+    
     
     init() {
         $steps
@@ -47,6 +52,8 @@ final class TabBarViewModel: ObservableObject  {
         }
         .store(in: &cancellable)
     }
+    
+    @AppStorage("dataCoin") var dataCoin = DefaultSettings.dataCoin
     
     @AppStorage("userID") var userID = DefaultSettings.userID
     
@@ -68,9 +75,12 @@ final class TabBarViewModel: ObservableObject  {
             
         }
     }
-    let date = Calendar.current.startOfDay(for: Date())
+    
+   
 
     func calculateDataHealthKitStep() {
+        let date = Calendar.current.startOfDay(for: Date())
+        
         guard healthKitManager.healthStore != nil, let steps = HKQuantityType.quantityType(forIdentifier: .stepCount)
         else {return}
         
@@ -78,8 +88,22 @@ final class TabBarViewModel: ObservableObject  {
             guard let sum = result?.sumQuantity(), let self = self else {return}
             
             let resultStep = Float(sum.doubleValue(for: HKUnit.count()))
+        
+            let dateNow = Date.now.dateToString()
+   
+            if resultStep >= 10000 && dataCoin != dateNow {
+                
+                let coin = (userSelf?.coin ?? 0) + 1
+                
+                let dateNowApp = Date.now.dateToString()
+                
+                dataCoin = dateNowApp
+                
+                updateData(value: coin, nameValueUpdate: "coin")
+                
+            }
             
-            updateSteps(value: Int(resultStep))
+            updateData(value: Int(resultStep), nameValueUpdate: "step")
             
             DispatchQueue.main.async {
                 self.steps = resultStep
@@ -87,11 +111,24 @@ final class TabBarViewModel: ObservableObject  {
         }
     }
     
-    func updateSteps(value: Int) {
-        fireBaseManager.updateData(nameValueUpdate: "step", id: userID, value: value)
+    func updateData(value: Int, nameValueUpdate: String) {
+        fireBaseManager.updateData(nameValueUpdate: nameValueUpdate, id: userID, value: value)
     }
     
-    
+    func fetchUser() {
+        self.fireBaseManager.getDataRealTime(id: userID) {[weak self] dataSnapshot in
+            guard let self = self else {return}
+            
+            do {
+                let user = try dataSnapshot.decodeJSON(type: Users.self)
+                self.userSelf = user
+            } catch {
+                print (error.localizedDescription)
+            }
+            
+        }
+        
+    }
     
     
 }

@@ -51,6 +51,7 @@ struct TabBarView: View {
         }
         .task {
             vm.calculateDataHealthKitStep()
+            vm.fetchUser()
         }
         .edgesIgnoringSafeArea(.bottom)
     }
