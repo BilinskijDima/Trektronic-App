@@ -10,6 +10,7 @@ import FirebaseCore
 
 enum DefaultSettings {
     static let userID = ""
+    static let dataCoin = ""
 }
 
 enum LoadView: String, CaseIterable {
