@@ -13,7 +13,7 @@ struct OnboardingView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-           
+            
             TabView(selection: $vm.currentStep) {
                 ForEach(vm.onBoardingSteps, id: \.id) { step in
                     VStack {
@@ -21,7 +21,7 @@ struct OnboardingView: View {
                         Image(systemName: step.image)
                             .foregroundColor(.baseColorWB)
                             .font(.system(size: 150))
-                       
+                        
                         VStack {
                             
                             VStack(spacing: 8) {
@@ -61,7 +61,7 @@ struct OnboardingView: View {
                         .foregroundColor(Color.baseColorWB)
                         .frame(width: step.id == vm.currentStep ? 20 : 10, height: 10)
                         .animation(.easeInOut, value: vm.currentStep)
-                        }
+                }
             }
             .padding(.bottom, 42)
             
@@ -73,7 +73,6 @@ struct OnboardingView: View {
                         vm.currentStep += 1
                     }
                 } else {
-                   // vm.showPresetting = true
                     self.stateLoadView = .presettingView
                 }
             } label: { }
@@ -82,11 +81,10 @@ struct OnboardingView: View {
                 .padding(.horizontal, 24)
             
         }
-      // .fullScreenCover(isPresented: $vm.showPresetting) { PresettingView() }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-
+        
     }
-
+    
 }
 
 struct OnboardingView_Previews: PreviewProvider {

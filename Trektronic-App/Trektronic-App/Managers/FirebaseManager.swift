@@ -22,14 +22,18 @@ protocol FirebaseManagerProtocol {
     func checkUserNameAlreadyExist(newUserName: String, completion: @escaping(Bool) -> Void)
     func fetchUser(completion: @escaping(DataSnapshot) -> Void)
     func singOutWithGoogle()
+    func persistImageToStorage(userID: String, image: UIImage) async throws -> String
+    func updateData(nameValueUpdate: String, id: String, value: Any)
 }
 
 class FirebaseManager: FirebaseManagerProtocol {
     
     @AppStorage("stateLoadingView") var stateLoadView: LoadView = .loginView
-    
+
     let db = Firestore.firestore()
     let ref = Database.database().reference()
+    let storage = Storage.storage()
+    static let shared = FirebaseManager()
     
     func singInWithGoogle() async throws -> User {
         guard let clientID = FirebaseApp.app()?.options.clientID else { fatalError("error") }
@@ -81,6 +85,10 @@ class FirebaseManager: FirebaseManagerProtocol {
         }
     }
     
+    func updateData(nameValueUpdate: String, id: String, value: Any) {
+           ref.child("users").child(id).child(nameValueUpdate).setValue(value)
+    }
+    
     //  getDataRealTime(), fetchUser(), checkUserNameAlreadyExist() эти методы не удалось написать под async await, как я понял это из за того что эти методы использую .observe то есть постоянно слушаю изменения данных, и замыкание данные возвращает не одним запросом, поэтому async ломает в данном случи работу этих методов, аналогично происходит в HealthKitManager где данные обновляются в реальном времени или забираются из хранилища не за один раз 
     
     func getDataRealTime(id: String, completion: @escaping(DataSnapshot) -> Void) {
@@ -107,8 +115,28 @@ class FirebaseManager: FirebaseManagerProtocol {
             }
         })
     }
+    //
     
- 
+    func persistImageToStorage(userID: String, image: UIImage) async throws -> String {
+        return await withCheckedContinuation { continuation in
+            let ref = FirebaseManager.shared.storage.reference(withPath: userID)
+            
+            guard let imageDate = image.jpegData(compressionQuality: 0.5) else { fatalError() }
+            
+            ref.putData(imageDate, metadata: nil) { metadata, error in
+                if let error = error {
+                    print(error.localizedDescription)
+                    continuation.resume(returning: "")
+                    return
+                }
+                ref.downloadURL { url, error in
+                    if let error = error {
+                        print(error.localizedDescription)
+                    }
+                    continuation.resume(returning: url?.absoluteString ?? "")
+                }
+            }
+        }
+    }
 
-    
 }

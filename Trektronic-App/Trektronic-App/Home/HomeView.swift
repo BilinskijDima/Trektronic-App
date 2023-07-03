@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import SDWebImageSwiftUI
 
 struct CardsView: View {
     
@@ -36,7 +36,7 @@ struct CardsView: View {
                             .bold()
                             .font(.system(size: 20))
                     }
-                
+                    
                     Text (nameSettings)
                         .opacity(0.5)
                         .font(.system(size: 16))
@@ -55,7 +55,7 @@ struct CardsView: View {
         .frame(maxWidth: .infinity)
         .frame(height: 200)
         .background(color)
-        .cornerRadius(40)
+        .cornerRadius(24)
         .padding(.bottom, 16)
         
     }
@@ -65,32 +65,120 @@ struct HomeView: View {
     
     @StateObject var vm: HomeViewModel = HomeViewModel()
     
+    
     var body: some View {
         
         NavigationView {
             ScrollView(.vertical, showsIndicators: false) {
-                
                 VStack(spacing: 0) {
-                    CardsView(name: "STEP монета", nameValue: "STEP", nameSettings: "Множитель STEP: x1.0", color: .red, data: vm.stepsCoin.description)
                     
-                    CardsView(name: "TRON монета", nameValue: "TROIN", nameSettings: "", color: .green, data: vm.user?.coin.description ?? "0")
-                }
-                .padding([.horizontal, .top], 24)
+                    VStack(alignment: .trailing) {
+                        
+                        HStack(alignment: .center) {
+
+                            Spacer()
+                            HStack(spacing: 0) {
+                                Text(vm.user?.nickname ?? "")
+                                    .font(.system(size: 25))
+                                    .foregroundColor(.baseColorWB)
+                                
+                                Button {
+                                    print ("переход в настройки")
+                                } label: {
+                                    WebImage(url: URL(string: vm.user?.image ?? ""))
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: 50, height: 50)
+                                        .cornerRadius(25)
+                                }
+                                .padding(.leading, 8)
+                            }
+                            .padding(8)
+                            .background(.blue)
+                            .cornerRadius(24)
+                            .padding(.bottom, 16)
+                        }
+                    }
+                    
+                    VStack(spacing: 0) {
+                        CardsView(name: "STEP монета", nameValue: "STEP", nameSettings: "Множитель STEP: x1.0", color: .red, data: vm.stepsCoin.description)
+                        
+                        CardsView(name: "TRON монета", nameValue: "TROIN", nameSettings: "", color: .green, data: vm.user?.coin.description ?? "0")
+                    }
+                   
+                    VStack {
+                        Text("Избранные")
+                            .bold()
+                            .font(.system(size: 35))
+                        .padding(.top, 24)
+                        
+                        ForEach(vm.users, id: \.hashValue) { user in
+                            NavigationLink {
+                                UserView(userFavorit: user,
+                                         userSelf: vm.user,
+                                         updateUser: { vm.updateFavorite(id: user.id) },
+                                         isFavorite: { vm.isFavorite(id: user.id) })
+                            } label: {
+                                HStack(alignment: .center, spacing: 16) {
+                                    
+                            
+                                        WebImage(url: URL(string: user.image))
+                                            .resizable()
+                                            .scaledToFill()
+                                            .frame(width: 50, height: 50)
+                                            .cornerRadius(25)
+                                 
+                                    
+                                    VStack {
+                                        Text(user.nickname)
+                                            .bold()
+                                            .font(.system(size: 25))
+                                            .foregroundColor(.baseColorWB)
+                                    }
+                                    Spacer()
+                                    
+                                    ZStack(alignment: .center) {
+                                        
+                                        Circle()
+                                            .foregroundColor(.purple)
+                                            .frame(width: 50, height: 50)
+                                            .cornerRadius(25)
+                                     
+                                        Text("\(user.step)")
+                                            .foregroundColor(.baseColorWB)
+                                    }
+                                }
+                                
+                            }
+                            Divider()
+                            
+                        }
                 
+                        
+                        
+                        
+                    }
+               
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .padding(.horizontal, 24)
             }
             .navigationTitle("Домой")
             .toolbar {
                 Button {
                     
-                } label: { 
+                } label: {
                     Image(systemName: "info.circle.fill")
                         .foregroundColor(.baseColorWB)
                 }
             }
+            
         }
         .task {
             vm.userData()
+            vm.fetchFavoriteUser()
         }
+        
     }
 }
 

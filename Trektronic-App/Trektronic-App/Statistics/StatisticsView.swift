@@ -21,7 +21,6 @@ struct valueView: View {
             Spacer()
             Text(data)
         }
-        
         .padding(.horizontal, 45)
         .padding(.vertical, 12)
         .background(color)
@@ -32,8 +31,8 @@ struct valueView: View {
 
 struct StatisticsView: View {
     
-    @StateObject var vm: StatisticsViewModel = StatisticsViewModel()
-    
+    @ObservedObject var vm: StatisticsViewModel
+
     var body: some View {
         
         NavigationView {
@@ -43,12 +42,13 @@ struct StatisticsView: View {
                     VStack {
                         HStack {
                             valueView(name: "Всего", color: .red, data: "\(Int(vm.steps))")
+    
                             Spacer()
+                            
                             valueView(name: "Дистанция", color: .green, data: "\(Int(vm.distance))")
                         }
                         .padding(.vertical, 24)
                     }
-                    
                     
                     VStack {
                         ZStack {
@@ -70,7 +70,7 @@ struct StatisticsView: View {
                                 .opacity(0.2)
                             
                             Circle()
-                                .trim(from: 0.0, to: CGFloat(min(vm.steps, (Float(vm.steps) * 0.0001))))
+                                .trim(from: 0.0, to: CGFloat(min(vm.steps, (vm.steps * 0.0001))))
                                 .stroke(style: StrokeStyle(lineWidth: 20.0, lineCap: .round, lineJoin: .round))
                                 .foregroundColor(Color.red)
                                 .rotationEffect(Angle(degrees: 270))
@@ -79,10 +79,9 @@ struct StatisticsView: View {
                         .frame(width: 200, height: 200)
                         .padding(.vertical, 24)
                     }
-                    
+      
                     
                     VStack {
-                        
                         Text("График")
                             .bold()
                             .font(.system(size: 32))
@@ -109,6 +108,30 @@ struct StatisticsView: View {
                             }
                             
                         }
+                        .chartOverlay(content: { proxy in
+                            GeometryReader { innerProxy in
+                                Rectangle()
+                                    .fill(.clear).contentShape(Rectangle())
+                                    .gesture(
+                                       DragGesture()
+                                        .onChanged{ value in
+                                            
+                                            let location = value.location
+                                            
+                                            if let step: Int = proxy.value(atY: location.x) {
+                                                print (step)
+                                            }
+                                            
+                                            
+                                        }.onEnded{ value in
+                                            
+                                        }
+                                    )
+                                
+                            }
+                            
+                           
+                        })
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 24)
                         .frame(height: 350)
@@ -152,6 +175,7 @@ struct StatisticsView: View {
                 }
             }
             .task {
+
                 vm.calculateDataHealthKit()
                 
             }
@@ -162,6 +186,6 @@ struct StatisticsView: View {
 
 struct StatisticsView_Previews: PreviewProvider {
     static var previews: some View {
-        StatisticsView()
+        StatisticsView(vm: .init())
     }
 }

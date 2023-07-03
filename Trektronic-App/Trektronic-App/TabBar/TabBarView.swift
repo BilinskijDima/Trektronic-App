@@ -19,7 +19,7 @@ struct TabBarView: View {
             case .house:
                 HomeView()
             case .chart:
-                StatisticsView()
+                StatisticsView(vm: vm.statisticsViewModel)
             case .person:
                 PeopleView()
             case .gearshape:
@@ -48,6 +48,9 @@ struct TabBarView: View {
                 .padding(.bottom, 24)
          
             }
+        }
+        .task {
+            vm.calculateDataHealthKitStep()
         }
         .edgesIgnoringSafeArea(.bottom)
     }
