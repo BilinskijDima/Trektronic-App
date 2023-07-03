@@ -63,7 +63,7 @@
 
 /* Begin PBXFileReference section */
 		D00779142A4700FA0078AE3D /* PresettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresettingView.swift; sourceTree = "<group>"; };
-		D00779162A47010F0078AE3D /* PresettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PresettingViewModel.swift; path = ../../../../PresettingViewModel.swift; sourceTree = "<group>"; };
+		D00779162A47010F0078AE3D /* PresettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresettingViewModel.swift; sourceTree = "<group>"; };
 		D0575E722A2F9F0A003CE661 /* Trektronic-App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Trektronic-App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0575E752A2F9F0A003CE661 /* Trektronic_AppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trektronic_AppApp.swift; sourceTree = "<group>"; };
 		D0575E792A2F9F0C003CE661 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
