@@ -11,23 +11,47 @@ import SDWebImageSwiftUI
 struct SettingsView: View {
     
     @StateObject var vm: SettingsViewModel = SettingsViewModel()
-
+    
     var body: some View {
         NavigationView {
             ScrollView(.vertical, showsIndicators: false) {
-          
+                
                 VStack {
                     
-                    Button {
-                        vm.showImagePicker.toggle()
-                    } label: {
-                        WebImage(url: URL(string: vm.user?.image ?? ""))
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 100, height: 100)
-                            .cornerRadius(50)
+                    ZStack(alignment: .bottomTrailing) {
+                  
+                        if let image = vm.image {
+                            Image(uiImage: image)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 160, height: 160)
+                                .cornerRadius(80)
+                        } else {
+                            WebImage(url: URL(string: vm.user?.image ?? ""))
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 150, height: 150)
+                                .cornerRadius(75)
+                        }
+                        
+                        Button {
+                            vm.showImagePicker.toggle()
+                        } label: {
+                            ZStack {
+                                Circle()
+                                    .frame(width: 45, height: 45)
+                                    .foregroundColor(.blue)
+                                Image(systemName: "plus")
+                                    .foregroundColor(.baseColorBW)
+                            }
+                        }
                     }
-                    .padding(.top, 24)
+                    .padding(.vertical, 24)
+                    
+                    Button {
+                        vm.saveImage()
+                    } label: { }
+                        .buttonStyle(StyleDefaultButton(name: "Сохранить новое фото", colorBG: Color.baseColorWB))
                     
                     Text(vm.user?.nickname ?? "")
                         .bold()
@@ -49,7 +73,7 @@ struct SettingsView: View {
                         Button {
                             vm.checkNickname()
                         } label: { }
-                            .buttonStyle(StyleDefaultButton(name: "Изменить"))
+                            .buttonStyle(StyleDefaultButton(name: "Изменить", colorBG: Color.baseColorWB))
                     }
                     
                     Text(vm.errorText)
@@ -60,7 +84,7 @@ struct SettingsView: View {
                     Button {
                         vm.singOut()
                     } label: { }
-                        .buttonStyle(StyleDefaultButton(name: "Выйти из профиля"))
+                        .buttonStyle(StyleDefaultButton(name: "Выйти из профиля", colorBG: Color.red))
                     
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -70,7 +94,7 @@ struct SettingsView: View {
             .navigationTitle("Настройки")
             .toolbar {
                 Button {
-                    
+                    vm.isShowingInfo = true
                 } label: {
                     Image(systemName: "info.circle.fill")
                         .foregroundColor(.baseColorWB)
@@ -79,6 +103,12 @@ struct SettingsView: View {
         }
         .task {
             vm.fetchDataUser()
+        }
+        .fullScreenCover(isPresented: $vm.showImagePicker) {
+            ImagePicker(image: $vm.image)
+        }
+        .sheet(isPresented: $vm.isShowingInfo) {
+            InfoView(nameView: "Экран Настроек", infoText: "Информация об экране")
         }
       
     }

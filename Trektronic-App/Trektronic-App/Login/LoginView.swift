@@ -41,12 +41,12 @@ struct LoginView: View {
                 Button {
                     vm.singInWithGoogle()
                 } label: { }
-                    .buttonStyle(StyleDefaultButtonImage(name: "Войти через Google", logo: Image("GoogleLogo"), width: 25, height: 25))
+                    .buttonStyle(StyleDefaultButtonImage(name: "Войти через Google", logo: Image("GoogleLogo"), width: 25, height: 25, colorBG: Color.baseColorWB))
                 
                 Button {
                    
                 } label: { }
-                    .buttonStyle(StyleDefaultButtonImage(name: "Войти через Apple", logo: Image(systemName: "apple.logo"), width: 25, height: 28.5))
+                    .buttonStyle(StyleDefaultButtonImage(name: "Войти через Apple", logo: Image(systemName: "apple.logo"), width: 25, height: 28.5, colorBG: Color.baseColorWB))
             }
             .padding(.bottom, 42)
         }

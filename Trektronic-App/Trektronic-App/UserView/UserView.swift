@@ -54,23 +54,24 @@ struct UserView: View {
                                 .frame(width: vm.width, height: vm.height)
                                 .foregroundColor(Color.black.opacity(0.1))
                           
-                            RoundedRectangle(cornerRadius: 20, style: .continuous)
+                            Rectangle()
+                                .cornerRadius(20, corners: [.bottomLeft, .topLeft])
                                 .frame(width: vm.progressUserSelf, height: vm.height)
                                 .foregroundColor(Color.purple)
                         }
               
                         ZStack(alignment: .trailing) {
                             RoundedRectangle(cornerRadius: 20, style: .continuous)
+                                
                                 .frame(width: vm.width, height: vm.height)
                                 .foregroundColor(Color.clear)
-                            RoundedRectangle(cornerRadius: 20, style: .continuous)
+            
+                            Rectangle()
+                                .cornerRadius(20, corners: [.bottomRight, .topRight])
                                 .frame(width: vm.progressUserFavorit, height: vm.height)
                                 .foregroundColor(Color.red)
                         }
-                        HStack {
-                            Divider()
-                                .background(.blue)
-                        }
+                     
                     }
                 }
             }

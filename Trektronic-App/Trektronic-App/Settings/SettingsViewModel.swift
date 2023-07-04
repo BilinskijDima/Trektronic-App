@@ -15,10 +15,14 @@ final class SettingsViewModel: ObservableObject  {
     @AppStorage("userID") var userID = DefaultSettings.userID
 
     @Published var showImagePicker = false
-    @Published var  errorText = ""
+    @Published var errorText = ""
     @Published var user: Users?
     
     @Published var textFieldName = ""
+    
+    @Published var image: UIImage?
+    
+    @Published var isShowingInfo = false
     
     func singOut() {
         fireBaseManager.singOutWithGoogle()
@@ -41,10 +45,10 @@ final class SettingsViewModel: ObservableObject  {
         
     }
     
-    func updateData(name: String) {
-        fireBaseManager.updateData(nameValueUpdate: "nickname", id: userID, value: name)
+    func updateData(value: Any, nameValueUpdate: String) {
+        fireBaseManager.updateData(nameValueUpdate: nameValueUpdate, id: userID, value: value)
     }
-    
+   
     func checkNickname() {
         guard !self.textFieldName.isEmpty else {
             self.errorText = "вы не ввели имя"
@@ -55,13 +59,21 @@ final class SettingsViewModel: ObservableObject  {
             if result {
                 self.errorText = "извините это имя уже занято"
             } else {
-                updateData(name: self.textFieldName)
+                updateData(value: self.textFieldName, nameValueUpdate:  "nickname")
                 self.errorText = ""
             }
         }
     }
     
+    func saveImage() {
+        Task {
+            guard let newImage = image else {return}
+            
+            let imageURL = try await fireBaseManager.persistImageToStorage(userID: userID, image: newImage)
+            
+            self.updateData(value: imageURL, nameValueUpdate: "image")
+        }
+    }
     
 }
-
 

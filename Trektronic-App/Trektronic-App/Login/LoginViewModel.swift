@@ -16,7 +16,8 @@ final class LoginViewModel: ObservableObject  {
     @AppStorage("stateLoadingView") var stateLoadView: LoadView = .loginView
 
     private var fireBaseManager: FirebaseManagerProtocol = FirebaseManager()
-    
+    private var healthKitManager: HealthKitManagerProtocol = HealthKitManager()
+
     func singInWithGoogle() {
         
         Task {
@@ -37,7 +38,11 @@ final class LoginViewModel: ObservableObject  {
                         if dataSnapshot.value as? [String: AnyObject] == nil {
                             self.stateLoadView = .onboardingView
                         } else {
-                            self.stateLoadView = .presettingView
+                            if healthKitManager.authorizationStatus() {
+                                self.stateLoadView = .tabBarView
+                            } else {
+                                self.stateLoadView = .presettingView
+                            }
                         }
                         
                     })

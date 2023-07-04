@@ -66,7 +66,7 @@ struct PeopleView: View {
             .navigationTitle("Люди")
             .toolbar {
                 Button {
-                    
+                    vm.isShowingInfo = true
                 } label: {
                     Image(systemName: "info.circle.fill")
                         .foregroundColor(.baseColorWB)
@@ -76,6 +76,9 @@ struct PeopleView: View {
         .task {
             vm.fetchAllUsers()
             vm.fetchUser(id: userID)
+        }
+        .sheet(isPresented: $vm.isShowingInfo) {
+            InfoView(nameView: "Экран Люди", infoText: "Информация об экране")
         }
     }
     
