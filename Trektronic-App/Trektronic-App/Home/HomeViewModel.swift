@@ -97,11 +97,8 @@ final class HomeViewModel: ObservableObject  {
                     self.users.append(userFavorite)
                 }
 
-                if favouritesUser == [""] {
-                    self.favouritesUserCheck = true
-                } else {
-                    self.favouritesUserCheck = false
-                }
+                self.favouritesUserCheck = favouritesUser.count == 1 ? true : false
+         
                 
             } catch {
                 print (error.localizedDescription)

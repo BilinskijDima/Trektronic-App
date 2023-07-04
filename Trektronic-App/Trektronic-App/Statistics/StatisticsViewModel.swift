@@ -159,12 +159,7 @@ final class StatisticsViewModel: ObservableObject  {
         let sumStepWeek = sumStepWeek.reduce(0.0, { $0 + $1 })
         
         DispatchQueue.main.async {
-            if sumStepWeek == 0.0 {
-                self.sumStepWeekResult = true
-            } else {
-                self.sumStepWeekResult = false
-            }
-            
+            self.sumStepWeekResult = sumStepWeek == 0.0 ? true : false
         }
     }
     
