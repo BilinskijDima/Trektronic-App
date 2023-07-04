@@ -97,7 +97,7 @@ final class HomeViewModel: ObservableObject  {
                     self.users.append(userFavorite)
                 }
 
-                self.favouritesUserCheck = favouritesUser.count == 1 ? true : false
+                self.favouritesUserCheck = favouritesUser.count == 1
          
                 
             } catch {
