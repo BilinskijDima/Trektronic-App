@@ -88,6 +88,7 @@ class HealthKitManager: HealthKitManagerProtocol {
         
         observerQuery = HKObserverQuery(sampleType: dataType, predicate: nil, updateHandler: { [weak self] query, completionHandler, error in
             guard let self = self else {return}
+            
             if let error = error {
                 print("Error: \(error.localizedDescription)")
             }
@@ -117,7 +118,7 @@ class HealthKitManager: HealthKitManagerProtocol {
                 
                 completion(result)
                 
-            })
+            }) 
             if let healthStore = healthStore {
                 queryStatistics.map(healthStore.execute)
             }

@@ -11,6 +11,8 @@ import SwiftUI
 
 final class HomeViewModel: ObservableObject  {
     
+    @Published var alert: AlertTypes? = nil
+    
     @Published var favouritesUser = Set<String>()
     
     @Published var stepsCoin: Double = 0.0
@@ -22,7 +24,7 @@ final class HomeViewModel: ObservableObject  {
     @Published var favouritesUserCheck = false
     
     @Published var isShowingInfo = false
-   
+    @Published var alertVisible = true
     
     @AppStorage("userID") var userID = DefaultSettings.userID
     
@@ -43,14 +45,16 @@ final class HomeViewModel: ObservableObject  {
  
                 calculateDataHealthKit(withStart: date)
             } catch {
-                print (error.localizedDescription)
+                self.alert = .defaultButton(title: "Ошибка", message: error.localizedDescription)
             }
             
         }
         
         func calculateDataHealthKit(withStart: Date) {
             
-            guard healthKitManager.healthStore != nil, let steps = HKQuantityType.quantityType(forIdentifier: .stepCount) else {return}
+            guard healthKitManager.healthStore != nil, let steps = HKQuantityType.quantityType(forIdentifier: .stepCount) else {
+                self.alert = .defaultButton(title: "Ошибка", message: CustomError.failedLoadingHK.description)
+                return}
             
             if  healthKitManager.authorizationStatus() {
                 
@@ -62,6 +66,14 @@ final class HomeViewModel: ObservableObject  {
                         self.stepsCoin = round(value * 1000) / 1000.0
                     }
                 }
+            } else {
+                
+                alert = .twoButton(title: "Ошибка", message: CustomError.failedLoadingHK.description, primaryButton: .default(Text("OK")), secondaryButton: .default(Text("Настройки"), action: {
+                    if let url = URL.init(string: UIApplication.openSettingsURLString) {
+                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                    }
+                }))
+            
             }
         }
     }
@@ -78,7 +90,6 @@ final class HomeViewModel: ObservableObject  {
             let array = Array(favouritesUser)
             print (array)
             fireBaseManager.updateData(nameValueUpdate: "favouritesUser", id: userID, value: array)
-            
         }
     }
     
@@ -101,9 +112,9 @@ final class HomeViewModel: ObservableObject  {
          
                 
             } catch {
-                print (error.localizedDescription)
+                self.alert = .defaultButton(title: "Ошибка", message: error.localizedDescription)
             }
         }
     }
-    
+
 }

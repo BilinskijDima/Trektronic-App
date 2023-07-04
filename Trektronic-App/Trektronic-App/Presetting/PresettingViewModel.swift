@@ -16,6 +16,8 @@ final class PresettingViewModel: ObservableObject  {
     @AppStorage("stateLoadingView") var stateLoadView: LoadView = .loginView
     @AppStorage("userID") var userID = DefaultSettings.userID
     
+    @Published var alert: AlertTypes? = nil
+    
     @Published var showImagePicker = false
     @Published var image: UIImage?
     @Published var imageURL: String?
@@ -34,7 +36,11 @@ final class PresettingViewModel: ObservableObject  {
     @MainActor
     func requestAuthorisation() {
         Task {
-            stateHealthKit = try await healthKitManager.requestAuthorisation()
+            do {
+                stateHealthKit = try await healthKitManager.requestAuthorisation()
+            } catch {
+                self.alert = .defaultButton(title: "Ошибка", message: error.localizedDescription)
+            }
         }
     }
     
@@ -70,26 +76,27 @@ final class PresettingViewModel: ObservableObject  {
     
     func setDataRealTime() {
         Task {
-          
-            guard let defaultImage = UIImage(named: "DefaultAvatar") else {return}
-            
-            let imageURL = try await fireBaseManager.persistImageToStorage(userID: userID, image: image ?? defaultImage)
-
-            let user = Users(date: Date.now.description, step: 0, coin: 0, nickname: textFieldName, image: imageURL, favouritesUser: [""], id: userID)
-        
-            try await fireBaseManager.setDataRealTime(user: user, id: userID)
-            await MainActor.run {
-                self.stateLoadView = .tabBarView
+            do {
+                guard let defaultImage = UIImage(named: "DefaultAvatar") else {return}
+                
+                let imageURL = try await fireBaseManager.persistImageToStorage(userID: userID, image: image ?? defaultImage)
+                
+                let user = Users(date: Date.now.description, step: 0, coin: 0, nickname: textFieldName, image: imageURL, favouritesUser: [""], id: userID)
+                
+                try await fireBaseManager.setDataRealTime(user: user, id: userID)
+                
+                await MainActor.run {
+                    self.stateLoadView = .tabBarView
+                }
+            } catch {
+                self.alert = .defaultButton(title: "Ошибка", message: error.localizedDescription)
             }
         }
-   
     }
 
     func stateAutUser() {
-        
         self.fireBaseManager.getDataRealTime(id: userID) {[weak self] dataSnapshot in
             guard let self = self else {return}
-            print(dataSnapshot.value!)
            
             if "\(dataSnapshot.value!)" == "<null>" {
                 print ("пользователь нет")
@@ -103,12 +110,10 @@ final class PresettingViewModel: ObservableObject  {
                     self.disableTextFieldName = true
                     self.stateNickname = true
                 } catch {
-                    print (error.localizedDescription)
+                    self.alert = .defaultButton(title: "Ошибка", message: error.localizedDescription)
                 }
             }
-            
-           
-            
+
         }
         
     }

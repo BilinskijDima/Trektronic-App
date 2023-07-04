@@ -63,6 +63,9 @@ struct PeopleView: View {
                 }
                 .padding([.horizontal, .top], 24)
             }
+            .alert(item: $vm.alert) { value in
+                return value.alert
+            }
             .navigationTitle("Люди")
             .toolbar {
                 Button {
@@ -80,6 +83,7 @@ struct PeopleView: View {
         .sheet(isPresented: $vm.isShowingInfo) {
             InfoView(nameView: "Экран Люди", infoText: "Информация об экране")
         }
+        
     }
     
 }

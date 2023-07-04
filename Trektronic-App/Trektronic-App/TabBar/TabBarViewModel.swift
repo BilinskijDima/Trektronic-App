@@ -33,16 +33,15 @@ enum Tab: String, CaseIterable {
 
 final class TabBarViewModel: ObservableObject  {
     
-
-    
     private var cancellable = Set <AnyCancellable>()
+    
+    @Published var alert: AlertTypes? = nil
     
     @Published var steps: Float = 0
     
     @Published var userSelf: Users?
     
     @Published var statisticsViewModel = StatisticsViewModel()
-    
     
     init() {
         $steps
@@ -76,9 +75,8 @@ final class TabBarViewModel: ObservableObject  {
         }
     }
     
-   
-
     func calculateDataHealthKitStep() {
+        
         let date = Calendar.current.startOfDay(for: Date())
         
         guard healthKitManager.healthStore != nil, let steps = HKQuantityType.quantityType(forIdentifier: .stepCount)
@@ -123,7 +121,7 @@ final class TabBarViewModel: ObservableObject  {
                 let user = try dataSnapshot.decodeJSON(type: Users.self)
                 self.userSelf = user
             } catch {
-                print (error.localizedDescription)
+                self.alert = .defaultButton(title: "Ошибка", message: error.localizedDescription)
             }
             
         }

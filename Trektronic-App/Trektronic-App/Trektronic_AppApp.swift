@@ -8,6 +8,62 @@
 import SwiftUI
 import FirebaseCore
 
+enum CustomError: Error {
+    
+    case failedLoadingHK
+    
+    case failedLoadingDataHK
+    
+    var description: String {
+        switch self {
+        case .failedLoadingHK:
+            return "Извините у нас нет доступа к хранилищу HealthKit, зайдите в настройки и разрешите доступ"
+        case .failedLoadingDataHK:
+            return "Не получилось получить доступ к данным"
+        }
+    }
+}
+
+enum AlertTypes: Identifiable {
+    
+    case defaultButton(title: String,
+                       message: String)
+    
+    case twoButton(title: String,
+                   message: String,
+                   primaryButton: Alert.Button,
+                   secondaryButton: Alert.Button)
+    
+    var alert: Alert {
+        switch self {
+        case .defaultButton(title: let title,
+                            message: let message):
+            
+            return Alert(title: Text(title),
+                         message: Text(message))
+            
+        case .twoButton(title: let title,
+                        message: let message,
+                        primaryButton: let primaryButton,
+                        secondaryButton: let secondaryButton):
+            
+            return Alert(title: Text(title),
+                         message: Text(message),
+                         primaryButton: primaryButton,
+                         secondaryButton: secondaryButton)
+        }
+    }
+    
+    var id: String {
+        switch self {
+        case .defaultButton:
+            return "ok"
+        case .twoButton:
+            return "twoButton"
+        }
+    }
+}
+
 enum DefaultSettings {
     static let userID = ""
     static let dataCoin = ""

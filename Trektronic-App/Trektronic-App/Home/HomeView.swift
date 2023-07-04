@@ -172,6 +172,9 @@ struct HomeView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .padding(.horizontal, 24)
             }
+            .alert(item: $vm.alert) { value in
+                return value.alert
+            }
             .navigationTitle("Домой")
             .toolbar {
                 Button {
@@ -182,14 +185,18 @@ struct HomeView: View {
                 }
             }
             
+            
         }
         .task {
             vm.userData()
             vm.fetchFavoriteUser()
         }
+        
         .sheet(isPresented: $vm.isShowingInfo) {
             InfoView(nameView: "Экран Домой", infoText: "Информация об экране")
         }
+        
+    
         
     }
 }

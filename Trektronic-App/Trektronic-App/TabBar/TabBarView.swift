@@ -49,6 +49,9 @@ struct TabBarView: View {
          
             }
         }
+        .alert(item: $vm.alert) { value in
+            return value.alert
+        }
         .task {
             vm.calculateDataHealthKitStep()
             vm.fetchUser()

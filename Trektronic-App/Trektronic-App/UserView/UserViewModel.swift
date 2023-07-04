@@ -17,6 +17,7 @@ final class UserViewModel: ObservableObject  {
     let width: CGFloat = 300
     let height: CGFloat = 35
     
+    @Published var alert: AlertTypes? = nil
     
     @Published var progressUserSelf: CGFloat = 0
     @Published var progressUserFavorit: CGFloat = 0
@@ -42,7 +43,7 @@ final class UserViewModel: ObservableObject  {
                 self.progressUser(userSelf: CGFloat(userSelfStep), userFavorit: CGFloat(user.step))
                 
             } catch {
-                print (error.localizedDescription)
+                self.alert = .defaultButton(title: "Ошибка", message: error.localizedDescription)
             }
             
         }

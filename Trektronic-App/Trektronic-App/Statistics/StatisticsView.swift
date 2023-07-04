@@ -178,6 +178,9 @@ struct StatisticsView: View {
                 }
                 .padding(.horizontal, 24)
             }
+            .alert(item: $vm.alert) { value in
+                return value.alert
+            }
             .navigationTitle("Статистика")
             .toolbar {
                 Button {
@@ -195,7 +198,7 @@ struct StatisticsView: View {
             .sheet(isPresented: $vm.isShowingInfo) {
                 InfoView(nameView: "Экран Статистики", infoText: "Информация об экране")
             }
-            
+         
         }
     }
 }

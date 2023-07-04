@@ -91,6 +91,9 @@ struct SettingsView: View {
                 .padding(.horizontal, 24)
 
             }
+            .alert(item: $vm.alert) { value in
+                return value.alert
+            }
             .navigationTitle("Настройки")
             .toolbar {
                 Button {
@@ -110,6 +113,7 @@ struct SettingsView: View {
         .sheet(isPresented: $vm.isShowingInfo) {
             InfoView(nameView: "Экран Настроек", infoText: "Информация об экране")
         }
+       
       
     }
 }
