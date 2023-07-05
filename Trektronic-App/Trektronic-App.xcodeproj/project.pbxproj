@@ -1,0 +1,782 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D00779152A4700FA0078AE3D /* PresettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00779142A4700FA0078AE3D /* PresettingView.swift */; };
+		D00779172A47010F0078AE3D /* PresettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00779162A47010F0078AE3D /* PresettingViewModel.swift */; };
+		D0528EE42A535DA50008F05B /* RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0528EE32A535DA50008F05B /* RoundedCorner.swift */; };
+		D0575E762A2F9F0A003CE661 /* Trektronic_AppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0575E752A2F9F0A003CE661 /* Trektronic_AppApp.swift */; };
+		D0575E7A2A2F9F0C003CE661 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0575E792A2F9F0C003CE661 /* Assets.xcassets */; };
+		D0575E7D2A2F9F0C003CE661 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0575E7C2A2F9F0C003CE661 /* Preview Assets.xcassets */; };
+		D0575E852A2FA89A003CE661 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = D0575E842A2FA89A003CE661 /* FirebaseAuth */; };
+		D0575E872A2FA89A003CE661 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = D0575E862A2FA89A003CE661 /* FirebaseDatabase */; };
+		D0575E892A2FA89A003CE661 /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D0575E882A2FA89A003CE661 /* FirebaseDatabaseSwift */; };
+		D0575E8B2A2FA89A003CE661 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = D0575E8A2A2FA89A003CE661 /* FirebaseFirestore */; };
+		D0575E8D2A2FA89A003CE661 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D0575E8C2A2FA89A003CE661 /* FirebaseFirestoreSwift */; };
+		D0575E8F2A2FA89A003CE661 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = D0575E8E2A2FA89A003CE661 /* FirebaseMessaging */; };
+		D0575E912A2FA89A003CE661 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = D0575E902A2FA89A003CE661 /* FirebaseStorage */; };
+		D0575E942A2FAA56003CE661 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = D0575E932A2FAA56003CE661 /* GoogleSignIn */; };
+		D0575E962A2FAA56003CE661 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D0575E952A2FAA56003CE661 /* GoogleSignInSwift */; };
+		D0575E992A2FABCD003CE661 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0575E982A2FABCD003CE661 /* LoginView.swift */; };
+		D0575E9B2A2FAE15003CE661 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0575E9A2A2FAE15003CE661 /* LoginViewModel.swift */; };
+		D0575E9E2A2FAEE7003CE661 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0575E9D2A2FAEE7003CE661 /* OnboardingView.swift */; };
+		D0575EA02A2FAEFE003CE661 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0575E9F2A2FAEFE003CE661 /* OnboardingViewModel.swift */; };
+		D0575EA32A2FAF7A003CE661 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0575EA22A2FAF7A003CE661 /* TabBarView.swift */; };
+		D0575EA52A2FAF99003CE661 /* TabBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0575EA42A2FAF99003CE661 /* TabBarViewModel.swift */; };
+		D0575EA82A2FB04A003CE661 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0575EA72A2FB04A003CE661 /* FirebaseManager.swift */; };
+		D0575EAB2A2FB7CB003CE661 /* Text + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0575EAA2A2FB7CB003CE661 /* Text + Extension.swift */; };
+		D0575EAD2A2FB8C4003CE661 /* Color + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0575EAC2A2FB8C4003CE661 /* Color + Extension.swift */; };
+		D0575EAF2A2FC589003CE661 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D0575EAE2A2FC589003CE661 /* GoogleService-Info.plist */; };
+		D0575EB32A30EFED003CE661 /* Button + Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0575EB22A30EFED003CE661 /* Button + Style.swift */; };
+		D078A2582A536C11005F87BD /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D078A2572A536C11005F87BD /* InfoView.swift */; };
+		D07D87B42A4B391C009549FB /* DataSnapshot + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07D87B32A4B391C009549FB /* DataSnapshot + Extension.swift */; };
+		D07D87B62A4B5723009549FB /* Encodable + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07D87B52A4B5723009549FB /* Encodable + Extension.swift */; };
+		D07D87B82A4C5BCE009549FB /* String + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07D87B72A4C5BCE009549FB /* String + Extension.swift */; };
+		D07D87BA2A4C7383009549FB /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07D87B92A4C7383009549FB /* ImagePicker.swift */; };
+		D07D87BE2A4C8A76009549FB /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = D07D87BD2A4C8A76009549FB /* SDWebImageSwiftUI */; };
+		D07E999A2A3E0BEB00261CC8 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E99992A3E0BEB00261CC8 /* CoreDataManager.swift */; };
+		D07E999C2A3E0E1900261CC8 /* TestCoreDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E999B2A3E0E1900261CC8 /* TestCoreDataViewModel.swift */; };
+		D07E999E2A3E12C100261CC8 /* AddTestCoreDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E999D2A3E12C100261CC8 /* AddTestCoreDataViewModel.swift */; };
+		D07E99A02A3E133900261CC8 /* AddTestCoreDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E999F2A3E133900261CC8 /* AddTestCoreDataView.swift */; };
+		D07E99A22A3E175D00261CC8 /* EntitiesCD+ Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E99A12A3E175D00261CC8 /* EntitiesCD+ Extension.swift */; };
+		D07E99A42A3E17A700261CC8 /* CoreDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E99A32A3E17A700261CC8 /* CoreDataModel.swift */; };
+		D0882FC22A35BEF200AD2B29 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0882FC12A35BEF200AD2B29 /* HealthKitManager.swift */; };
+		D0882FC42A35C0BD00AD2B29 /* HealthKitModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0882FC32A35C0BD00AD2B29 /* HealthKitModel.swift */; };
+		D0882FC72A35CD2300AD2B29 /* Data + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0882FC62A35CD2300AD2B29 /* Data + Extension.swift */; };
+		D0882FEA2A35EA8600AD2B29 /* Trektronic-App.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D0882FE82A35EA8600AD2B29 /* Trektronic-App.xcdatamodeld */; };
+		D0882FF92A361E8700AD2B29 /* TestCoreDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0882FF82A361E8700AD2B29 /* TestCoreDataView.swift */; };
+		D08B87812A4840440033B148 /* PeopleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08B87802A4840440033B148 /* PeopleView.swift */; };
+		D08B87832A4840530033B148 /* PeopleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08B87822A4840530033B148 /* PeopleViewModel.swift */; };
+		D08B87862A4840AD0033B148 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08B87852A4840AD0033B148 /* SettingsView.swift */; };
+		D08B87882A4840C30033B148 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08B87872A4840C30033B148 /* SettingsViewModel.swift */; };
+		D0BF3E1D2A4EE626007937B0 /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BF3E1C2A4EE626007937B0 /* UserView.swift */; };
+		D0BF3E212A5057E5007937B0 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BF3E202A5057E5007937B0 /* UserViewModel.swift */; };
+		D0CC3C862A3F0E8F00C78346 /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CC3C852A3F0E8F00C78346 /* StatisticsView.swift */; };
+		D0CC3C882A3F0EA000C78346 /* StatisticsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CC3C872A3F0EA000C78346 /* StatisticsViewModel.swift */; };
+		D0CC3C8A2A3F101B00C78346 /* FireBaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CC3C892A3F101B00C78346 /* FireBaseModel.swift */; };
+		D0E808732A33BA89005A17E4 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E808722A33BA89005A17E4 /* HomeView.swift */; };
+		D0E808752A33BA96005A17E4 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E808742A33BA96005A17E4 /* HomeViewModel.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		D00779142A4700FA0078AE3D /* PresettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresettingView.swift; sourceTree = "<group>"; };
+		D00779162A47010F0078AE3D /* PresettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresettingViewModel.swift; sourceTree = "<group>"; };
+		D0528EE32A535DA50008F05B /* RoundedCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorner.swift; sourceTree = "<group>"; };
+		D0575E722A2F9F0A003CE661 /* Trektronic-App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Trektronic-App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0575E752A2F9F0A003CE661 /* Trektronic_AppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trektronic_AppApp.swift; sourceTree = "<group>"; };
+		D0575E792A2F9F0C003CE661 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D0575E7C2A2F9F0C003CE661 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		D0575E982A2FABCD003CE661 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		D0575E9A2A2FAE15003CE661 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		D0575E9D2A2FAEE7003CE661 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		D0575E9F2A2FAEFE003CE661 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
+		D0575EA22A2FAF7A003CE661 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
+		D0575EA42A2FAF99003CE661 /* TabBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewModel.swift; sourceTree = "<group>"; };
+		D0575EA72A2FB04A003CE661 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
+		D0575EAA2A2FB7CB003CE661 /* Text + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text + Extension.swift"; sourceTree = "<group>"; };
+		D0575EAC2A2FB8C4003CE661 /* Color + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color + Extension.swift"; sourceTree = "<group>"; };
+		D0575EAE2A2FC589003CE661 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D0575EB02A2FC5F5003CE661 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D0575EB22A30EFED003CE661 /* Button + Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Button + Style.swift"; sourceTree = "<group>"; };
+		D078A2572A536C11005F87BD /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
+		D07D87B32A4B391C009549FB /* DataSnapshot + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataSnapshot + Extension.swift"; sourceTree = "<group>"; };
+		D07D87B52A4B5723009549FB /* Encodable + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable + Extension.swift"; sourceTree = "<group>"; };
+		D07D87B72A4C5BCE009549FB /* String + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Extension.swift"; sourceTree = "<group>"; };
+		D07D87B92A4C7383009549FB /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		D07E99992A3E0BEB00261CC8 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		D07E999B2A3E0E1900261CC8 /* TestCoreDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCoreDataViewModel.swift; sourceTree = "<group>"; };
+		D07E999D2A3E12C100261CC8 /* AddTestCoreDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTestCoreDataViewModel.swift; sourceTree = "<group>"; };
+		D07E999F2A3E133900261CC8 /* AddTestCoreDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTestCoreDataView.swift; sourceTree = "<group>"; };
+		D07E99A12A3E175D00261CC8 /* EntitiesCD+ Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EntitiesCD+ Extension.swift"; sourceTree = "<group>"; };
+		D07E99A32A3E17A700261CC8 /* CoreDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataModel.swift; sourceTree = "<group>"; };
+		D0882FC12A35BEF200AD2B29 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
+		D0882FC32A35C0BD00AD2B29 /* HealthKitModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitModel.swift; sourceTree = "<group>"; };
+		D0882FC62A35CD2300AD2B29 /* Data + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data + Extension.swift"; sourceTree = "<group>"; };
+		D0882FE92A35EA8600AD2B29 /* Trektronic-App.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Trektronic-App.xcdatamodel"; sourceTree = "<group>"; };
+		D0882FF82A361E8700AD2B29 /* TestCoreDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCoreDataView.swift; sourceTree = "<group>"; };
+		D08B87802A4840440033B148 /* PeopleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleView.swift; sourceTree = "<group>"; };
+		D08B87822A4840530033B148 /* PeopleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleViewModel.swift; sourceTree = "<group>"; };
+		D08B87852A4840AD0033B148 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		D08B87872A4840C30033B148 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		D0BF3E1C2A4EE626007937B0 /* UserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
+		D0BF3E202A5057E5007937B0 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
+		D0CC3C852A3F0E8F00C78346 /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
+		D0CC3C872A3F0EA000C78346 /* StatisticsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewModel.swift; sourceTree = "<group>"; };
+		D0CC3C892A3F101B00C78346 /* FireBaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseModel.swift; sourceTree = "<group>"; };
+		D0E808722A33BA89005A17E4 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		D0E808742A33BA96005A17E4 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		D0E808762A33E3FA005A17E4 /* Trektronic-App.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "Trektronic-App.entitlements"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D0575E6F2A2F9F0A003CE661 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D07D87BE2A4C8A76009549FB /* SDWebImageSwiftUI in Frameworks */,
+				D0575E962A2FAA56003CE661 /* GoogleSignInSwift in Frameworks */,
+				D0575E8F2A2FA89A003CE661 /* FirebaseMessaging in Frameworks */,
+				D0575E942A2FAA56003CE661 /* GoogleSignIn in Frameworks */,
+				D0575E8D2A2FA89A003CE661 /* FirebaseFirestoreSwift in Frameworks */,
+				D0575E892A2FA89A003CE661 /* FirebaseDatabaseSwift in Frameworks */,
+				D0575E8B2A2FA89A003CE661 /* FirebaseFirestore in Frameworks */,
+				D0575E912A2FA89A003CE661 /* FirebaseStorage in Frameworks */,
+				D0575E872A2FA89A003CE661 /* FirebaseDatabase in Frameworks */,
+				D0575E852A2FA89A003CE661 /* FirebaseAuth in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D00779132A4700C00078AE3D /* Presetting */ = {
+			isa = PBXGroup;
+			children = (
+				D00779142A4700FA0078AE3D /* PresettingView.swift */,
+				D00779162A47010F0078AE3D /* PresettingViewModel.swift */,
+			);
+			path = Presetting;
+			sourceTree = "<group>";
+		};
+		D0575E692A2F9F0A003CE661 = {
+			isa = PBXGroup;
+			children = (
+				D0575E742A2F9F0A003CE661 /* Trektronic-App */,
+				D0575E732A2F9F0A003CE661 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D0575E732A2F9F0A003CE661 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D0575E722A2F9F0A003CE661 /* Trektronic-App.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D0575E742A2F9F0A003CE661 /* Trektronic-App */ = {
+			isa = PBXGroup;
+			children = (
+				D0575E7B2A2F9F0C003CE661 /* Preview Content */,
+				D0E808762A33E3FA005A17E4 /* Trektronic-App.entitlements */,
+				D0575EB02A2FC5F5003CE661 /* Info.plist */,
+				D0575EAE2A2FC589003CE661 /* GoogleService-Info.plist */,
+				D0575E792A2F9F0C003CE661 /* Assets.xcassets */,
+				D0575E752A2F9F0A003CE661 /* Trektronic_AppApp.swift */,
+				D07D87BB2A4C7420009549FB /* ImagePicker */,
+				D0882FE72A35E99200AD2B29 /* CoreData */,
+				D0575EB12A30EFBA003CE661 /* CustomStyle */,
+				D0575EA92A2FB7A1003CE661 /* Extension */,
+				D0575EA62A2FB015003CE661 /* Managers */,
+				D0882FC52A35C0C100AD2B29 /* Model */,
+				D0882FFC2A3632BC00AD2B29 /* CoreDataViewTest */,
+				D0575EA12A2FAF48003CE661 /* TabBar */,
+				D0575E972A2FABA2003CE661 /* Login */,
+				D0575E9C2A2FAED3003CE661 /* Onboarding */,
+				D00779132A4700C00078AE3D /* Presetting */,
+				D078A2562A536BFA005F87BD /* Info */,
+				D0E808712A33BA71005A17E4 /* Home */,
+				D0CC3C842A3F0E2100C78346 /* Statistics */,
+				D08B877F2A4840020033B148 /* People */,
+				D0BF3E1B2A4EE5EF007937B0 /* UserView */,
+				D08B87842A48407C0033B148 /* Settings */,
+			);
+			path = "Trektronic-App";
+			sourceTree = "<group>";
+		};
+		D0575E7B2A2F9F0C003CE661 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				D0575E7C2A2F9F0C003CE661 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		D0575E972A2FABA2003CE661 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				D0575E982A2FABCD003CE661 /* LoginView.swift */,
+				D0575E9A2A2FAE15003CE661 /* LoginViewModel.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		D0575E9C2A2FAED3003CE661 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				D0575E9D2A2FAEE7003CE661 /* OnboardingView.swift */,
+				D0575E9F2A2FAEFE003CE661 /* OnboardingViewModel.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		D0575EA12A2FAF48003CE661 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				D0575EA22A2FAF7A003CE661 /* TabBarView.swift */,
+				D0575EA42A2FAF99003CE661 /* TabBarViewModel.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
+		D0575EA62A2FB015003CE661 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				D0575EA72A2FB04A003CE661 /* FirebaseManager.swift */,
+				D0882FC12A35BEF200AD2B29 /* HealthKitManager.swift */,
+				D07E99992A3E0BEB00261CC8 /* CoreDataManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		D0575EA92A2FB7A1003CE661 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				D07D87B52A4B5723009549FB /* Encodable + Extension.swift */,
+				D07D87B32A4B391C009549FB /* DataSnapshot + Extension.swift */,
+				D07E99A12A3E175D00261CC8 /* EntitiesCD+ Extension.swift */,
+				D0575EAA2A2FB7CB003CE661 /* Text + Extension.swift */,
+				D0575EAC2A2FB8C4003CE661 /* Color + Extension.swift */,
+				D0882FC62A35CD2300AD2B29 /* Data + Extension.swift */,
+				D07D87B72A4C5BCE009549FB /* String + Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		D0575EB12A30EFBA003CE661 /* CustomStyle */ = {
+			isa = PBXGroup;
+			children = (
+				D0575EB22A30EFED003CE661 /* Button + Style.swift */,
+				D0528EE32A535DA50008F05B /* RoundedCorner.swift */,
+			);
+			path = CustomStyle;
+			sourceTree = "<group>";
+		};
+		D078A2562A536BFA005F87BD /* Info */ = {
+			isa = PBXGroup;
+			children = (
+				D078A2572A536C11005F87BD /* InfoView.swift */,
+			);
+			path = Info;
+			sourceTree = "<group>";
+		};
+		D07D87BB2A4C7420009549FB /* ImagePicker */ = {
+			isa = PBXGroup;
+			children = (
+				D07D87B92A4C7383009549FB /* ImagePicker.swift */,
+			);
+			path = ImagePicker;
+			sourceTree = "<group>";
+		};
+		D0882FC52A35C0C100AD2B29 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D07E99A32A3E17A700261CC8 /* CoreDataModel.swift */,
+				D0882FC32A35C0BD00AD2B29 /* HealthKitModel.swift */,
+				D0CC3C892A3F101B00C78346 /* FireBaseModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D0882FE72A35E99200AD2B29 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				D0882FE82A35EA8600AD2B29 /* Trektronic-App.xcdatamodeld */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		D0882FFC2A3632BC00AD2B29 /* CoreDataViewTest */ = {
+			isa = PBXGroup;
+			children = (
+				D0882FF82A361E8700AD2B29 /* TestCoreDataView.swift */,
+				D07E999B2A3E0E1900261CC8 /* TestCoreDataViewModel.swift */,
+				D07E999F2A3E133900261CC8 /* AddTestCoreDataView.swift */,
+				D07E999D2A3E12C100261CC8 /* AddTestCoreDataViewModel.swift */,
+			);
+			path = CoreDataViewTest;
+			sourceTree = "<group>";
+		};
+		D08B877F2A4840020033B148 /* People */ = {
+			isa = PBXGroup;
+			children = (
+				D08B87802A4840440033B148 /* PeopleView.swift */,
+				D08B87822A4840530033B148 /* PeopleViewModel.swift */,
+			);
+			path = People;
+			sourceTree = "<group>";
+		};
+		D08B87842A48407C0033B148 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				D08B87852A4840AD0033B148 /* SettingsView.swift */,
+				D08B87872A4840C30033B148 /* SettingsViewModel.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		D0BF3E1B2A4EE5EF007937B0 /* UserView */ = {
+			isa = PBXGroup;
+			children = (
+				D0BF3E1C2A4EE626007937B0 /* UserView.swift */,
+				D0BF3E202A5057E5007937B0 /* UserViewModel.swift */,
+			);
+			path = UserView;
+			sourceTree = "<group>";
+		};
+		D0CC3C842A3F0E2100C78346 /* Statistics */ = {
+			isa = PBXGroup;
+			children = (
+				D0CC3C852A3F0E8F00C78346 /* StatisticsView.swift */,
+				D0CC3C872A3F0EA000C78346 /* StatisticsViewModel.swift */,
+			);
+			path = Statistics;
+			sourceTree = "<group>";
+		};
+		D0E808712A33BA71005A17E4 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				D0E808722A33BA89005A17E4 /* HomeView.swift */,
+				D0E808742A33BA96005A17E4 /* HomeViewModel.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D0575E712A2F9F0A003CE661 /* Trektronic-App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D0575E802A2F9F0C003CE661 /* Build configuration list for PBXNativeTarget "Trektronic-App" */;
+			buildPhases = (
+				D0575E6E2A2F9F0A003CE661 /* Sources */,
+				D0575E6F2A2F9F0A003CE661 /* Frameworks */,
+				D0575E702A2F9F0A003CE661 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Trektronic-App";
+			packageProductDependencies = (
+				D0575E842A2FA89A003CE661 /* FirebaseAuth */,
+				D0575E862A2FA89A003CE661 /* FirebaseDatabase */,
+				D0575E882A2FA89A003CE661 /* FirebaseDatabaseSwift */,
+				D0575E8A2A2FA89A003CE661 /* FirebaseFirestore */,
+				D0575E8C2A2FA89A003CE661 /* FirebaseFirestoreSwift */,
+				D0575E8E2A2FA89A003CE661 /* FirebaseMessaging */,
+				D0575E902A2FA89A003CE661 /* FirebaseStorage */,
+				D0575E932A2FAA56003CE661 /* GoogleSignIn */,
+				D0575E952A2FAA56003CE661 /* GoogleSignInSwift */,
+				D07D87BD2A4C8A76009549FB /* SDWebImageSwiftUI */,
+			);
+			productName = "Trektronic-App";
+			productReference = D0575E722A2F9F0A003CE661 /* Trektronic-App.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D0575E6A2A2F9F0A003CE661 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1430;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					D0575E712A2F9F0A003CE661 = {
+						CreatedOnToolsVersion = 14.3;
+					};
+				};
+			};
+			buildConfigurationList = D0575E6D2A2F9F0A003CE661 /* Build configuration list for PBXProject "Trektronic-App" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D0575E692A2F9F0A003CE661;
+			packageReferences = (
+				D0575E832A2FA899003CE661 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				D0575E922A2FAA56003CE661 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				D07D87BC2A4C8A76009549FB /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+			);
+			productRefGroup = D0575E732A2F9F0A003CE661 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D0575E712A2F9F0A003CE661 /* Trektronic-App */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D0575E702A2F9F0A003CE661 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D0575E7D2A2F9F0C003CE661 /* Preview Assets.xcassets in Resources */,
+				D0575E7A2A2F9F0C003CE661 /* Assets.xcassets in Resources */,
+				D0575EAF2A2FC589003CE661 /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D0575E6E2A2F9F0A003CE661 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D0575EA52A2FAF99003CE661 /* TabBarViewModel.swift in Sources */,
+				D08B87832A4840530033B148 /* PeopleViewModel.swift in Sources */,
+				D0CC3C862A3F0E8F00C78346 /* StatisticsView.swift in Sources */,
+				D0BF3E1D2A4EE626007937B0 /* UserView.swift in Sources */,
+				D0CC3C8A2A3F101B00C78346 /* FireBaseModel.swift in Sources */,
+				D0575EAD2A2FB8C4003CE661 /* Color + Extension.swift in Sources */,
+				D0575EB32A30EFED003CE661 /* Button + Style.swift in Sources */,
+				D07E99A22A3E175D00261CC8 /* EntitiesCD+ Extension.swift in Sources */,
+				D078A2582A536C11005F87BD /* InfoView.swift in Sources */,
+				D07D87B42A4B391C009549FB /* DataSnapshot + Extension.swift in Sources */,
+				D07D87BA2A4C7383009549FB /* ImagePicker.swift in Sources */,
+				D0882FC72A35CD2300AD2B29 /* Data + Extension.swift in Sources */,
+				D0575E9B2A2FAE15003CE661 /* LoginViewModel.swift in Sources */,
+				D07E99A42A3E17A700261CC8 /* CoreDataModel.swift in Sources */,
+				D0575EAB2A2FB7CB003CE661 /* Text + Extension.swift in Sources */,
+				D08B87812A4840440033B148 /* PeopleView.swift in Sources */,
+				D0575EA02A2FAEFE003CE661 /* OnboardingViewModel.swift in Sources */,
+				D07D87B82A4C5BCE009549FB /* String + Extension.swift in Sources */,
+				D0575EA82A2FB04A003CE661 /* FirebaseManager.swift in Sources */,
+				D0575EA32A2FAF7A003CE661 /* TabBarView.swift in Sources */,
+				D07E999E2A3E12C100261CC8 /* AddTestCoreDataViewModel.swift in Sources */,
+				D07E999C2A3E0E1900261CC8 /* TestCoreDataViewModel.swift in Sources */,
+				D07D87B62A4B5723009549FB /* Encodable + Extension.swift in Sources */,
+				D0BF3E212A5057E5007937B0 /* UserViewModel.swift in Sources */,
+				D0E808752A33BA96005A17E4 /* HomeViewModel.swift in Sources */,
+				D07E999A2A3E0BEB00261CC8 /* CoreDataManager.swift in Sources */,
+				D0575E992A2FABCD003CE661 /* LoginView.swift in Sources */,
+				D00779152A4700FA0078AE3D /* PresettingView.swift in Sources */,
+				D08B87862A4840AD0033B148 /* SettingsView.swift in Sources */,
+				D0E808732A33BA89005A17E4 /* HomeView.swift in Sources */,
+				D0575E9E2A2FAEE7003CE661 /* OnboardingView.swift in Sources */,
+				D00779172A47010F0078AE3D /* PresettingViewModel.swift in Sources */,
+				D08B87882A4840C30033B148 /* SettingsViewModel.swift in Sources */,
+				D0528EE42A535DA50008F05B /* RoundedCorner.swift in Sources */,
+				D0882FF92A361E8700AD2B29 /* TestCoreDataView.swift in Sources */,
+				D0882FEA2A35EA8600AD2B29 /* Trektronic-App.xcdatamodeld in Sources */,
+				D0CC3C882A3F0EA000C78346 /* StatisticsViewModel.swift in Sources */,
+				D0882FC22A35BEF200AD2B29 /* HealthKitManager.swift in Sources */,
+				D0882FC42A35C0BD00AD2B29 /* HealthKitModel.swift in Sources */,
+				D0575E762A2F9F0A003CE661 /* Trektronic_AppApp.swift in Sources */,
+				D07E99A02A3E133900261CC8 /* AddTestCoreDataView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		D0575E7E2A2F9F0C003CE661 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		D0575E7F2A2F9F0C003CE661 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D0575E812A2F9F0C003CE661 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Trektronic-App/Trektronic-App.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Trektronic-App/Preview Content\"";
+				DEVELOPMENT_TEAM = B9RY2H98ND;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Trektronic-App/Info.plist";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "This app requires to access your data";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "This app requires to access your data";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortrait UIInterfaceOrientationPortrait UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortrait UIInterfaceOrientationPortrait";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.BillyWonka.Trektronic-App";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D0575E822A2F9F0C003CE661 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Trektronic-App/Trektronic-App.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Trektronic-App/Preview Content\"";
+				DEVELOPMENT_TEAM = B9RY2H98ND;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Trektronic-App/Info.plist";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "This app requires to access your data";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "This app requires to access your data";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortrait UIInterfaceOrientationPortrait UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortrait UIInterfaceOrientationPortrait";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.BillyWonka.Trektronic-App";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D0575E6D2A2F9F0A003CE661 /* Build configuration list for PBXProject "Trektronic-App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D0575E7E2A2F9F0C003CE661 /* Debug */,
+				D0575E7F2A2F9F0C003CE661 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D0575E802A2F9F0C003CE661 /* Build configuration list for PBXNativeTarget "Trektronic-App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D0575E812A2F9F0C003CE661 /* Debug */,
+				D0575E822A2F9F0C003CE661 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D0575E832A2FA899003CE661 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.0.0;
+			};
+		};
+		D0575E922A2FAA56003CE661 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
+		D07D87BC2A4C8A76009549FB /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D0575E842A2FA89A003CE661 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D0575E832A2FA899003CE661 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		D0575E862A2FA89A003CE661 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D0575E832A2FA899003CE661 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		D0575E882A2FA89A003CE661 /* FirebaseDatabaseSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D0575E832A2FA899003CE661 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabaseSwift;
+		};
+		D0575E8A2A2FA89A003CE661 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D0575E832A2FA899003CE661 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		D0575E8C2A2FA89A003CE661 /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D0575E832A2FA899003CE661 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
+		};
+		D0575E8E2A2FA89A003CE661 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D0575E832A2FA899003CE661 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+		D0575E902A2FA89A003CE661 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D0575E832A2FA899003CE661 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+		D0575E932A2FAA56003CE661 /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D0575E922A2FAA56003CE661 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		D0575E952A2FAA56003CE661 /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D0575E922A2FAA56003CE661 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
+		};
+		D07D87BD2A4C8A76009549FB /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D07D87BC2A4C8A76009549FB /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
+		};
+/* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		D0882FE82A35EA8600AD2B29 /* Trektronic-App.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				D0882FE92A35EA8600AD2B29 /* Trektronic-App.xcdatamodel */,
+			);
+			currentVersion = D0882FE92A35EA8600AD2B29 /* Trektronic-App.xcdatamodel */;
+			path = "Trektronic-App.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = D0575E6A2A2F9F0A003CE661 /* Project object */;
+}
