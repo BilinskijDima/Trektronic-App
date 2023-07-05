@@ -75,6 +75,9 @@ final class PresettingViewModel: ObservableObject  {
     }
     
     func setDataRealTime() {
+        
+        activateIndicator = true
+        
         Task {
             do {
                 guard let defaultImage = UIImage(named: "DefaultAvatar") else {return}
@@ -98,7 +101,7 @@ final class PresettingViewModel: ObservableObject  {
         self.fireBaseManager.getDataRealTime(id: userID) {[weak self] dataSnapshot in
             guard let self = self else {return}
            
-            if "\(dataSnapshot.value!)" == "<null>" {
+            if "\(dataSnapshot.value ?? "")" == "<null>" {
                 print ("пользователь нет")
                 self.setData = true
             } else {

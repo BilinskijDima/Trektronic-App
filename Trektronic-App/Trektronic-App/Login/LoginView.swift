@@ -53,7 +53,7 @@ struct LoginView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding(.horizontal, 24)
         .alert(item: $vm.alert) { value in
-            return value.alert
+             value.alert
         }
     }
 }

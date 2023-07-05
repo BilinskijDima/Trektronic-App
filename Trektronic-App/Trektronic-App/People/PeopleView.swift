@@ -64,7 +64,7 @@ struct PeopleView: View {
                 .padding([.horizontal, .top], 24)
             }
             .alert(item: $vm.alert) { value in
-                return value.alert
+                 value.alert
             }
             .navigationTitle("Люди")
             .toolbar {

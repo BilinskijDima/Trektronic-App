@@ -50,7 +50,7 @@ struct TabBarView: View {
             }
         }
         .alert(item: $vm.alert) { value in
-            return value.alert
+             value.alert
         }
         .task {
             vm.calculateDataHealthKitStep()

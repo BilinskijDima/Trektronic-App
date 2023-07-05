@@ -84,7 +84,7 @@ struct UserView: View {
            
         }
         .alert(item: $vm.alert) { value in
-            return value.alert
+             value.alert
         }
         .navigationTitle (userFavorit?.nickname ?? "")
         .toolbar {

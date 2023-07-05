@@ -82,16 +82,13 @@ struct HomeView: View {
                                     .font(.system(size: 25))
                                     .foregroundColor(.baseColorWB)
                                 
-                                Button {
-                                    print ("переход в настройки")
-                                } label: {
-                                    WebImage(url: URL(string: vm.user?.image ?? ""))
-                                        .resizable()
-                                        .scaledToFill()
-                                        .frame(width: 50, height: 50)
-                                        .cornerRadius(25)
-                                }
-                                .padding(.leading, 8)
+                                WebImage(url: URL(string: vm.user?.image ?? ""))
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 50, height: 50)
+                                    .cornerRadius(25)
+                                    .padding(.leading, 8)
+                                
                             }
                             .padding(8)
                             .background(.blue)
@@ -173,7 +170,7 @@ struct HomeView: View {
                 .padding(.horizontal, 24)
             }
             .alert(item: $vm.alert) { value in
-                return value.alert
+                 value.alert
             }
             .navigationTitle("Домой")
             .toolbar {

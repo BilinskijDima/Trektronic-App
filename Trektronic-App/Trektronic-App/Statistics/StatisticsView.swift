@@ -94,16 +94,16 @@ struct StatisticsView: View {
                             }
                         }
                         .pickerStyle(.segmented)
+                        
                         ZStack(alignment: .center) {
+                            
                             if vm.sumStepWeekResult {
-                                
                                 Text ("Нет данных")
                                     .foregroundColor(.baseColorWB)
                                     .padding(16)
                                     .background(Color.baseColorWB)
                                     .cornerRadius(12)
                                     .opacity(0.3)
-                                
                                 
                             }
                             Chart {
@@ -119,30 +119,6 @@ struct StatisticsView: View {
                                 }
                                 
                             }
-                            //.chartOverlay(content: { proxy in
-                            //                            GeometryReader { innerProxy in
-                            //                                Rectangle()
-                            //                                    .fill(.clear).contentShape(Rectangle())
-                            //                                    .gesture(
-                            //                                       DragGesture()
-                            //                                        .onChanged{ value in
-                            //
-                            //                                            let location = value.location
-                            //
-                            //                                            if let step: Int = proxy.value(atY: location.x) {
-                            //                                                print (step)
-                            //                                            }
-                            //
-                            //
-                            //                                        }.onEnded{ value in
-                            //
-                            //                                        }
-                            //                                    )
-                            //
-                            //                            }
-                            //
-                            //
-                            //                        })
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 24)
                             .frame(height: 350)
@@ -179,7 +155,7 @@ struct StatisticsView: View {
                 .padding(.horizontal, 24)
             }
             .alert(item: $vm.alert) { value in
-                return value.alert
+                value.alert
             }
             .navigationTitle("Статистика")
             .toolbar {
@@ -191,9 +167,7 @@ struct StatisticsView: View {
                 }
             }
             .task {
-                
                 vm.calculateDataHealthKit()
-                
             }
             .sheet(isPresented: $vm.isShowingInfo) {
                 InfoView(nameView: "Экран Статистики", infoText: "Информация об экране")

@@ -53,9 +53,7 @@ struct PresettingView: View {
                         }
                         
                         Button {
-                            if !vm.disableTextFieldName {
-                                vm.showImagePicker.toggle()
-                            }
+                            vm.showImagePicker.toggle()
                         } label: {
                             ZStack {
                                 Circle()
@@ -65,11 +63,10 @@ struct PresettingView: View {
                                     .foregroundColor(.baseColorBW)
                             }
                         }
+                        .disabled(vm.disableTextFieldName)
                         
                         
                     }
-                    
-                    
                     .padding(.bottom, 24)
                     
                     Text(vm.disableTextFieldName ? "Рады вас снова видеть" : "Введите уникальное имя")
@@ -128,7 +125,6 @@ struct PresettingView: View {
                 
                 Button {
                     vm.stateSaveData()
-                    vm.activateIndicator = true
                 } label: { }
                     .buttonStyle(StyleDefaultButton(name: "Давай начнем", colorBG: Color.baseColorWB))
                     .opacity(vm.stateHealthKit && vm.stateNickname ? 1 : 0.5)
@@ -140,7 +136,7 @@ struct PresettingView: View {
             
         }
         .alert(item: $vm.alert) { value in
-            return value.alert
+             value.alert
         }
         .task {
             vm.stateAutUser()
