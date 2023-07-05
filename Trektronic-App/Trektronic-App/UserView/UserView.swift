@@ -83,6 +83,9 @@ struct UserView: View {
             vm.fetchUser(id: userFavorit?.id ?? "", userSelfStep: userSelf?.step ?? 0)
            
         }
+        .alert(item: $vm.alert) { value in
+             value.alert
+        }
         .navigationTitle (userFavorit?.nickname ?? "")
         .toolbar {
             Button(action: updateUser, label: {
@@ -92,7 +95,7 @@ struct UserView: View {
 
         }
         .navigationBarTitleDisplayMode(.inline)
-        
+       
     }
     
 }

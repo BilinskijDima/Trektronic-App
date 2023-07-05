@@ -115,7 +115,6 @@ class FirebaseManager: FirebaseManagerProtocol {
             }
         })
     }
-    //
     
     func persistImageToStorage(userID: String, image: UIImage) async throws -> String {
         return await withCheckedContinuation { continuation in

@@ -24,6 +24,8 @@ final class SettingsViewModel: ObservableObject  {
     
     @Published var isShowingInfo = false
     
+    @Published var alert: AlertTypes? = nil
+
     func singOut() {
         fireBaseManager.singOutWithGoogle()
     }
@@ -39,7 +41,7 @@ final class SettingsViewModel: ObservableObject  {
                 self.user = user
                 
             } catch {
-                print (error.localizedDescription)
+                self.alert = .defaultButton(title: "Ошибка", message: error.localizedDescription)
             }
         })
         
@@ -67,11 +69,15 @@ final class SettingsViewModel: ObservableObject  {
     
     func saveImage() {
         Task {
-            guard let newImage = image else {return}
-            
-            let imageURL = try await fireBaseManager.persistImageToStorage(userID: userID, image: newImage)
-            
-            self.updateData(value: imageURL, nameValueUpdate: "image")
+            do {
+                guard let newImage = image else {return}
+                
+                let imageURL = try await fireBaseManager.persistImageToStorage(userID: userID, image: newImage)
+                
+                self.updateData(value: imageURL, nameValueUpdate: "image")
+            } catch {
+                self.alert = .defaultButton(title: "Ошибка", message: error.localizedDescription)
+            }
         }
     }
     

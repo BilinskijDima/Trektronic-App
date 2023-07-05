@@ -10,6 +10,8 @@ import SwiftUI
 import Combine
 
 final class PeopleViewModel: ObservableObject  {
+    
+    @Published var alert: AlertTypes? = nil
 
     @Published var users = [Users]()
     
@@ -33,7 +35,7 @@ final class PeopleViewModel: ObservableObject  {
                 }
                 
             } catch {
-                print (error.localizedDescription)
+                self.alert = .defaultButton(title: "Ошибка", message: error.localizedDescription)
             }
         }
     }
@@ -68,7 +70,7 @@ final class PeopleViewModel: ObservableObject  {
                 self.favouritesUser = Set(user.favouritesUser ?? [""])
                 
             } catch {
-                print (error.localizedDescription)
+                self.alert = .defaultButton(title: "Ошибка", message: error.localizedDescription)
             }
             
         }

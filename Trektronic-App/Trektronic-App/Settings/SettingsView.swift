@@ -14,12 +14,13 @@ struct SettingsView: View {
     
     var body: some View {
         NavigationView {
+            
             ScrollView(.vertical, showsIndicators: false) {
                 
                 VStack {
                     
                     ZStack(alignment: .bottomTrailing) {
-                  
+                        
                         if let image = vm.image {
                             Image(uiImage: image)
                                 .resizable()
@@ -30,8 +31,8 @@ struct SettingsView: View {
                             WebImage(url: URL(string: vm.user?.image ?? ""))
                                 .resizable()
                                 .scaledToFill()
-                                .frame(width: 150, height: 150)
-                                .cornerRadius(75)
+                                .frame(width: 160, height: 160)
+                                .cornerRadius(80)
                         }
                         
                         Button {
@@ -60,6 +61,7 @@ struct SettingsView: View {
                         .padding(.bottom, 8)
                     
                     HStack{
+                        
                         TextField("Новое имя", text: $vm.textFieldName)
                             .padding([.vertical, .leading], 12)
                             .colorInvert()
@@ -74,12 +76,12 @@ struct SettingsView: View {
                             vm.checkNickname()
                         } label: { }
                             .buttonStyle(StyleDefaultButton(name: "Изменить", colorBG: Color.baseColorWB))
+                        
                     }
                     
                     Text(vm.errorText)
                         .foregroundColor(.red)
                         .padding(.bottom , 100)
-                
                     
                     Button {
                         vm.singOut()
@@ -89,9 +91,14 @@ struct SettingsView: View {
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .padding(.horizontal, 24)
-
+                
             }
+            .alert(item: $vm.alert) { value in
+                value.alert
+            }
+            
             .navigationTitle("Настройки")
+            
             .toolbar {
                 Button {
                     vm.isShowingInfo = true
@@ -110,7 +117,8 @@ struct SettingsView: View {
         .sheet(isPresented: $vm.isShowingInfo) {
             InfoView(nameView: "Экран Настроек", infoText: "Информация об экране")
         }
-      
+        
+        
     }
 }
 

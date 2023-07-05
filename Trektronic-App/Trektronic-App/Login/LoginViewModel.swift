@@ -14,6 +14,8 @@ final class LoginViewModel: ObservableObject  {
     @AppStorage("userID") var userID = DefaultSettings.userID
     
     @AppStorage("stateLoadingView") var stateLoadView: LoadView = .loginView
+    
+    @Published var alert: AlertTypes? = nil
 
     private var fireBaseManager: FirebaseManagerProtocol = FirebaseManager()
     private var healthKitManager: HealthKitManagerProtocol = HealthKitManager()
@@ -34,7 +36,7 @@ final class LoginViewModel: ObservableObject  {
                     
                     fireBaseManager.getDataRealTime(id: userData.uid, completion: {[weak self] dataSnapshot in
                         guard let self = self else {return}
-                  
+                        
                         if dataSnapshot.value as? [String: AnyObject] == nil {
                             self.stateLoadView = .onboardingView
                         } else {
@@ -50,7 +52,7 @@ final class LoginViewModel: ObservableObject  {
                 }
                 
             } catch {
-                print (error.localizedDescription)
+                self.alert = .defaultButton(title: "Ошибка", message: error.localizedDescription)
             }
         }
         
